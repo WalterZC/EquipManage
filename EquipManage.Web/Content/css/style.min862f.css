@@ -1,0 +1,283 @@
+.nav-close {
+    padding: 10px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size: 1.4em;
+    cursor: pointer;
+    z-index: 10;
+    display: none;
+    color: rgba(255,255,255,.3);
+}
+.nav>li.active>a {
+	color: #fff
+}
+.nav>li.active {
+	border-left: 4px solid #3598dc;
+	/*background: #293846*/
+}
+a {
+    cursor: pointer;
+}
+
+.content-tabs .roll-nav, .page-tabs-list {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    color: #999;
+    z-index: 2;
+    top: 0;
+}
+
+nav.page-tabs {
+    margin-left: 40px;
+    width: 100000px;
+    height: 40px;
+    overflow: hidden;
+}
+
+    nav.page-tabs .page-tabs-content {
+        float: left;
+    }
+
+.page-tabs a {
+    display: block;
+    float: left;
+    border-right: solid 1px #eee;
+    padding: 0 15px;
+}
+
+
+    .page-tabs a.active {
+        /*background: #2f4050;
+	color: #a7b1c2*/
+        background: #3598dc;
+        color: #fff;
+    }
+
+.skin-1 .page-tabs a.active {
+    background: #3598dc;
+    color: #fff;
+}
+
+.skin-3 .page-tabs a.active {
+    background: #3e2c42;
+    color: #fff;
+}
+.gray-bg {
+	background-color: #f3f3f4
+}
+.client-detail .vertical-timeline-icon.gray-bg {
+	color: #a7aaab
+}
+a:focus,a:hover {
+	text-decoration: none
+}
+
+.page-tabs a i:hover {
+    color: #FFF;
+}
+
+.content-tabs .roll-nav:hover, .page-tabs a:hover {
+    /*color: #777;
+    background: #f2f2f2;*/
+    cursor: pointer;
+}
+
+
+nav.page-tabs .page-tabs-content {
+    float: left;
+}
+
+.content-tabs .roll-left {
+    left: 0;
+    border-right: solid 1px #eee;
+}
+
+.content-tabs .roll-right {
+    right: 0;
+    border-left: solid 1px #eee;
+}
+
+.roll-right.J_tabRight {
+    right: 140px;
+}
+
+.roll-right.btn-group {
+    right: 60px;
+    width: 80px;
+    padding: 0;
+}
+
+    .roll-right.btn-group button {
+        width: 80px;
+    }
+
+.roll-right.J_tabExit {
+    background: #fff;
+    height: 40px;
+    width: 60px;
+    outline: 0;
+}
+
+.nav.navbar-top-links li.dropdown {
+    display: none;
+}
+
+
+    .dropdown-menu > li > a {
+        border-radius: 3px;
+        color: inherit;
+        line-height: 25px;
+        margin: 4px;
+        text-align: left;
+        font-weight: 400;
+    }
+
+        .dropdown-menu > li > a.font-bold {
+            font-weight: 600;
+        }
+
+.navbar-top-links .dropdown-menu li {
+    display: block;
+}
+
+    .navbar-top-links .dropdown-menu li:last-child {
+        margin-right: 0;
+    }
+
+    .navbar-top-links .dropdown-menu li a {
+        padding: 3px 20px;
+        min-height: 0;
+    }
+
+        .navbar-top-links .dropdown-menu li a div {
+            white-space: normal;
+        }
+
+.top-navigation .navbar-nav .dropdown-menu > .active > a {
+    background: #fff;
+    color: #1ab394;
+    font-weight: 700;
+}
+
+.top-navigation .navbar-nav .dropdown-menu {
+    box-shadow: none;
+    border: 1px solid #e7eaec;
+}
+
+.top-navigation .dropdown-menu > li > a {
+    margin: 0;
+    padding: 7px 20px;
+}
+
+.navbar .dropdown-menu {
+    margin-top: 0;
+}
+
+.top-navigation .navbar-nav .open .dropdown-menu .dropdown-header, .top-navigation .navbar-nav .open .dropdown-menu > li > a {
+    padding: 10px 15px 10px 20px;
+}
+
+.ibox-tools .dropdown-menu > li > a {
+    padding: 4px 10px;
+    font-size: 12px;
+}
+
+.ibox .open > .dropdown-menu {
+    left: auto;
+    right: 0;
+}
+
+body.rtls .dropdown-menu > li > a {
+    text-align: right;
+}
+
+.roll-right.J_tabExit {
+    background: #fff;
+    height: 40px;
+    width: 60px;
+    outline: 0;
+}
+
+.content-tabs {
+    position: relative;
+    height: 42px;
+    background: #fafafa;
+    line-height: 40px;
+}
+
+    .content-tabs .roll-left {
+        left: 0;
+        border-right: solid 1px #eee;
+    }
+
+    .content-tabs button {
+        background: #fff;
+        border: 0;
+        height: 40px;
+        width: 40px;
+        outline: 0;
+    }
+
+        .content-tabs button:hover {
+            background: #fafafa;
+        }
+
+.content-tabs {
+    border-bottom: solid 2px #3598dc;
+}
+
+.skin-1 .content-tabs {
+    border-bottom: solid 2px #3598dc;
+}
+
+.skin-3 .content-tabs {
+    border-bottom: solid 2px #3e2c42;
+}
+
+body {
+    font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    color: #676a6c;
+    overflow-x: hidden;
+}
+
+@media (max-width:350px) {
+    .nav-close {
+        display: block;
+    }
+}
+
+@media (max-width:768px) {
+    .content-tabs {
+        display: none;
+    }
+}
+
+::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #999;
+}
+
+.page-tabs a {
+    color: #999;
+}
+
+    .page-tabs a i {
+        color: #ccc;
+    }
+
+.J_menuTab {
+    -webkit-transition: all .3s ease-out 0s;
+    transition: all .3s ease-out 0s;
+}
