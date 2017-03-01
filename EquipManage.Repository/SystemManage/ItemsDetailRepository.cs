@@ -7,7 +7,6 @@
 using EquipManage.Data;
 using EquipManage.Domain.Entity.SystemManage;
 using EquipManage.Domain.IRepository.SystemManage;
-using EquipManage.Repository.SystemManage;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
@@ -22,12 +21,12 @@ namespace EquipManage.Repository.SystemManage
             StringBuilder strSql = new StringBuilder();
             strSql.Append(@"SELECT  d.*
                             FROM    Sys_ItemsDetail d
-                                    INNER  JOIN Sys_Items i ON i.F_Id = d.F_ItemId
+                                    INNER  JOIN Sys_Items i ON i.FId = d.FItemId
                             WHERE   1 = 1
-                                    AND i.F_EnCode = @enCode
-                                    AND d.F_EnabledMark = 1
-                                    AND d.F_DeleteMark = 0
-                            ORDER BY d.F_SortCode ASC");
+                                    AND i.FEnCode = @enCode
+                                    AND d.FEnabledMark = 1
+                                    AND d.FDeleteMark = 0
+                            ORDER BY d.FSortCode ASC");
             DbParameter[] parameter = 
             {
                  new SqlParameter("@enCode",enCode)

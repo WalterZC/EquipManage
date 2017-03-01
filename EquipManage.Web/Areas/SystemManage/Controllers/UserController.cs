@@ -7,8 +7,6 @@
 using EquipManage.Application.SystemManage;
 using EquipManage.Code;
 using EquipManage.Domain.Entity.SystemManage;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 
 
