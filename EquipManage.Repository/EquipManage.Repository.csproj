@@ -41,17 +41,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemManage\EquipmentRepository.cs" />
-    <Compile Include="SystemManage\ItemsDetailRepository.cs" />
-    <Compile Include="SystemManage\ItemsRepository.cs" />
+    <Compile Include="SystemDocument\EquipmentRepository.cs" />
+    <Compile Include="SystemDocument\ItemsDetailRepository.cs" />
+    <Compile Include="SystemDocument\ItemsRepository.cs" />
     <Compile Include="SystemManage\ModuleButtonRepository.cs" />
     <Compile Include="SystemManage\ModuleRepository.cs" />
-    <Compile Include="SystemManage\AreaRepository.cs" />
-    <Compile Include="SystemManage\OrganizeRepository.cs" />
-    <Compile Include="SystemManage\RoleRepository.cs" />
-    <Compile Include="SystemManage\UserLogOnRepository.cs" />
-    <Compile Include="SystemManage\UserRepository.cs" />
-    <Compile Include="SystemManage\RoleAuthorizeRepository.cs" />
+    <Compile Include="SystemDocument\AreaRepository.cs" />
+    <Compile Include="SystemDocument\OrganizeRepository.cs" />
+    <Compile Include="SystemDocument\RoleRepository.cs" />
+    <Compile Include="SystemDocument\UserLogOnRepository.cs" />
+    <Compile Include="SystemDocument\UserRepository.cs" />
+    <Compile Include="SystemDocument\RoleAuthorizeRepository.cs" />
     <Compile Include="SystemSecurity\DbBackupRepository.cs" />
     <Compile Include="SystemSecurity\FilterIPRepository.cs" />
     <Compile Include="SystemSecurity\LogRepository.cs" />

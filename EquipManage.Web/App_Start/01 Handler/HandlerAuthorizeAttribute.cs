@@ -1,4 +1,4 @@
-﻿using EquipManage.Application.SystemManage;
+﻿using EquipManage.Application.SystemDocument;
 using EquipManage.Code;
 using System.Text;
 using System.Web;

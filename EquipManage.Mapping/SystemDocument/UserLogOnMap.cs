@@ -9,11 +9,11 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace EquipManage.Mapping.SystemDocument
 {
-    public class RoleAuthorizeMap : EntityTypeConfiguration<RoleAuthorizeEntity>
+    public class UserLogOnMap : EntityTypeConfiguration<UserLogOnEntity>
     {
-        public RoleAuthorizeMap()
+        public UserLogOnMap()
         {
-            this.ToTable("Sys_RoleAuthorize");
+            this.ToTable("Sys_UserLogOn");
             this.HasKey(t => t.FId);
         }
     }

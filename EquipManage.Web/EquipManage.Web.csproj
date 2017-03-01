@@ -124,17 +124,18 @@
     <Compile Include="Areas\ReportManage\Controllers\EchartsController.cs" />
     <Compile Include="Areas\ReportManage\Controllers\HighchartsController.cs" />
     <Compile Include="Areas\ReportManage\ReportManageAreaRegistration.cs" />
-    <Compile Include="Areas\SystemManage\Controllers\AreaController.cs" />
-    <Compile Include="Areas\SystemManage\Controllers\DutyController.cs" />
-    <Compile Include="Areas\SystemManage\Controllers\EquipmentController.cs" />
-    <Compile Include="Areas\SystemManage\Controllers\ItemsDataController.cs" />
+    <Compile Include="Areas\SystemDocument\SystemDocumentAreaRegistration.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\AreaController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\DutyController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\EquipmentController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\ItemsDataController.cs" />
     <Compile Include="Areas\SystemManage\Controllers\ModuleButtonController.cs" />
     <Compile Include="Areas\SystemManage\Controllers\ModuleController.cs" />
-    <Compile Include="Areas\SystemManage\Controllers\OrganizeController.cs" />
-    <Compile Include="Areas\SystemManage\Controllers\RoleAuthorizeController.cs" />
-    <Compile Include="Areas\SystemManage\Controllers\RoleController.cs" />
-    <Compile Include="Areas\SystemManage\Controllers\UserController.cs" />
-    <Compile Include="Areas\SystemManage\Controllers\ItemsTypeController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\OrganizeController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\RoleAuthorizeController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\RoleController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\UserController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\ItemsTypeController.cs" />
     <Compile Include="Areas\SystemManage\SystemManageAreaRegistration.cs" />
     <Compile Include="Areas\SystemSecurity\Controllers\DbBackupController.cs" />
     <Compile Include="Areas\SystemSecurity\Controllers\FilterIPController.cs" />
@@ -471,46 +472,46 @@
     <Content Include="Areas\SystemManage\Views\ModuleButton\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\Area\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Area\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\ItemsData\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\ItemsData\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\ItemsType\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\ItemsType\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\ItemsType\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\ItemsType\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\ItemsData\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\ItemsData\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\ItemsType\Details.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\ItemsType\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\ItemsData\Details.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\ItemsData\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\Organize\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Organize\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\Organize\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Organize\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\Organize\Details.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Organize\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\Role\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Role\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\Role\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Role\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\Area\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Area\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\User\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
@@ -520,25 +521,25 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\User\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\User\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\User\RevisePassword.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\User\RevisePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\Duty\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Duty\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\Duty\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Duty\Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\Duty\Details.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Duty\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\Role\Details.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Role\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\User\Details.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\User\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\SystemSecurity\Views\Web.config" />
@@ -624,10 +625,11 @@
     <Content Include="Areas\ExampleManage\Views\Print\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\SystemManage\Views\User\Info.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\User\Info.cshtml" />
     <Content Include="package.json" />
-    <Content Include="Areas\SystemManage\Views\Equipment\Index.cshtml" />
-    <Content Include="Areas\SystemManage\Views\Equipment\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Equipment\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Equipment\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Web.config" />
     <None Include="Properties\PublishProfiles\EquipManage.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

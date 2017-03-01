@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = $.request("keyValue");
+    $(function () {
+        initControl();
+        $.ajax({
+            url: "/SystemDocument/Duty/GetFormJson",
+            data: { keyValue: keyValue },
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                $("#form1").formSerialize(data);
+                $("#form1").find('.form-control,select,input').attr('readonly', 'readonly');
+                $("#form1").find('div.ckbox label').attr('for', '');
+            }
+        });
+    });
+    function initControl() {
+        $("#FOrganizeId").bindSelect({
+            url: "/SystemDocument/Organize/GetTreeSelectJson",
+        });
+    }
+</script>
+
+<form id="form1">
+    <div style="padding-top: 20px; margin-right: 20px;">
+        <table class="form">
+            <tr>
+                <th class="formTitle">归属组织</th>
+                <td class="formValue">
+                    <select id="FOrganizeId" name="FOrganizeId" class="form-control required">
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">岗位名称</th>
+                <td class="formValue">
+                    <input id="FFullName" name="FFullName" type="text" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">岗位编号</th>
+                <td class="formValue">
+                    <input id="FEnCode" name="FEnCode" type="text" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">显示顺序</th>
+                <td class="formValue">
+                    <input id="FSortCode" name="FSortCode" type="text" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" style="height: 35px;">选项</th>
+                <td class="formValue" style="padding-top: 1px;">
+                    <div class="ckbox">
+                        <input id="FAllowEdit" name="FAllowEdit" type="checkbox"><label for="FAllowEdit">允许编辑</label>
+                    </div>
+                    <div class="ckbox">
+                        <input id="FAllowDelete" name="FAllowDelete" type="checkbox"><label for="FAllowDelete">允许删除</label>
+                    </div>
+                    <div class="ckbox">
+                        <input id="FEnabledMark" name="FEnabledMark" type="checkbox" checked="checked"><label for="FEnabledMark">有效</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" valign="top" style="padding-top: 5px;">备注
+                </th>
+                <td class="formValue">
+                    <textarea id="FDescription" name="FDescription" class="form-control" style="height: 60px;"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">创建人员</th>
+                <td class="formValue">
+                    <input id="FCreatorUserId" name="FCreatorUserId" type="text" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+
+                <th class="formTitle">创建时间</th>
+                <td class="formValue">
+                    <input id="FCreatorTime" name="FCreatorTime" type="text" class="form-control" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">修改人员</th>
+                <td class="formValue">
+                    <input id="FLastModifyUserId" name="FLastModifyUserId" type="text" class="form-control" />
+                </td>
+
+            </tr>
+            <tr>
+                <th class="formTitle">修改时间</th>
+                <td class="formValue">
+                    <input id="FLastModifyTime" name="FLastModifyTime" type="text" class="form-control" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

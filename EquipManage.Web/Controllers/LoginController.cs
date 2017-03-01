@@ -7,14 +7,11 @@
 using EquipManage.Domain.Entity.SystemSecurity;
 using EquipManage.Application.SystemSecurity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using EquipManage.Domain.Entity.SystemManage;
-using EquipManage.Application.SystemManage;
 using EquipManage.Code;
 using EquipManage.Application;
+using EquipManage.Domain.Entity.SystemDocument;
+using EquipManage.Application.SystemDocument;
 
 namespace EquipManage.Web.Controllers
 {

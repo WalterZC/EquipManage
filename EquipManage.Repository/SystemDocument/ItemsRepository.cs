@@ -4,17 +4,15 @@
  * Description: 设备管理系统-匠盟科技
  * Date:2017-02-17
 *********************************************************************************/
+using EquipManage.Data;
 using EquipManage.Domain.Entity.SystemDocument;
-using System.Data.Entity.ModelConfiguration;
+using EquipManage.Domain.IRepository.SystemDocument;
+using EquipManage.Repository.SystemDocument;
 
-namespace EquipManage.Mapping.SystemDocument
+namespace EquipManage.Repository.SystemDocument
 {
-    public class RoleAuthorizeMap : EntityTypeConfiguration<RoleAuthorizeEntity>
+    public class ItemsRepository : RepositoryBase<ItemsEntity>, IItemsRepository
     {
-        public RoleAuthorizeMap()
-        {
-            this.ToTable("Sys_RoleAuthorize");
-            this.HasKey(t => t.FId);
-        }
+
     }
 }

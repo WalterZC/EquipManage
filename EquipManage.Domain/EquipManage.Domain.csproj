@@ -45,56 +45,56 @@
     <Compile Include="01 Infrastructure\IDeleteAudited.cs" />
     <Compile Include="01 Infrastructure\IEntity.cs" />
     <Compile Include="01 Infrastructure\IModificationAudited.cs" />
-    <Compile Include="03 Entity\SystemManage\AreaEntity.cs" />
-    <Compile Include="03 Entity\SystemManage\ChangeContentEntity.cs" />
-    <Compile Include="03 Entity\SystemManage\ChangeTypeEntity.cs" />
-    <Compile Include="03 Entity\SystemManage\EnergyItemEntity.cs" />
-    <Compile Include="03 Entity\SystemManage\EquipmentEntity.cs" />
-    <Compile Include="03 Entity\SystemManage\EquipmentSpotCheckItemEntity.cs" />
-    <Compile Include="03 Entity\SystemManage\ExpWareEntity.cs" />
-    <Compile Include="03 Entity\SystemManage\MaintainEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\AreaEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\ChangeContentEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\ChangeTypeEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\EnergyItemEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\EquipmentEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\EquipmentSpotCheckItemEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\ExpWareEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\MaintainEntity.cs" />
     <Compile Include="03 Entity\SystemManage\ModuleButtonEntity.cs" />
     <Compile Include="03 Entity\SystemManage\ModuleEntity.cs" />
-    <Compile Include="03 Entity\SystemManage\OperationClassEntity.cs" />
-    <Compile Include="03 Entity\SystemManage\OperationClassMemberEntity.cs" />
-    <Compile Include="03 Entity\SystemManage\OperationItemEntity.cs" />
-    <Compile Include="03 Entity\SystemManage\OperationProjectEntity.cs" />
-    <Compile Include="03 Entity\SystemManage\PartsEntity.cs" />
-    <Compile Include="03 Entity\SystemManage\PositionEntity.cs" />
-    <Compile Include="03 Entity\SystemManage\RoleAuthorizeEntity.cs" />
-    <Compile Include="03 Entity\SystemManage\UserLogOnEntity.cs" />
-    <Compile Include="03 Entity\SystemManage\ItemsDetailEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\OperationClassEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\OperationClassMemberEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\OperationItemEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\OperationProjectEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\PartsEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\PositionEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\RoleAuthorizeEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\UserLogOnEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\ItemsDetailEntity.cs" />
     <Compile Include="03 Entity\SystemSecurity\DbBackupEntity.cs" />
     <Compile Include="03 Entity\SystemSecurity\FilterIPEntity.cs" />
     <Compile Include="03 Entity\SystemSecurity\LogEntity.cs" />
     <Compile Include="02 ViewModel\AuthorizeActionModel.cs" />
-    <Compile Include="04 IRepository\SystemManage\IAreaRepository.cs" />
-    <Compile Include="04 IRepository\SystemManage\IEquipmentRepository.cs" />
-    <Compile Include="04 IRepository\SystemManage\IItemsDetailRepository.cs" />
-    <Compile Include="04 IRepository\SystemManage\IItemsRepository.cs" />
+    <Compile Include="04 IRepository\SystemDocument\IAreaRepository.cs" />
+    <Compile Include="04 IRepository\SystemDocument\IEquipmentRepository.cs" />
+    <Compile Include="04 IRepository\SystemDocument\IItemsDetailRepository.cs" />
+    <Compile Include="04 IRepository\SystemDocument\IItemsRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IModuleButtonRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IModuleRepository.cs" />
-    <Compile Include="04 IRepository\SystemManage\IOrganizeRepository.cs" />
-    <Compile Include="04 IRepository\SystemManage\IRoleAuthorizeRepository.cs" />
-    <Compile Include="04 IRepository\SystemManage\IRoleRepository.cs" />
-    <Compile Include="04 IRepository\SystemManage\IUserLogOnRepository.cs" />
-    <Compile Include="04 IRepository\SystemManage\IUserRepository.cs" />
+    <Compile Include="04 IRepository\SystemDocument\IOrganizeRepository.cs" />
+    <Compile Include="04 IRepository\SystemDocument\IRoleAuthorizeRepository.cs" />
+    <Compile Include="04 IRepository\SystemDocument\IRoleRepository.cs" />
+    <Compile Include="04 IRepository\SystemDocument\IUserLogOnRepository.cs" />
+    <Compile Include="04 IRepository\SystemDocument\IUserRepository.cs" />
     <Compile Include="04 IRepository\SystemSecurity\IDbBackupRepository.cs" />
     <Compile Include="04 IRepository\SystemSecurity\IFilterIPRepository.cs" />
     <Compile Include="04 IRepository\SystemSecurity\ILogRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="03 Entity\SystemManage\ItemsEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\ItemsEntity.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="03 Entity\SystemManage\OrganizeEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\OrganizeEntity.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="03 Entity\SystemManage\RoleEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\RoleEntity.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="03 Entity\SystemManage\UserEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\UserEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EquipManage.Code\EquipManage.Code.csproj">

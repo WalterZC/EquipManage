@@ -4,8 +4,9 @@
  * Description: 设备管理系统-匠盟科技
  * Date:2017-02-17
 *********************************************************************************/
-using EquipManage.Application.SystemManage;
+using EquipManage.Application.SystemDocument;
 using EquipManage.Code;
+using EquipManage.Domain.Entity.SystemDocument;
 using EquipManage.Domain.Entity.SystemManage;
 using System.Collections.Generic;
 using System.Linq;
