@@ -11,6 +11,7 @@ using EquipManage.Domain.IRepository.SystemDocument;
 using EquipManage.Repository.SystemDocument;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EquipManage.Application.SystemDocument
 {
@@ -30,6 +31,23 @@ namespace EquipManage.Application.SystemDocument
             }
             expression = expression.And(t => t.FAccount != "admin");
             return service.FindList(expression, pagination);
+        }
+        public List<UserEntity> GetList(string keyword)
+        {
+            var expression = ExtLinq.True<UserEntity>();
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                expression = expression.And(t => t.FOrganizeId.Contains(keyword));
+            }
+                expression = expression.And(t => t.FAccount != "admin");
+            return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
+        }
+
+        public List<UserEntity> GetList()
+        {
+            var expression = ExtLinq.True<UserEntity>();
+            expression = expression.And(t => t.FAccount != "admin");
+            return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
         }
         public UserEntity GetForm(string keyValue)
         {

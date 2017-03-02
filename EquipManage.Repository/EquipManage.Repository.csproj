@@ -41,9 +41,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemDocument\ChangeContentRepository.cs" />
+    <Compile Include="SystemDocument\ChangeTypeRepository.cs" />
+    <Compile Include="SystemDocument\EnergyItemRepository.cs" />
     <Compile Include="SystemDocument\EquipmentRepository.cs" />
+    <Compile Include="SystemDocument\EquipmentSpotCheckItemRepository.cs" />
+    <Compile Include="SystemDocument\ExpWareRepository.cs" />
     <Compile Include="SystemDocument\ItemsDetailRepository.cs" />
     <Compile Include="SystemDocument\ItemsRepository.cs" />
+    <Compile Include="SystemDocument\MaintainRepository.cs" />
+    <Compile Include="SystemDocument\OperationClassMemberRepository.cs" />
+    <Compile Include="SystemDocument\OperationClassRepository.cs" />
+    <Compile Include="SystemDocument\OperationItemRepository.cs" />
+    <Compile Include="SystemDocument\OperationProjectRepository.cs" />
+    <Compile Include="SystemDocument\PartsRepository.cs" />
+    <Compile Include="SystemDocument\PositionRepository.cs" />
     <Compile Include="SystemManage\ModuleButtonRepository.cs" />
     <Compile Include="SystemManage\ModuleRepository.cs" />
     <Compile Include="SystemDocument\AreaRepository.cs" />

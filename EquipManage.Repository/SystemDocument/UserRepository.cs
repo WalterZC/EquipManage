@@ -8,7 +8,6 @@ using EquipManage.Code;
 using EquipManage.Data;
 using EquipManage.Domain.Entity.SystemDocument;
 using EquipManage.Domain.IRepository.SystemDocument;
-using EquipManage.Repository.SystemDocument;
 
 namespace EquipManage.Repository.SystemDocument
 {

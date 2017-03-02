@@ -46,9 +46,21 @@
   <ItemGroup>
     <Compile Include="Infrastructure\DbLogType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemDocument\ChangeContentApp.cs" />
+    <Compile Include="SystemDocument\ChangeTypeApp.cs" />
+    <Compile Include="SystemDocument\EnergyItemApp.cs" />
     <Compile Include="SystemDocument\EquipmentApp.cs" />
+    <Compile Include="SystemDocument\EquipmentSpotCheckItemApp.cs" />
+    <Compile Include="SystemDocument\ExpWareApp.cs" />
     <Compile Include="SystemDocument\ItemsApp.cs" />
     <Compile Include="SystemDocument\ItemsDetailApp.cs" />
+    <Compile Include="SystemDocument\MaintainApp.cs" />
+    <Compile Include="SystemDocument\OperationClassApp.cs" />
+    <Compile Include="SystemDocument\OperationClassMemberApp.cs" />
+    <Compile Include="SystemDocument\OperationItemApp.cs" />
+    <Compile Include="SystemDocument\OperationProjectApp.cs" />
+    <Compile Include="SystemDocument\PartsApp.cs" />
+    <Compile Include="SystemDocument\PositionApp.cs" />
     <Compile Include="SystemManage\ModuleApp.cs" />
     <Compile Include="SystemManage\ModuleButtonApp.cs" />
     <Compile Include="SystemDocument\AreaApp.cs" />

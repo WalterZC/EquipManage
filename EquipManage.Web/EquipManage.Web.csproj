@@ -124,6 +124,8 @@
     <Compile Include="Areas\ReportManage\Controllers\EchartsController.cs" />
     <Compile Include="Areas\ReportManage\Controllers\HighchartsController.cs" />
     <Compile Include="Areas\ReportManage\ReportManageAreaRegistration.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\OperationClassController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\PositionController.cs" />
     <Compile Include="Areas\SystemDocument\SystemDocumentAreaRegistration.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\AreaController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\DutyController.cs" />
@@ -630,6 +632,12 @@
     <Content Include="Areas\SystemDocument\Views\Equipment\Index.cshtml" />
     <Content Include="Areas\SystemDocument\Views\Equipment\Form.cshtml" />
     <Content Include="Areas\SystemDocument\Views\Web.config" />
+    <Content Include="Areas\SystemDocument\Views\Position\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Position\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Position\Details.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\OperationClass\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\OperationClass\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\OperationClass\Detail.cshtml" />
     <None Include="Properties\PublishProfiles\EquipManage.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

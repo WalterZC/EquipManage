@@ -28,11 +28,27 @@ namespace EquipManage.Web.Controllers
                 organize = this.GetOrganizeList(),
                 role = this.GetRoleList(),
                 duty = this.GetDutyList(),
-                user = "",
+                user = this.GetUserList(),
                 authorizeMenu = this.GetMenuList(),
                 authorizeButton = this.GetMenuButtonList(),
             };
             return Content(data.ToJson());
+        }
+        private object GetUserList()
+        {
+            UserApp userApp = new UserApp();
+            var data = userApp.GetList();
+            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+            foreach (UserEntity item in data)
+            {
+                var fieldItem = new
+                {
+                    encode = item.FId,
+                    fullname = item.FRealName
+                };
+                dictionary.Add(item.FId, fieldItem);
+            }
+            return dictionary;
         }
         private object GetDataItemList()
         {

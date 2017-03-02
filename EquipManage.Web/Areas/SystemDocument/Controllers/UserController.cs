@@ -32,6 +32,12 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         }
         [HttpGet]
         [HandlerAjaxOnly]
+        public ActionResult GetGridJsonByOrg(string keyword="")
+        {
+            return Content(userApp.GetList(keyword).ToJson());
+        }
+        [HttpGet]
+        [HandlerAjaxOnly]
         public ActionResult GetFormJson(string keyValue)
         {
             var data = userApp.GetForm(keyValue);
