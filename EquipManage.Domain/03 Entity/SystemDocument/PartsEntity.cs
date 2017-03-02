@@ -17,6 +17,8 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FWarehouse { get; set; }
         public string FWarehousePlace { get; set; }
         public string FPlace { get; set; }
+        public string FUnit { get; set; }
+        public string FStorekeeper { get; set; }
         public string FSource { get; set; }
         public string FIsTree { get; set; }
         public int? FLayers { get; set; }

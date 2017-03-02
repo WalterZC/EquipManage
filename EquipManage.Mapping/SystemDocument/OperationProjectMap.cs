@@ -3,11 +3,11 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace EquipManage.Mapping.SystemDocument
 {
-    public class ChangeContentMap: EntityTypeConfiguration<ChangeContentEntity>
+    public class OperationProjectMap: EntityTypeConfiguration<OperationProjectEntity>
     {
-        public ChangeContentMap()
+        public OperationProjectMap()
         {
-            this.ToTable("Sys_ChangeContent");
+            this.ToTable("Sys_OperationProject");
             this.HasKey(t => t.FId);
         }
     }
