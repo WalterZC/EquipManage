@@ -13,30 +13,23 @@
             height: $(window).height() - 128,
             colModel: [
                 { label: '主键', name: 'FId', hidden: true },
+                {
+                    label: '部门', name: 'FBelongOrgID', width: 80, align: 'left',
+                    formatter: function (cellvalue, options, rowObject) {
+                        return top.clients.organize[cellvalue] == null ? "" : top.clients.organize[cellvalue].fullname;
+                    }
+                },
                 { label: '编号', name: 'FNumber', width: 80, align: 'left' },
                 { label: '名称', name: 'FShortName', width: 80, align: 'left' },
-                { label: '全称', name: 'FFullName', width: 80, align: 'left' },
-                { label: '手机', name: 'FMobilePhone', width: 100, align: 'left' },
-                {
-                    label: '公司', name: 'FOrganizeId', width: 150, align: 'left',
-                    formatter: function (cellvalue, options, rowObject) {
-                        return top.clients.organize[cellvalue] == null ? "" : top.clients.organize[cellvalue].fullname;
-                    }
-                },
-                {
-                    label: '部门', name: 'FDepartmentId', width: 80, align: 'left',
-                    formatter: function (cellvalue, options, rowObject) {
-                        return top.clients.organize[cellvalue] == null ? "" : top.clients.organize[cellvalue].fullname;
-                    }
-                },
+
                 {
                     label: '创建时间', name: 'FCreatorTime', width: 80, align: 'left',
                     formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
                 },
-                { label: '备注', name: 'FDescription', width: 200, align: 'left' }
+                { label: '工作内容', name: 'FOperationContent', width: 200, align: 'left' }
             ],
             pager: "#gridPager",
-            sortname: 'FDepartmentId asc,FCreatorTime desc',
+            sortname: 'FBelongOrgID asc,FCreatorTime desc',
             viewrecords: true
         });
         $("#btn_search").click(function () {
@@ -50,8 +43,8 @@
             id: "Form",
             title: "新增班组",
             url: "/SystemDocument/OperationClass/Form",
-            width: "700px",
-            height: "550px",
+            width: "600px",
+            height: "450px",
             callBack: function (iframeId) {
                 top.frames[iframeId].submitForm();
             }
@@ -95,7 +88,7 @@
         $.modalConfirm("注：您确定要【禁用】该班组吗？", function (r) {
             if (r) {
                 $.submitForm({
-                    url: "/SystemDocument/OperationClass/DisabledAccount",
+                    url: "/SystemDocument/OperationClass/DisabledOperationClass",
                     param: { keyValue: keyValue },
                     success: function () {
                         $.currentWindow().$("#gridList").trigger("reloadGrid");
@@ -109,7 +102,7 @@
         $.modalConfirm("注：您确定要【启用】该项班组吗？", function (r) {
             if (r) {
                 $.submitForm({
-                    url: "/SystemDocument/OperationClass/EnabledAccount",
+                    url: "/SystemDocument/OperationClass/EnabledOperationClass",
                     param: { keyValue: keyValue },
                     success: function () {
                         $.currentWindow().$("#gridList").trigger("reloadGrid");

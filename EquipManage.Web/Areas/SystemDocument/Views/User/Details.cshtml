@@ -39,6 +39,11 @@
             id: "FId",
             text: "FFullName"
         });
+        $("#FLastModifyUserId").bindSelect({
+            url: "/SystemDocument/User/GetGridJsonByOrg",
+            id: "FId",
+            text: "FRealName"
+        });
     }
 </script>
 <form id="form1">
@@ -157,7 +162,9 @@
                 <tr>
                     <th class="formTitle">修改人员</th>
                     <td class="formValue">
-                        <input id="FLastModifyUserId" name="FLastModifyUserId" type="text" class="form-control" />
+                        <select id="FLastModifyUserId" name="FLastModifyUserId" class="form-control">
+                            <option value="">==请选择==</option>
+                        </select>
                     </td>
                     <th class="formTitle">修改时间</th>
                     <td class="formValue">

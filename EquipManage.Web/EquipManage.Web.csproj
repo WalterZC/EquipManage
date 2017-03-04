@@ -125,6 +125,7 @@
     <Compile Include="Areas\ReportManage\Controllers\HighchartsController.cs" />
     <Compile Include="Areas\ReportManage\ReportManageAreaRegistration.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\OperationClassController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\OperationClassMemberController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\PositionController.cs" />
     <Compile Include="Areas\SystemDocument\SystemDocumentAreaRegistration.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\AreaController.cs" />
@@ -155,6 +156,8 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Areas\SystemDocument\Script\OperationClassMember\Form.js" />
+    <Content Include="Areas\SystemDocument\Script\OperationClassMember\Index.js" />
     <Content Include="Content\css\framework-font.css" />
     <Content Include="Content\css\framework-ui.css" />
     <Content Include="Content\css\framework-login.css" />
@@ -638,6 +641,9 @@
     <Content Include="Areas\SystemDocument\Views\OperationClass\Index.cshtml" />
     <Content Include="Areas\SystemDocument\Views\OperationClass\Form.cshtml" />
     <Content Include="Areas\SystemDocument\Views\OperationClass\Detail.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\OperationClassMember\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\OperationClassMember\Details.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\OperationClassMember\Form.cshtml" />
     <None Include="Properties\PublishProfiles\EquipManage.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

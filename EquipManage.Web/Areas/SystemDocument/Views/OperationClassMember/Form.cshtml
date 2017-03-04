@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+<script src="~/Areas/SystemDocument/Script/OperationClassMember/Form.js"></script>
+
+<form id="form1">
+    <div style="padding-top: 20px; margin-right: 20px;">
+        <table class="form">
+            <tr style="display:none;">
+                <th class="formTitle">班组</th>
+                <td class="formValue">
+                    <input id="FOperationClassID" name="FOperationClassID" type="text" class="form-control required" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">人员姓名</th>
+                <td class="formValue">
+                    <select id="FMemberID" name="FMemberID" class="form-control required">
+                        <option value="">==请选择==</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">排序</th>
+                <td class="formValue">
+                    <input id="FSortCode" name="FSortCode" type="text" class="form-control required" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" style="height: 35px;">选项</th>
+                <td class="formValue" style="padding-top: 1px;">
+                    <div class="ckbox">
+                        <input id="FIsDefault" name="FIsDefault" type="checkbox"><label for="FIsDefault">默认</label>
+                    </div>
+                    <div class="ckbox">
+                        <input id="FEnabledMark" name="FEnabledMark" type="checkbox" checked="checked"><label for="FEnabledMark">有效</label>
+                    </div>
+                    <div class="ckbox">
+                        <input id="FIsPrinciple" name="FIsPrinciple" type="checkbox"><label for="FIsPrinciple">负责人</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" valign="top" style="padding-top: 5px;">备注
+                </th>
+                <td class="formValue">
+                    <textarea id="FDescription" name="FDescription" class="form-control" style="height: 60px;"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
