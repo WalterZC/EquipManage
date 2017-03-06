@@ -1,12 +1,18 @@
-﻿using System;
+﻿using EquipManage.Domain.Entity.SystemDocument;
+using EquipManage.Domain.IRepository.SystemDocument;
+using EquipManage.Repository.SystemDocument;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EquipManage.Application.SystemDocument
 {
-    class ChangeContentApp
+    public class ChangeContentApp
     {
+        private IChangeContentRepository service = new ChangeContentRepository();
+
+        public List<ChangeContentEntity> GetList()
+        {
+            return service.IQueryable().OrderBy(t => t.FSortCode).ToList();
+        }
     }
 }
