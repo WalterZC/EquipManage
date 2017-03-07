@@ -124,6 +124,7 @@
     <Compile Include="Areas\ReportManage\Controllers\EchartsController.cs" />
     <Compile Include="Areas\ReportManage\Controllers\HighchartsController.cs" />
     <Compile Include="Areas\ReportManage\ReportManageAreaRegistration.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\ChangeContentController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\ChangeTypeController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\OperationClassController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\OperationClassMemberController.cs" />
@@ -157,6 +158,7 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Areas\SystemDocument\Script\ChangeType\Form.js" />
     <Content Include="Areas\SystemDocument\Script\OperationClassMember\Form.js" />
     <Content Include="Areas\SystemDocument\Script\OperationClassMember\Index.js" />
     <Content Include="Content\css\framework-font.css" />

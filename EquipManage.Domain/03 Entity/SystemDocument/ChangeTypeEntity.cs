@@ -11,10 +11,11 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FId { get; set; }
         public string FNumber { get; set; }
         public string FFullName { get; set; }
+        public string FParentId { get; set; }
         public string FContent { get; set; }
         public int FSortCode { get; set; }
-        public bool FAllowEdit { get; set; }
-        public bool FAllowDelete { get; set; }
+        public bool ?FAllowEdit { get; set; }
+        public bool ?FAllowDelete { get; set; }
         public bool? FDeleteMark { get; set; }
         public bool? FEnabledMark { get; set; }
         public string FDescription { get; set; }
@@ -25,5 +26,7 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public DateTime? FDeleteTime { get; set; }
         public string FDeleteUserId { get; set; }
         public string FOrganizeId { get; set; }
+        public int FLayers { get; set; }
+        public bool FIsTree { get; set; }
     }
 }

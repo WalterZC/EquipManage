@@ -3,4 +3,64 @@
     Layout = "~/Views/Shared/_Form.cshtml";
 }
 
-<h2>Form</h2>
+<form id="form1">
+    <div style="padding-top: 20px; margin-right: 20px;">
+        <div class="col-md-6">
+
+
+            <table class="form">
+                <tr>
+                    <th class="formTitle">编号</th>
+                    <td class="formValue">
+                        <input id="FNumber" name="FNumber" type="text" class="form-control required" placeholder="请输入编号" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">名称</th>
+                    <td class="formValue">
+                        <input id="FFullName" name="FFullName" type="text" class="form-control required" placeholder="请输入名称" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">排序</th>
+                    <td class="formValue">
+                        <input id="FSortCode" name="FSortCode" type="text" class="form-control required" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle" style="height: 35px;">选项</th>
+                    <td class="formValue" style="padding-top: 1px;">
+                        <div class="ckbox">
+                            <input id="FEnabledMark" name="FEnabledMark" type="checkbox" checked="checked"><label for="FEnabledMark">有效</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle" valign="middle" style="padding-top: 5px;">
+                        备注
+                    </th>
+                    <td class="formValue">
+                        <textarea id="FDescription" name="FDescription" class="form-control" style="height: 100%;"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table class="form">
+                <tr>
+                    <th class="formTitle" valign="middle">
+                        变更内容
+                    </th>
+                    <td class="formValue">
+                        <div>
+                            <div class="mt-checkbox-list">
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</form>
+<script src="~/Areas/SystemDocument/Script/ChangeType/Form.js"></script>

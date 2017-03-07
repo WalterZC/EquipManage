@@ -1,6 +1,140 @@
 ﻿@{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Index.cshtml";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
 }
-
-<h2>Index</h2>
+<script>
+    $(function () {
+        $('#layout').layout();
+        //treeView();
+        gridList();
+    });
+    //function treeView() {
+    //    $("#itemTree").treeview({
+    //        url: "/SystemDocument/ChangeType/GetTreeJson",
+    //        onnodeclick: function (item) {
+    //            $("#txt_keyword").val('');
+    //            $('#btn_search').trigger("click");
+    //        }
+    //    });
+    //}
+    function gridList() {
+        var $gridList = $("#gridList");
+        $gridList.dataGrid({
+            url: "/SystemDocument/ChangeType/GetGridJson",
+            height: $(window).height() - 128,
+            colModel: [
+                { label: '主键', name: 'FId', hidden: true },
+                { label: '变更类型编码', name: 'FNumber', width: 100, align: 'left' },
+                { label: '变更类型名称', name: 'FFullName', width: 100, align: 'left' },
+                { label: '序号', name: 'FSortCode', width: 100, align: 'left' },
+                {
+                    label: '创建时间', name: 'FCreatorTime', width: 100, align: 'left',
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
+                },
+                {
+                    label: "有效", name: "FEnabledMark", width: 60, align: "center",
+                    formatter: function (cellvalue) {
+                        return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                { label: '备注', name: 'FDescription', width: 200, align: 'left' }
+            ],
+            pager: "#gridPager",
+            sortname: 'FDepartmentId asc,FCreatorTime desc',
+            viewrecords: true
+        });
+        $("#btn_search").click(function () {
+            $gridList.jqGrid('setGridParam', {
+                url: "/SystemDocument/ChangeType/GetGridJson",
+                postData: { keyword: $("#txt_keyword").val() },
+            }).trigger('reloadGrid');
+        });
+    }
+    function btn_add() {
+        $.modalOpen({
+            id: "Form",
+            title: "新增类型",
+            url: "/SystemDocument/ChangeType/Form",
+            width: "600px",
+            height: "550px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_edit() {
+        var keyValue = $("#gridList").jqGridRowValue().FId;
+        $.modalOpen({
+            id: "Form",
+            title: "修改变更类型",
+            url: "/SystemDocument/ChangeType/Form?keyValue=" + keyValue,
+            width: "600px",
+            height: "550px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_delete() {
+        $.deleteForm({
+            url: "/SystemDocument/ChangeType/DeleteForm",
+            param: { keyValue: $("#gridList").jqGridRowValue().FId },
+            success: function () {
+                $("#gridList").resetSelection();
+                $("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+    function btn_details() {
+        var keyValue = $("#gridList").jqGridRowValue().FId;
+        $.modalOpen({
+            id: "Details",
+            title: "查看字典",
+            url: "/SystemDocument/ChangeType/Details?keyValue=" + keyValue,
+            width: "600px",
+            height: "550px",
+            btn: null,
+        });
+    }
+</script>
+<div class="ui-layout" id="layout" style="height: 100%; width: 100%;">
+    <div class="ui-layout-center">
+        <div class="topPanel">
+            <div class="toolbar">
+                <div class="btn-group">
+                    <a class="btn blue" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+                </div>
+                <div class="btn-group">
+                    <a id="NF-add" authorize="yes" class="btn blue dropdown-text" onclick="btn_add()"><i class="fa fa-plus"></i>新建字典</a>
+                </div>
+                <div class="operate">
+                    <ul class="nav nav-pills">
+                        <li class="first">已选中<span>1</span>项</li>
+                        <li><a id="NF-edit" authorize="yes" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改字典</a></li>
+                        <li><a id="NF-delete" authorize="yes" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除字典</a></li>
+                        <li><a id="NF-Details" authorize="yes" onclick="btn_details()"><i class="fa fa-search-plus"></i>查看字典</a></li>
+                    </ul>
+                    <a href="javascript:;" class="close"></a>
+                </div>
+                <script>$('.toolbar').authorizeButton()</script>
+            </div>
+            <div class="search">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="input-group">
+                                <input id="txt_keyword" type="text" class="form-control" placeholder="名称/编号" style="width: 200px;">
+                                <span class="input-group-btn">
+                                    <button id="btn_search" type="button" class="btn blue"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="gridPanel">
+            <table id="gridList"></table>
+        </div>
+    </div>
+</div>

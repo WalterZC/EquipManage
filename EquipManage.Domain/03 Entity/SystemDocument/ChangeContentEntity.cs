@@ -15,8 +15,8 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FField { get; set; }
         public string FType { get; set; }
         public int FSortCode { get; set; }
-        public bool FAllowEdit { get; set; }
-        public bool FAllowDelete { get; set; }
+        public bool? FAllowEdit { get; set; }
+        public bool? FAllowDelete { get; set; }
         public bool? FDeleteMark { get; set; }
         public bool? FEnabledMark { get; set; }
         public string FDescription { get; set; }
