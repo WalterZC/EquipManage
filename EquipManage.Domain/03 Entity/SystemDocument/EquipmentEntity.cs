@@ -68,5 +68,6 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FLastModifyUserId { get; set; }
         public DateTime? FDeleteTime { get; set; }
         public string FDeleteUserId { get; set; }
+        public string FEquipmentTypeId { get; set; }
     }
 }

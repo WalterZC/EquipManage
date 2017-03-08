@@ -46,6 +46,7 @@
     <Compile Include="SystemDocument\EnergyItemRepository.cs" />
     <Compile Include="SystemDocument\EquipmentRepository.cs" />
     <Compile Include="SystemDocument\EquipmentSpotCheckItemRepository.cs" />
+    <Compile Include="SystemDocument\EquipmentTypeRepository.cs" />
     <Compile Include="SystemDocument\ExpWareRepository.cs" />
     <Compile Include="SystemDocument\ItemsDetailRepository.cs" />
     <Compile Include="SystemDocument\ItemsRepository.cs" />

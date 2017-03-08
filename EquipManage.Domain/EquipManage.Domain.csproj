@@ -51,6 +51,7 @@
     <Compile Include="03 Entity\SystemDocument\EnergyItemEntity.cs" />
     <Compile Include="03 Entity\SystemDocument\EquipmentEntity.cs" />
     <Compile Include="03 Entity\SystemDocument\EquipmentSpotCheckItemEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\EquipmentTypeEntity.cs" />
     <Compile Include="03 Entity\SystemDocument\ExpWareEntity.cs" />
     <Compile Include="03 Entity\SystemDocument\MaintainEntity.cs" />
     <Compile Include="03 Entity\SystemManage\ModuleButtonEntity.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="04 IRepository\SystemDocument\IEnergyItemRepository.cs" />
     <Compile Include="04 IRepository\SystemDocument\IEquipmentRepository.cs" />
     <Compile Include="04 IRepository\SystemDocument\IEquipmentSpotCheckItemRepository.cs" />
+    <Compile Include="04 IRepository\SystemDocument\IEquipmentTypeRepository.cs" />
     <Compile Include="04 IRepository\SystemDocument\IExpWareRepository.cs" />
     <Compile Include="04 IRepository\SystemDocument\IItemsDetailRepository.cs" />
     <Compile Include="04 IRepository\SystemDocument\IItemsRepository.cs" />

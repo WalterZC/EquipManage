@@ -127,6 +127,7 @@
     <Compile Include="Areas\SystemDocument\Controllers\ChangeContentController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\ChangeTypeController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\EnergyItemController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\EquipmentTypeController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\MaintainController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\OperationClassController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\OperationClassMemberController.cs" />
@@ -161,15 +162,22 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Content Include="Areas\SystemDocument\Script\ChangeType\Form.js" />
-    <Content Include="Areas\SystemDocument\Script\EnergyItem\Form.js" />
-    <Content Include="Areas\SystemDocument\Script\EnergyItem\Index.js" />
-    <Content Include="Areas\SystemDocument\Script\Maintain\Form.js" />
-    <Content Include="Areas\SystemDocument\Script\Maintain\Index.js" />
-    <Content Include="Areas\SystemDocument\Script\OperationClassMember\Form.js" />
-    <Content Include="Areas\SystemDocument\Script\OperationClassMember\Index.js" />
-    <Content Include="Areas\SystemDocument\Script\Parts\Form.js" />
-    <Content Include="Areas\SystemDocument\Script\Parts\Index.js" />
+    <Content Include="Areas\SystemDocument\Scripts\ChangeType\Form.js" />
+    <Content Include="Areas\SystemDocument\Scripts\ChangeType\Index.js" />
+    <Content Include="Areas\SystemDocument\Scripts\EnergyItem\Form.js" />
+    <Content Include="Areas\SystemDocument\Scripts\EnergyItem\Index.js" />
+    <Content Include="Areas\SystemDocument\Scripts\EquipmentType\Details.js" />
+    <Content Include="Areas\SystemDocument\Scripts\EquipmentType\Form.js" />
+    <Content Include="Areas\SystemDocument\Scripts\EquipmentType\Index.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Equipment\Details.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Equipment\Form.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Equipment\Index.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Maintain\Form.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Maintain\Index.js" />
+    <Content Include="Areas\SystemDocument\Scripts\OperationClassMember\Form.js" />
+    <Content Include="Areas\SystemDocument\Scripts\OperationClassMember\Index.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Parts\Form.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Parts\Index.js" />
     <Content Include="Content\css\framework-font.css" />
     <Content Include="Content\css\framework-ui.css" />
     <Content Include="Content\css\framework-login.css" />
@@ -664,6 +672,10 @@
     <Content Include="Areas\SystemDocument\Views\Maintain\Form.cshtml" />
     <Content Include="Areas\SystemDocument\Views\Parts\Index.cshtml" />
     <Content Include="Areas\SystemDocument\Views\Parts\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\EquipmentType\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\EquipmentType\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\EquipmentType\Details.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Equipment\Details.cshtml" />
     <None Include="Properties\PublishProfiles\EquipManage.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

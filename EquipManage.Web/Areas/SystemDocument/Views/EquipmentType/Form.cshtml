@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script src="~/Areas/SystemDocument/Scripts/EquipmentType/Form.js"></script>
+
+<form id="form1">
+    <div style="padding-top: 20px; margin-right: 20px;">
+        <table class="form">
+            <tr>
+                <th class="formTitle">上级</th>
+                <td class="formValue">
+                    <select id="FParentId" name="FParentId" class="form-control required">
+                        <option value="0">父节点</option>
+                    </select>
+                </td>
+                <th class="formTitle">编号</th>
+                <td class="formValue">
+                    <input id="FNumber" name="FNumber" type="text" class="form-control required" placeholder="请输入编号" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">名称</th>
+                <td class="formValue">
+                    <input id="FFullName" name="FFullName" type="text" class="form-control required" placeholder="请输入名称" />
+                </td>
+                <th class="formTitle">设备规格</th>
+                <td class="formValue">
+                    <input id="FStandard" name="FStandard" type="text" class="form-control required" placeholder="请输入名称" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">设备型号</th>
+                <td class="formValue">
+                    <input id="FModel" name="FModel" type="text" class="form-control required" placeholder="请输入名称" />
+                </td>
+                <th class="formTitle">特种</th>
+                <td class="formValue">
+                    <select id="FSpecialType" name="FSpecialType" class="form-control">
+                        <option value="0">否</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">机械复杂系数</th>
+                <td class="formValue">
+                    <input id="FMachineCoefficient" name="FMachineCoefficient" type="text" class="form-control required" placeholder="请输入名称" />
+                </td>
+                <th class="formTitle">电子复杂系数</th>
+                <td class="formValue">
+                    <input id="FElectricCoefficient" name="FElectricCoefficient" type="text" class="form-control required" placeholder="请输入名称" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" style="height: 35px;">选项</th>
+                <td class="formValue" style="padding-top: 1px;" colspan="3">
+                    <div class="ckbox">
+                        <input id="FIfUseChange" name="FIfUseChange" type="checkbox"><label for="FIfUseChange">使用变更单</label>
+                    </div>
+                    <div class="ckbox">
+                        <input id="FIfPrecision" name="FIfPrecision" type="checkbox"><label for="FIfPrecision">精密</label>
+                    </div>
+                    <div class="ckbox">
+                        <input id="FIfRare" name="FIfRare" type="checkbox"><label for="FIfRare">稀有</label>
+                    </div>
+                    <div class="ckbox">
+                        <input id="FIfLarge" name="FIfLarge" type="checkbox"><label for="FIfLarge">大型</label>
+                    </div>
+                    <div class="ckbox">
+                        <input id="FAllowEdit" name="FAllowEdit" type="checkbox"><label for="FAllowEdit">允许编辑</label>
+                    </div>
+                    <div class="ckbox">
+                        <input id="FAllowDelete" name="FAllowDelete" type="checkbox"><label for="FAllowDelete">允许删除</label>
+                    </div>
+                    <div class="ckbox">
+                        <input id="FEnabledMark" name="FEnabledMark" type="checkbox" checked="checked"><label for="FEnabledMark">有效</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" valign="top" style="padding-top: 5px;">
+                    备注
+                </th>
+                <td class="formValue" colspan="3">
+                    <textarea id="FDescription" name="FDescription" class="form-control" style="height: 60px;"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

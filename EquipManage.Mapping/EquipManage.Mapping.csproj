@@ -56,6 +56,7 @@
     <Compile Include="SystemDocument\EnergyItemMap.cs" />
     <Compile Include="SystemDocument\EquipmentMap.cs" />
     <Compile Include="SystemDocument\EquipmentSpotCheckItemMap.cs" />
+    <Compile Include="SystemDocument\EquipmentTypeMap.cs" />
     <Compile Include="SystemDocument\ExpWareMap.cs" />
     <Compile Include="SystemDocument\ItemsDetailMap.cs" />
     <Compile Include="SystemDocument\ItemsMap.cs" />

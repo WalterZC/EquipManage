@@ -11,17 +11,23 @@ namespace EquipManage.Application.SystemDocument
     {
         private IEquipmentRepository service = new EquipmentRepository();
 
-        public List<EquipmentEntity> GetList(string keyword)
+        public List<EquipmentEntity> GetList(string typeId = "", string keyword = "")
         {
             var expression = ExtLinq.True<EquipmentEntity>();
+            if (!string.IsNullOrEmpty(typeId))
+            {
+                expression = expression.And(t => t.FEquipmentTypeId == typeId);
+            }
             if (!string.IsNullOrEmpty(keyword))
             {
                 expression = expression.And(t => t.FFullName.Contains(keyword));
                 expression = expression.Or(t => t.FNumber.Contains(keyword));
             }
-            return service.IQueryable(expression).OrderBy(t => t.FCreatorTime).ToList();
-
-            //return service.IQueryable().OrderBy(t => t.FCreatorTime).ToList();
+            return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
+        }
+        public List<EquipmentEntity> GetItemList(string enCode)
+        {
+            return service.GetEquipmentList(enCode);
         }
         public EquipmentEntity GetForm(string keyValue)
         {
@@ -31,17 +37,17 @@ namespace EquipManage.Application.SystemDocument
         {
             service.Delete(t => t.FId == keyValue);
         }
-        public void SubmitForm(EquipmentEntity equipmentEntity, string keyValue)
+        public void SubmitForm(EquipmentEntity EquipmentEntity, string keyValue)
         {
             if (!string.IsNullOrEmpty(keyValue))
             {
-                equipmentEntity.Modify(keyValue);
-                service.Update(equipmentEntity);
+                EquipmentEntity.Modify(keyValue);
+                service.Update(EquipmentEntity);
             }
             else
             {
-                equipmentEntity.Create();
-                service.Insert(equipmentEntity);
+                EquipmentEntity.Create();
+                service.Insert(EquipmentEntity);
             }
         }
     }

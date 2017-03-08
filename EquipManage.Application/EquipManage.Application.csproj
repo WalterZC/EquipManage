@@ -51,6 +51,7 @@
     <Compile Include="SystemDocument\EnergyItemApp.cs" />
     <Compile Include="SystemDocument\EquipmentApp.cs" />
     <Compile Include="SystemDocument\EquipmentSpotCheckItemApp.cs" />
+    <Compile Include="SystemDocument\EquipmentTypeApp.cs" />
     <Compile Include="SystemDocument\ExpWareApp.cs" />
     <Compile Include="SystemDocument\ItemsApp.cs" />
     <Compile Include="SystemDocument\ItemsDetailApp.cs" />
