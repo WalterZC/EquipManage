@@ -5,19 +5,20 @@ namespace EquipManage.Domain.Entity.SystemDocument
     public class MaintainEntity : IEntity<MaintainEntity>, ICreationAudited, IDeleteAudited, IModificationAudited
     {
         public string FId { get; set; }
+        public string FParentId { get; set; }
         public string FNumber { get; set; }
         public string FFullName { get; set; }
         public string FShortName { get; set; }
         public string FLayers { get; set; }
         public string FAddress { get; set; }
-        public string FRate { get; set; }
+        public decimal FRate { get; set; }
         public string FLinkMan { get; set; }
         public string FTelePhone { get; set; }
         public string FMobilePhone { get; set; }
         public string FWeChat { get; set; }
         public string FFax { get; set; }
         public string FEmail { get; set; }
-        public string FSource { get; set; }
+        public int FSource { get; set; }
         public bool? FAllowEdit { get; set; }
         public bool? FAllowDelete { get; set; }
         public int? FSortCode { get; set; }

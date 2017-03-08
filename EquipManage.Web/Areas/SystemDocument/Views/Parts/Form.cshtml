@@ -1,0 +1,119 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+<script src="~/Areas/SystemDocument/Script/Parts/Form.js"></script>
+<form id="form1">
+    <div style="padding-top: 20px; margin-right: 20px;">
+        <table class="form">
+            <tr>
+                <th class="formTitle">归属组织</th>
+                <td class="formValue">
+                    <select id="FOrganizeId" name="FOrganizeId" class="form-control required"></select>
+                </td>
+                <th class="formTitle">名称</th>
+                <td class="formValue">
+                    <input id="FFullName" name="FFullName" type="text" class="form-control required" placeholder="请输入项目名称" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">编码</th>
+                <td class="formValue">
+                    <input id="FNumber" name="FNumber" type="text" class="form-control required" placeholder="请输入项目编码" />
+                </td>
+                <th class="formTitle">图号</th>
+                <td class="formValue">
+                    <input id="FFigure" name="FFigure" type="text" class="form-control required" placeholder="请输入项目编码" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">规格型号</th>
+                <td class="formValue">
+                    <input id="FModel" name="FModel" type="text" class="form-control required" placeholder="请输入项目编码" />
+                </td>
+                <th class="formTitle">类别</th>
+                <td class="formValue">
+                    <input id="FCategory" name="FCategory" type="text" class="form-control required" placeholder="请输入项目编码" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">计量单位</th>
+                <td class="formValue">
+                    <input id="FUnit" name="FUnit" type="text" class="form-control required" placeholder="请输入计量单位" />
+                </td>
+                <th class="formTitle">成本价格</th>
+                <td class="formValue">
+                    <input id="FCost" name="FCost" type="text" class="form-control required" placeholder="请输入项目单价" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">仓库</th>
+                <td class="formValue">
+                    <input id="FWarehouse" name="FWarehouse" type="text" class="form-control required" placeholder="请输入计量单位" />
+                </td>
+                <th class="formTitle">仓位</th>
+                <td class="formValue">
+                    <input id="FWarehousePlace" name="FWarehousePlace" type="text" class="form-control required" placeholder="请输入项目单价" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">保管员</th>
+                <td class="formValue">
+                    <input id="FStorekeeper" name="FStorekeeper" type="text" class="form-control required" placeholder="请输入项目单价" />
+                </td>
+                <th class="formTitle">存放位置</th>
+                <td class="formValue">
+                    <input id="FPlace" name="FPlace" type="text" class="form-control required" placeholder="请输入项目单价" />
+                </td>
+            </tr>
+            <tr>
+
+                <th class="formTitle">零件供应商</th>
+                <td class="formValue">
+                    <input id="FSupply" name="FSupply" type="text" class="form-control required" placeholder="请输入项目单价" />
+                </td>
+                <th class="formTitle">生产厂商</th>
+                <td class="formValue">
+                    <input id="FManufacturer" name="FManufacturer" type="text" class="form-control required" placeholder="请输入项目单价" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">显示顺序</th>
+                <td class="formValue">
+                    <input id="FSortCode" name="FSortCode" type="text" class="form-control required" placeholder="请输入显示顺序" />
+                </td>
+                <th class="formTitle">来源</th>
+                <td class="formValue">
+                    <select id="FSource" name="FSource" class="form-control" disabled>
+                        <option value="0" selected="selected">系统录入</option>
+                        <option value="1">Excel模板导入</option>
+                        <option value="2">系统集成导入</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" style="height: 35px;">选项</th>
+                <td class="formValue" style="padding-top: 1px;" colspan="3">
+                    <div class="ckbox">
+                        <input id="FAllowEdit" name="FAllowEdit" type="checkbox"><label for="FAllowEdit">允许编辑</label>
+                    </div>
+                    <div class="ckbox">
+                        <input id="FAllowDelete" name="FAllowDelete" type="checkbox"><label for="FAllowDelete">允许删除</label>
+                    </div>
+                    <div class="ckbox">
+                        <input id="FEnabledMark" name="FEnabledMark" type="checkbox" checked="checked"><label for="FEnabledMark">有效</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" valign="top" style="padding-top: 5px;">
+                    备注
+                </th>
+                <td class="formValue" colspan="3">
+                    <textarea id="FDescription" name="FDescription" class="form-control" style="height: 60px;"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>

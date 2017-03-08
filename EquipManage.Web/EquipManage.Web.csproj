@@ -126,8 +126,11 @@
     <Compile Include="Areas\ReportManage\ReportManageAreaRegistration.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\ChangeContentController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\ChangeTypeController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\EnergyItemController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\MaintainController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\OperationClassController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\OperationClassMemberController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\PartsController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\PositionController.cs" />
     <Compile Include="Areas\SystemDocument\SystemDocumentAreaRegistration.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\AreaController.cs" />
@@ -159,8 +162,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Areas\SystemDocument\Script\ChangeType\Form.js" />
+    <Content Include="Areas\SystemDocument\Script\EnergyItem\Form.js" />
+    <Content Include="Areas\SystemDocument\Script\EnergyItem\Index.js" />
+    <Content Include="Areas\SystemDocument\Script\Maintain\Form.js" />
+    <Content Include="Areas\SystemDocument\Script\Maintain\Index.js" />
     <Content Include="Areas\SystemDocument\Script\OperationClassMember\Form.js" />
     <Content Include="Areas\SystemDocument\Script\OperationClassMember\Index.js" />
+    <Content Include="Areas\SystemDocument\Script\Parts\Form.js" />
+    <Content Include="Areas\SystemDocument\Script\Parts\Index.js" />
     <Content Include="Content\css\framework-font.css" />
     <Content Include="Content\css\framework-ui.css" />
     <Content Include="Content\css\framework-login.css" />
@@ -649,6 +658,12 @@
     <Content Include="Areas\SystemDocument\Views\OperationClassMember\Form.cshtml" />
     <Content Include="Areas\SystemDocument\Views\ChangeType\Index.cshtml" />
     <Content Include="Areas\SystemDocument\Views\ChangeType\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\EnergyItem\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\EnergyItem\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Maintain\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Maintain\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Parts\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Parts\Form.cshtml" />
     <None Include="Properties\PublishProfiles\EquipManage.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

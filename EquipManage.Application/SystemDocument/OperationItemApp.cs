@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EquipManage.Application.SystemDocument
 {
-    class OperationItemApp
+    public class OperationItemApp
     {
     }
 }

@@ -9,7 +9,7 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FFullName { get; set; }
         public string FShortName { get; set; }
         public string FModel { get; set; }
-        public string FCost { get; set; }
+        public decimal FCost { get; set; }
         public string FCategory { get; set; }
         public string FSupply { get; set; }
         public string FFigure { get; set; }
@@ -19,8 +19,8 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FPlace { get; set; }
         public string FUnit { get; set; }
         public string FStorekeeper { get; set; }
-        public string FSource { get; set; }
-        public string FIsTree { get; set; }
+        public int FSource { get; set; }
+        public bool? FIsTree { get; set; }
         public int? FLayers { get; set; }
         public bool? FAllowEdit { get; set; }
         public bool? FAllowDelete { get; set; }

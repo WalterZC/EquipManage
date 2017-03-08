@@ -8,10 +8,10 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FNumber { get; set; }
         public string FFullName { get; set; }
         public string FUnit { get; set; }
-        public string FPrice { get; set; }
+        public decimal FPrice { get; set; }
         public int FSortCode { get; set; }
-        public bool FAllowEdit { get; set; }
-        public bool FAllowDelete { get; set; }
+        public bool? FAllowEdit { get; set; }
+        public bool? FAllowDelete { get; set; }
         public bool? FDeleteMark { get; set; }
         public bool? FEnabledMark { get; set; }
         public string FDescription { get; set; }

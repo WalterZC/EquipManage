@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+<script src="~/Areas/SystemDocument/Script/Maintain/Form.js"></script>
+<form id="form1">
+    <div style="padding-top: 20px; margin-right: 20px;">
+        <table class="form">
+            <tr>
+                <th class="formTitle">上级</th>
+                <td class="formValue">
+                    <select id="FParentId" name="FParentId" class="form-control required">
+                        <option value="0">父节点</option>
+                    </select>
+                </td>
+                <th class="formTitle">归属组织</th>
+                <td class="formValue">
+                    <select id="FOrganizeId" name="FOrganizeId" class="form-control required"></select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">编码</th>
+                <td class="formValue">
+                    <input id="FNumber" name="FNumber" type="text" class="form-control required" placeholder="请输入编码" />
+                </td>
+                <th class="formTitle">名称</th>
+                <td class="formValue">
+                    <input id="FFullName" name="FFullName" type="text" class="form-control required" placeholder="请输入名称" />
+                </td>
+            </tr>
+
+            <tr>
+                <th class="formTitle">扣率</th>
+                <td class="formValue">
+                    <input id="FRate" name="FRate" type="text" class="form-control required" placeholder="请输入扣率" />
+                </td>
+                <th class="formTitle">联系人</th>
+                <td class="formValue">
+                    <input id="FLinkMan" name="FLinkMan" type="text" class="form-control required" placeholder="请输入联系人" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">联系电话</th>
+                <td class="formValue">
+                    <input id="FTelePhone" name="FTelePhone" type="text" class="form-control required" placeholder="请输入联系电话" />
+                </td>
+                <th class="formTitle">手机</th>
+                <td class="formValue">
+                    <input id="FMobilePhone" name="FMobilePhone" type="text" class="form-control required" placeholder="请输入手机" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">微信</th>
+                <td class="formValue">
+                    <input id="FWeChat" name="FWeChat" type="text" class="form-control required" placeholder="请输入微信" />
+                </td>
+                <th class="formTitle">传真</th>
+                <td class="formValue">
+                    <input id="FFax" name="FFax" type="text" class="form-control required" placeholder="请输入传真" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">电子邮件</th>
+                <td class="formValue">
+                    <input id="FEmail" name="FEmail" type="text" class="form-control required" placeholder="请输入电子邮件" />
+                </td>
+                <th class="formTitle">来源</th>
+                <td class="formValue">
+                    <select id="FSource" name="FSource" class="form-control" disabled>
+                        <option value="0" selected="selected">系统录入</option>
+                        <option value="1">Excel模板导入</option>
+                        <option value="2">系统集成导入</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle">联系地址</th>
+                <td class="formValue" colspan="3">
+                    <input id="FAddress" name="FAddress" type="text" class="form-control required" placeholder="请输入联系地址" />
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" style="height: 35px;">选项</th>
+                <td class="formValue" style="padding-top: 1px;" colspan="3">
+                    <div class="ckbox">
+                        <input id="FAllowEdit" name="FAllowEdit" type="checkbox"><label for="FAllowEdit">允许编辑</label>
+                    </div>
+                    <div class="ckbox">
+                        <input id="FAllowDelete" name="FAllowDelete" type="checkbox"><label for="FAllowDelete">允许删除</label>
+                    </div>
+                    <div class="ckbox">
+                        <input id="FEnabledMark" name="FEnabledMark" type="checkbox" checked="checked"><label for="FEnabledMark">有效</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th class="formTitle" valign="top" style="padding-top: 5px;">
+                    备注
+                </th>
+                <td class="formValue" colspan="3">
+                    <textarea id="FDescription" name="FDescription" class="form-control" style="height: 60px;"></textarea>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
