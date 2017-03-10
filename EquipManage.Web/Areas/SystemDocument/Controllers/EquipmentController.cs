@@ -53,5 +53,10 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             equipmentApp.DeleteForm(keyValue);
             return Success("删除成功。");
         }
+        [HttpGet]
+        public ActionResult Files()
+        {
+            return View();
+        }
     }
 }

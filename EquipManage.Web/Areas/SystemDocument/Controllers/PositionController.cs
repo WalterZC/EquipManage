@@ -97,5 +97,10 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             positionApp.DeleteForm(keyValue);
             return Success("删除成功。");
         }
+        public ActionResult GetSelectJson(string keyValue)
+        {
+            var data = positionApp.GetList(keyValue);
+            return Content(data.ToJson());
+        }
     }
 }

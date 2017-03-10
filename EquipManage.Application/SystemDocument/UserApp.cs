@@ -38,9 +38,15 @@ namespace EquipManage.Application.SystemDocument
             if (!string.IsNullOrEmpty(keyword))
             {
                 expression = expression.And(t => t.FOrganizeId.Contains(keyword));
+                expression = expression.Or(t => t.FDepartmentId.Contains(keyword));
             }
                 expression = expression.And(t => t.FAccount != "admin");
             return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
+        }
+
+        public List<UserEntity> GetClassUserList(string keyword)
+        {
+            return service.GetUserList(keyword);
         }
 
         public List<UserEntity> GetList()

@@ -6,6 +6,7 @@
 *********************************************************************************/
 using EquipManage.Data;
 using EquipManage.Domain.Entity.SystemDocument;
+using System.Collections.Generic;
 
 namespace EquipManage.Domain.IRepository.SystemDocument
 {
@@ -13,5 +14,7 @@ namespace EquipManage.Domain.IRepository.SystemDocument
     {
         void DeleteForm(string keyValue);
         void SubmitForm(UserEntity userEntity, UserLogOnEntity userLogOnEntity, string keyValue);
+
+        List<UserEntity> GetUserList(string FNumber);
     }
 }

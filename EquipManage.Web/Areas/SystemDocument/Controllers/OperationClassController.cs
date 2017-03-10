@@ -64,6 +64,11 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             operationClassApp.UpdateForm(operationClassEntity);
             return Success("启用成功。");
         }
+        public ActionResult GetSelectJson(string keyValue)
+        {
+            var data = operationClassApp.GetList(keyValue);
+            return Content(data.ToJson());
+        }
 
         [HttpGet]
         public ActionResult Info()

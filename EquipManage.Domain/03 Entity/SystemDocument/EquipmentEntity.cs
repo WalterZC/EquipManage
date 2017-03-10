@@ -22,32 +22,32 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FManufacturer { get; set; }
         public string FSupply { get; set; }
         public string FCategory { get; set; }
-        public string FUseDate { get; set; }
-        public string FBuyDate { get; set; }
-        public string FReleaseDate { get; set; }
-        public string FOrgVal { get; set; }
-        public string FYearLife { get; set; }
+        public DateTime? FUseDate { get; set; }
+        public DateTime? FBuyDate { get; set; }
+        public DateTime? FReleaseDate { get; set; }
+        public decimal FOrgVal { get; set; }
+        public int FYearLife { get; set; }
         public string FAccuracy { get; set; }
-        public string FSalvageRate { get; set; }
+        public decimal FSalvageRate { get; set; }
         public string FOrganizeId { get; set; }
         public string FBelongOrgID { get; set; }
         public string FUseOrgID { get; set; }
         public string FPositionID { get; set; }
         public string FRemark { get; set; }
-        public string FDetail { get; set; }
-        public string FLayers { get; set; }
+        public bool? FDetail { get; set; }
+        public int? FLayers { get; set; }
         public string FParentID { get; set; }
         public string FManuOrgID { get; set; }
         public string FManuClassID { get; set; }
         public string FManuPrincipalID { get; set; }
         public string FOperatorID { get; set; }
         public string FABC { get; set; }
-        public string FGuaranteeTime { get; set; }
+        public DateTime? FGuaranteeTime { get; set; }
         public string FFigure { get; set; }
         public string FFiles { get; set; }
         public string FPictures { get; set; }
-        public string FPower { get; set; }
-        public string FMachineCount { get; set; }
+        public int FPower { get; set; }
+        public int FMachineCount { get; set; }
         public string FQRCode { get; set; }
         public string FEnergys { get; set; }
         public string FSource { get; set; }
@@ -55,7 +55,7 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FFixedAssets { get; set; }
         public string FUnit { get; set; }
         public string FSpotCheckProjectID { get; set; }
-        public string FIsSingleMeasurement { get; set; }
+        public bool? FIsSingleMeasurement { get; set; }
         public bool? FAllowEdit { get; set; }
         public bool? FAllowDelete { get; set; }
         public int? FSortCode { get; set; }
@@ -67,7 +67,9 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public DateTime? FLastModifyTime { get; set; }
         public string FLastModifyUserId { get; set; }
         public DateTime? FDeleteTime { get; set; }
+        public string FStatus { get; set; }
         public string FDeleteUserId { get; set; }
         public string FEquipmentTypeId { get; set; }
+        public string FStandard { get; set;}
     }
 }

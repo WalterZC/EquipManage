@@ -17,7 +17,7 @@ namespace EquipManage.Application.SystemDocument
             var expression = ExtLinq.True<PositionEntity>();
             if (!string.IsNullOrEmpty(keyword))
             {
-                expression = expression.And(t => t.FOrganizeId.Contains(keyword));
+                expression = expression.And(t => t.FBelongOrgID.Contains(keyword));
             }
             return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
         }

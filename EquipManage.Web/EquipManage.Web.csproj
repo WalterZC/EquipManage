@@ -178,6 +178,9 @@
     <Content Include="Areas\SystemDocument\Scripts\OperationClassMember\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\Parts\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\Parts\Index.js" />
+    <Content Include="Areas\SystemDocument\Scripts\User\Details.js" />
+    <Content Include="Areas\SystemDocument\Scripts\User\Form.js" />
+    <Content Include="Areas\SystemDocument\Scripts\User\Index.js" />
     <Content Include="Content\css\framework-font.css" />
     <Content Include="Content\css\framework-ui.css" />
     <Content Include="Content\css\framework-login.css" />
@@ -676,6 +679,7 @@
     <Content Include="Areas\SystemDocument\Views\EquipmentType\Index.cshtml" />
     <Content Include="Areas\SystemDocument\Views\EquipmentType\Details.cshtml" />
     <Content Include="Areas\SystemDocument\Views\Equipment\Details.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\Equipment\Files.cshtml" />
     <None Include="Properties\PublishProfiles\EquipManage.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

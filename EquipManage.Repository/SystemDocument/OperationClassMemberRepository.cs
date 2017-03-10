@@ -20,7 +20,7 @@ namespace EquipManage.Repository.SystemDocument
                             WHERE   1 = 1
                                     AND i.FNumber = @FNumber
                                     AND d.FEnabledMark = 1
-                                    AND d.FDeleteMark = 0
+                                    AND ISNULL(d.FDeleteMark,0) = 0
                             ORDER BY d.FSortCode ASC");
             DbParameter[] parameter =
             {

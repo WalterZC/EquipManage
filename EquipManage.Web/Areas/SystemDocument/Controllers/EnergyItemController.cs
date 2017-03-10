@@ -18,9 +18,9 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         }
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetFormJson(string keyword)
+        public ActionResult GetFormJson(string keyValue)
         {
-            var data = energyItemApp.GetForm(keyword);
+            var data = energyItemApp.GetForm(keyValue);
             return Content(data.ToJson());
         }
         [HttpPost]

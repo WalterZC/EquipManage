@@ -1,7 +1,9 @@
 ﻿using EquipManage.Application.SystemDocument;
 using EquipManage.Code;
 using EquipManage.Domain.Entity.SystemDocument;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Web.Mvc;
 
 namespace EquipManage.Web.Areas.SystemDocument.Controllers
@@ -9,6 +11,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
     public class OperationClassMemberController : ControllerBase
     {
         private OperationClassMemberApp operationClassMemberApp = new OperationClassMemberApp();
+        private UserApp userApp = new UserApp();
 
         [HttpGet]
         [HandlerAjaxOnly]
@@ -19,13 +22,15 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         }
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetSelectJson(string enCode)
+        public ActionResult GetSelectJson(string keyValue)
         {
-            var data = operationClassMemberApp.GetItemList(enCode);
-            List<object> list = new List<object>();
-            foreach (OperationClassMemberEntity item in data)
+            var data = userApp.GetClassUserList(keyValue);
+            DataTable list = new DataTable();
+            list.Columns.Add("FId", Type.GetType("System.String"));
+            list.Columns.Add("FRealName", Type.GetType("System.String"));
+            foreach (UserEntity item in data)
             {
-                list.Add(new { id = item.FMemberID});
+                list.Rows.Add(new object[] { item.FId, item.FRealName });
             }
             return Content(list.ToJson());
         }

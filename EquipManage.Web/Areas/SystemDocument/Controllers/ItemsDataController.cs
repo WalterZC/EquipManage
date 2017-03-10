@@ -16,6 +16,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
     public class ItemsDataController : ControllerBase
     {
         private ItemsDetailApp itemsDetailApp = new ItemsDetailApp();
+        private ItemsApp itemsApp = new ItemsApp();
 
         [HttpGet]
         [HandlerAjaxOnly]

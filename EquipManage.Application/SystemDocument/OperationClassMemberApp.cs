@@ -31,6 +31,7 @@ namespace EquipManage.Application.SystemDocument
         {
             return service.GetItemList(FNumber);
         }
+
         public OperationClassMemberEntity GetForm(string keyValue)
         {
             return service.FindEntity(keyValue);

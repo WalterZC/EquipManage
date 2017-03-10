@@ -8,6 +8,10 @@ using EquipManage.Code;
 using EquipManage.Data;
 using EquipManage.Domain.Entity.SystemDocument;
 using EquipManage.Domain.IRepository.SystemDocument;
+using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.SqlClient;
+using System.Text;
 
 namespace EquipManage.Repository.SystemDocument
 {
@@ -41,6 +45,24 @@ namespace EquipManage.Repository.SystemDocument
                 }
                 db.Commit();
             }
+        }
+        public List<UserEntity> GetUserList(string FNumber)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(@"SELECT  u.*
+                            FROM    Sys_OperationClassMember d
+                                    INNER  JOIN Sys_OperationClass i ON i.FId = d.FOperationClassID
+		                            LEFT JOIN Sys_User u ON d.FMemberID=u.FId
+                            WHERE   1 = 1
+                                    AND i.FId = @FNumber
+                                    AND d.FEnabledMark = 1
+                                    AND ISNULL(d.FDeleteMark,0) = 0
+                            ORDER BY d.FSortCode ASC");
+            DbParameter[] parameter =
+            {
+                 new SqlParameter("@FNumber",FNumber)
+            };
+            return this.FindList(strSql.ToString(), parameter);
         }
     }
 }

@@ -18,15 +18,9 @@ function gridList() {
         height: $(window).height() - 96,
         colModel: [
             { label: "主键", name: "FId", hidden: true, key: true },
-            { label: '名称', name: 'FItemName', width: 150, align: 'left' },
-            { label: '编号', name: 'FItemCode', width: 150, align: 'left' },
-            { label: '排序', name: 'FSortCode', width: 80, align: 'center' },
-            {
-                label: "默认", name: "FIsDefault", width: 60, align: "center",
-                formatter: function (cellvalue) {
-                    return cellvalue == true ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
-                }
-            },
+            { label: '名称', name: 'FShortName', width: 150, align: 'left' },
+            { label: '编号', name: 'FNumber', width: 150, align: 'left' },
+
             {
                 label: '创建时间', name: 'FCreatorTime', width: 80, align: 'left',
                 formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
@@ -71,8 +65,8 @@ function btn_edit() {
         id: "Form",
         title: itemName + " 》修改类型",
         url: "/SystemDocument/Equipment/Form?keyValue=" + keyValue,
-        width: "450px",
-        height: "350px",
+        width: "900px",
+        height: "650px",
         callBack: function (iframeId) {
             top.frames[iframeId].submitForm();
         }
@@ -94,9 +88,26 @@ function btn_details() {
         id: "Details",
         title: "查看设备",
         url: "/SystemDocument/Equipment/Details?keyValue=" + keyValue,
-        width: "450px",
-        height: "470px",
+        width: "900px",
+        height: "650px",
         btn: null,
+    });
+}
+function btn_files() {
+    var itemId = $("#itemTree").getCurrentNode().id;
+    var itemName = $("#itemTree").getCurrentNode().text;
+    if (!itemId) {
+        return false;
+    }
+    $.modalOpen({
+        id: "Files",
+        title: itemName + " 》设备文件",
+        url: "/SystemDocument/Equipment/Files?itemId=" + itemId,
+        width: "900px",
+        height: "650px",
+        callBack: function (iframeId) {
+            top.frames[iframeId].submitForm();
+        }
     });
 }
 function btn_equipmentstype() {
