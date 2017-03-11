@@ -23,6 +23,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipManage.Data", "EquipMa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipManage.Mapping", "EquipManage.Mapping\EquipManage.Mapping.csproj", "{4E642CBE-F6C5-4CB9-9474-6B349652FE77}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 TTModel", "04 TTModel", "{3BBDB0C9-D15C-4DD2-BEB1-29D39AC99FDA}"
+	ProjectSection(SolutionItems) = preProject
+		DbHelper.ttinclude = DbHelper.ttinclude
+		ModelAuto.ttinclude = ModelAuto.ttinclude
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

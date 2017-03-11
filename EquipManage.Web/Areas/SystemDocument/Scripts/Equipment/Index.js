@@ -96,6 +96,7 @@ function btn_details() {
 function btn_files() {
     var itemId = $("#itemTree").getCurrentNode().id;
     var itemName = $("#itemTree").getCurrentNode().text;
+    var keyValue = $("#gridList").jqGridRowValue().FId;
     if (!itemId) {
         return false;
     }
@@ -105,9 +106,7 @@ function btn_files() {
         url: "/SystemDocument/Equipment/Files?itemId=" + itemId,
         width: "900px",
         height: "650px",
-        callBack: function (iframeId) {
-            top.frames[iframeId].submitForm();
-        }
+        btn: null
     });
 }
 function btn_equipmentstype() {

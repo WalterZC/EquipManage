@@ -154,6 +154,8 @@
     <Compile Include="Controllers\ClientsDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Filehelper\FilesHelper.cs" />
+    <Compile Include="Filehelper\ImageHandler.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -170,6 +172,7 @@
     <Content Include="Areas\SystemDocument\Scripts\EquipmentType\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\EquipmentType\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\Equipment\Details.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Equipment\Files.js" />
     <Content Include="Areas\SystemDocument\Scripts\Equipment\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\Equipment\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\Maintain\Form.js" />
@@ -599,6 +602,7 @@
   <ItemGroup>
     <Folder Include="Areas\ReportManage\Views\Echarts\" />
     <Folder Include="assets\" />
+    <Folder Include="Content\img\Free-file-icons\" />
     <Folder Include="Content\js\layer\" />
     <Folder Include="Content\js\metisMenu\" />
   </ItemGroup>
