@@ -103,7 +103,7 @@ function btn_files() {
     $.modalOpen({
         id: "Files",
         title: itemName + " 》设备文件",
-        url: "/SystemDocument/Equipment/Files?itemId=" + itemId,
+        url: "/SystemDocument/Equipment/Files?itemId=" + itemId + "&keyValue=" + keyValue,
         width: "900px",
         height: "650px",
         btn: null

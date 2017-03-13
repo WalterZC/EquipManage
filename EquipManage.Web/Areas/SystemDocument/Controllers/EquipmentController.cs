@@ -17,14 +17,14 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         private EquipmentApp equipmentApp = new EquipmentApp();
 
         FilesHelper filesHelper;
-        String tempPath = "~/somefiles/";
-        String serverMapPath = "~/Files/somefiles/";
+        String tempPath = "~/equipment/";
+        String serverMapPath = "~/Files/equipment/";
         private string StorageRoot
         {
             get { return Path.Combine(HostingEnvironment.MapPath(serverMapPath)); }
         }
-        private string UrlBase = "/Files/somefiles/";
-        String DeleteURL = "/FileUpload/DeleteFile/?file=";
+        private string UrlBase = "/Files/equipment/";
+        String DeleteURL = "/Equipment/DeleteFile/?file=";
         String DeleteType = "GET";
         public EquipmentController()
         {
@@ -148,14 +148,35 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         }
         public JsonResult GetFileList()
         {
-            var list = filesHelper.GetFileList();
+            var CurrentContext = HttpContext;
+            var list = filesHelper.GetFileList(HttpContext);
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public JsonResult DeleteFile(string file)
         {
-            filesHelper.DeleteFile(file);
+            var CurrentContext = HttpContext;
+            filesHelper.DeleteFile(CurrentContext, file);
             return Json("OK", JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DownFile(string filePath, string fileName)
+        {
+            filePath = Server.MapPath(filePath);
+            FileStream fs = new FileStream(filePath, FileMode.Open);
+            byte[] bytes = new byte[(int)fs.Length];
+            fs.Read(bytes, 0, bytes.Length);
+            fs.Close();
+            Response.Charset = "UTF-8";
+            Response.ContentEncoding = System.Text.Encoding.GetEncoding("UTF-8");
+            Response.ContentType = "application/octet-stream";
+
+
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + Server.UrlEncode(fileName));
+            Response.BinaryWrite(bytes);
+            Response.Flush();
+            Response.End();
+            return new EmptyResult();
         }
     }
 }

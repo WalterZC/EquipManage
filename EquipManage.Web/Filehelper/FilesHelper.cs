@@ -46,18 +46,18 @@ namespace EquipManage.Web.FileHelper
             }
         }
 
-        public String DeleteFile(String file)
+        public String DeleteFile(HttpContextBase ContentBase,String file)
         {
             System.Diagnostics.Debug.WriteLine("DeleteFile");
             //    var req = HttpContext.Current;
             System.Diagnostics.Debug.WriteLine(file);
 
-            String fullPath = Path.Combine(StorageRoot, file);
+            String fullPath = Path.Combine(StorageRoot + FormartQueryString(ContentBase.Request.UrlReferrer.Query, "keyValue") + "\\", file);
             System.Diagnostics.Debug.WriteLine(fullPath);
             System.Diagnostics.Debug.WriteLine(System.IO.File.Exists(fullPath));
-            String thumbPath = "/" + file + "80x80.jpg";
-            String partThumb1 = Path.Combine(StorageRoot, "thumbs");
-            String partThumb2 = Path.Combine(partThumb1, file + "80x80.jpg");
+            String thumbPath = Path.GetFileNameWithoutExtension(file) + "80x80.jpg";
+            String partThumb1 = Path.Combine(StorageRoot + FormartQueryString(ContentBase.Request.UrlReferrer.Query, "keyValue") + "\\", "thumbs");
+            String partThumb2 = Path.Combine(partThumb1, thumbPath);
 
             System.Diagnostics.Debug.WriteLine(partThumb2);
             System.Diagnostics.Debug.WriteLine(System.IO.File.Exists(partThumb2));
@@ -75,19 +75,19 @@ namespace EquipManage.Web.FileHelper
             String failMessage = "Error Delete";
             return failMessage;
         }
-        public JsonFiles GetFileList()
+        public JsonFiles GetFileList(HttpContextBase ContentBase)
         {
 
             var r = new List<ViewDataUploadFilesResult>();
 
-            String fullPath = Path.Combine(StorageRoot);
+            String fullPath = Path.Combine(StorageRoot + FormartQueryString(ContentBase.Request.UrlReferrer.Query, "keyValue") + "\\");
             if (Directory.Exists(fullPath))
             {
                 DirectoryInfo dir = new DirectoryInfo(fullPath);
                 foreach (FileInfo file in dir.GetFiles())
                 {
                     int SizeInt = unchecked((int)file.Length);
-                    r.Add(UploadResult(file.Name, SizeInt, file.FullName));
+                    r.Add(UploadResult(ContentBase,file.Name, SizeInt, file.FullName));
                 }
 
             }
@@ -101,7 +101,7 @@ namespace EquipManage.Web.FileHelper
             var httpRequest = ContentBase.Request;
             System.Diagnostics.Debug.WriteLine(Directory.Exists(tempPath));
 
-            String fullPath = Path.Combine(StorageRoot);
+            String fullPath = Path.Combine(StorageRoot+ FormartQueryString(ContentBase.Request.UrlReferrer.Query, "keyValue") + "\\");
             Directory.CreateDirectory(fullPath);
             // Create new folder for thumbs
             Directory.CreateDirectory(fullPath + "/thumbs/");
@@ -135,7 +135,7 @@ namespace EquipManage.Web.FileHelper
             for (int i = 0; i < request.Files.Count; i++)
             {
                 var file = request.Files[i];
-                String pathOnServer = Path.Combine(StorageRoot);
+                String pathOnServer = Path.Combine(StorageRoot + FormartQueryString(requestContext.Request.UrlReferrer.Query, "keyValue") + "\\");
                 var fullPath = Path.Combine(pathOnServer, Path.GetFileName(file.FileName));
                 file.SaveAs(fullPath);
 
@@ -162,7 +162,7 @@ namespace EquipManage.Web.FileHelper
 
                     }
                 }
-                statuses.Add(UploadResult(file.FileName, file.ContentLength, file.FileName));
+                statuses.Add(UploadResult(requestContext, file.FileName, file.ContentLength, file.FileName));
             }
         }
 
@@ -174,7 +174,7 @@ namespace EquipManage.Web.FileHelper
             if (request.Files.Count != 1) throw new HttpRequestValidationException("Attempt to upload chunked file containing more than one fragment per request");
             var file = request.Files[0];
             var inputStream = file.InputStream;
-            String patchOnServer = Path.Combine(StorageRoot);
+            String patchOnServer = Path.Combine(StorageRoot + FormartQueryString(requestContext.Request.UrlReferrer.Query, "keyValue") + "\\");
             var fullName = Path.Combine(patchOnServer, Path.GetFileName(file.FileName));
             var ThumbfullPath = Path.Combine(fullName, Path.GetFileName(file.FileName + "80x80.jpg"));
             ImageHandler handler = new ImageHandler();
@@ -194,9 +194,9 @@ namespace EquipManage.Web.FileHelper
                 fs.Flush();
                 fs.Close();
             }
-            statuses.Add(UploadResult(file.FileName, file.ContentLength, file.FileName));
+            statuses.Add(UploadResult(requestContext,file.FileName, file.ContentLength, file.FileName));
         }
-        public ViewDataUploadFilesResult UploadResult(String FileName, int fileSize, String FileFullPath)
+        public ViewDataUploadFilesResult UploadResult(HttpContextBase requestContext, String FileName, int fileSize, String FileFullPath)
         {
             String getType = System.Web.MimeMapping.GetMimeMapping(FileFullPath);
             var result = new ViewDataUploadFilesResult()
@@ -204,15 +204,15 @@ namespace EquipManage.Web.FileHelper
                 name = FileName,
                 size = fileSize,
                 type = getType,
-                url = UrlBase + FileName,
+                url = UrlBase + FormartQueryString(requestContext.Request.UrlReferrer.Query, "keyValue") + "\\" + FileName,
                 deleteUrl = DeleteURL + FileName,
-                thumbnailUrl = CheckThumb(getType, FileName),
+                thumbnailUrl = CheckThumb(requestContext, getType, FileName),
                 deleteType = DeleteType,
             };
             return result;
         }
 
-        public String CheckThumb(String type, String FileName)
+        public String CheckThumb(HttpContextBase requestContext,String type, String FileName)
         {
             var splited = type.Split('/');
             if (splited.Length == 2)
@@ -220,7 +220,7 @@ namespace EquipManage.Web.FileHelper
                 string extansion = splited[1].ToLower();
                 if (extansion.Equals("jpeg") || extansion.Equals("jpg") || extansion.Equals("png") || extansion.Equals("gif"))
                 {
-                    String thumbnailUrl = UrlBase + "thumbs/" + Path.GetFileNameWithoutExtension(FileName) + "80x80.jpg";
+                    String thumbnailUrl = UrlBase + FormartQueryString(requestContext.Request.UrlReferrer.Query, "keyValue") + "\\" + "thumbs/" + Path.GetFileNameWithoutExtension(FileName) + "80x80.jpg";
                     return thumbnailUrl;
                 }
                 else
@@ -244,11 +244,11 @@ namespace EquipManage.Web.FileHelper
             }
 
         }
-        public List<String> FilesList()
+        public List<String> FilesList(HttpContextBase requestContext)
         {
 
             List<String> Filess = new List<String>();
-            string path = HostingEnvironment.MapPath(serverMapPath);
+            string path = HostingEnvironment.MapPath(serverMapPath) + FormartQueryString(requestContext.Request.UrlReferrer.Query, "keyValue") + "\\";
             System.Diagnostics.Debug.WriteLine(path);
             if (Directory.Exists(path))
             {
@@ -261,6 +261,22 @@ namespace EquipManage.Web.FileHelper
 
             }
             return Filess;
+        }
+
+        public string FormartQueryString(string UrlQuerystring, string fname)
+        {
+            string result = "";
+
+            UrlQuerystring = UrlQuerystring.Replace("?", "");
+            var list = UrlQuerystring.Split('&');
+            foreach (var item in list)
+            {
+                if (item.Contains(fname))
+                {
+                    result = item.Split('=')[1];
+                }
+            }
+            return result;
         }
     }
     public class ViewDataUploadFilesResult

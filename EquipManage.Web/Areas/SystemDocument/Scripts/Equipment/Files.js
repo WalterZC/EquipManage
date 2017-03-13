@@ -30,8 +30,15 @@ var FormDropzone = function () {
 
                             // Remove the file preview.
                             _this.removeFile(file);
+
                             // If you want to the delete the file on the server as well,
                             // you can do the AJAX request here.
+                            $.ajax({
+                                type: 'GET',
+                                contentType: "application/json; charset=utf-8",
+                                url: '/Equipment/DeleteFile',
+                                data: { "file": file.name }
+                            });
                         });
 
                         // Add the button to the file preview element.
@@ -76,14 +83,14 @@ function initControl() {
                     content += '                          data-original-title="' + value.name + '">' + value.name + '</span>'
                     content += '                </div>'
                     content += '               <div class="clearfix">'
-                    content += '                    <button url="' + value.url + '" type="button"'
+                    content += '                    <a href="~/Equipment/DownFile?filePath=' + value.url + '&fileName=' + value.name + '" type="text"'
                     content += '                           class="btn btn-warning btn-sm waves-effect waves-light m-t-5 copy">'
-                    content += '                        <i class="fa fa-copy"></i> <span>下载</span>'
-                    content += '                    </button>'
-                    content += '                    <a type="text" class="btn btn-danger btn-sm waves-effect waves-light m-t-5"'
-                    content += '                            href="' + value.deleteUrl + '">'
-                    content += '                        <i class="fa fa-trash-o"></i> <span>删除</span>'
+                    content += '                        <i class="fa fa-download"></i> <span>下载</span>'
                     content += '                    </a>'
+                    content += '                    <button type="button" class="btn btn-danger btn-sm waves-effect waves-light m-t-5"'
+                    content += '                            onclick=delFile("' + value.name + '")>'
+                    content += '                        <i class="fa fa-trash-o"></i> <span>删除</span>'
+                    content += '                    </button>'
                     content += '                </div>'
                     content += '           </div>'
                 });
@@ -95,4 +102,20 @@ function initControl() {
         }
 
     });
+        $("#FItemID").val(keyValue);
 }
+
+function delFile(file) {
+    $.ajax({
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        url: '/Equipment/DeleteFile',
+        data: { "file": file },
+        success: function (result) {
+            if (result == "OK")
+            {
+                $("span[data-original-title='" + file + "']").parent().parent(".text-center").remove();
+            }
+        }
+    });
+  }
