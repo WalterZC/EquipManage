@@ -109,6 +109,22 @@ function btn_files() {
         btn: null
     });
 }
+function btn_parts() {
+    var itemId = $("#itemTree").getCurrentNode().id;
+    var FName = $("#gridList").jqGridRowValue().FShortName;
+    var keyValue = $("#gridList").jqGridRowValue().FId;
+    if (!itemId) {
+        return false;
+    }
+    $.modalOpen({
+        id: "Parts",
+        title: FName + " 》设备部位",
+        url: "/SystemDocument/Equipment/PartList?itemId=" + itemId + "&keyValue=" + keyValue,
+        width: "600px",
+        height: "550px",
+        btn:null
+    });
+}
 function btn_equipmentstype() {
     $.modalOpen({
         id: "EquipmentType",

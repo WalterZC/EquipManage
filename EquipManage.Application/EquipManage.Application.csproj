@@ -50,6 +50,9 @@
     <Compile Include="SystemDocument\ChangeTypeApp.cs" />
     <Compile Include="SystemDocument\EnergyItemApp.cs" />
     <Compile Include="SystemDocument\EquipmentApp.cs" />
+    <Compile Include="SystemDocument\EquipmentPartsApp.cs">
+      <DependentUpon>Application.SystemDocument.tt</DependentUpon>
+    </Compile>
     <Compile Include="SystemDocument\EquipmentSpotCheckItemApp.cs" />
     <Compile Include="SystemDocument\EquipmentTypeApp.cs" />
     <Compile Include="SystemDocument\ExpWareApp.cs" />
@@ -92,6 +95,15 @@
       <Project>{875233bf-ea15-49e0-9a9c-77884a897ff6}</Project>
       <Name>EquipManage.Repository</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SystemDocument\Application.SystemDocument.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Application.SystemDocument.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

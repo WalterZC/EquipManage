@@ -26,6 +26,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 TTModel", "04 TTModel", "{3BBDB0C9-D15C-4DD2-BEB1-29D39AC99FDA}"
 	ProjectSection(SolutionItems) = preProject
 		DbHelper.ttinclude = DbHelper.ttinclude
+		Manager.ttinclude = Manager.ttinclude
 		ModelAuto.ttinclude = ModelAuto.ttinclude
 	EndProjectSection
 EndProject

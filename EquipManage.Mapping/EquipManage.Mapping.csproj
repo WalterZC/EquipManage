@@ -55,6 +55,9 @@
     <Compile Include="SystemDocument\ChangeTypeMap.cs" />
     <Compile Include="SystemDocument\EnergyItemMap.cs" />
     <Compile Include="SystemDocument\EquipmentMap.cs" />
+    <Compile Include="SystemDocument\EquipmentPartsMap.cs">
+      <DependentUpon>Mapping.SystemDocument.tt</DependentUpon>
+    </Compile>
     <Compile Include="SystemDocument\EquipmentSpotCheckItemMap.cs" />
     <Compile Include="SystemDocument\EquipmentTypeMap.cs" />
     <Compile Include="SystemDocument\ExpWareMap.cs" />
@@ -83,6 +86,15 @@
       <Project>{7dc886cd-b8a0-44e8-aadd-57fcb0cfecb8}</Project>
       <Name>EquipManage.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SystemDocument\Mapping.SystemDocument.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Mapping.SystemDocument.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

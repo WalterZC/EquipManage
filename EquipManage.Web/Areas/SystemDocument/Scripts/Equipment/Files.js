@@ -71,7 +71,12 @@ function initControl() {
             if (data["files"].length == 0) {
                 content = '<div class="row"> <div class="col-md-4 text-center"><div class="alert alert-warning">目前还没有一个附件呢，你可以上传试试!</div></div></div>';
             } else {
+                var i = 0;
                 data["files"].forEach(function (value, index, array) {
+                    if (index % 4 == 0 && i != 4) {
+                        content += '<div class="row" style="padding-top:8px;padding-bottom:8px;">'
+                        content += '<div class="col-md-12 attach">'
+                    }
                     content += '<div class="col-sm-3 col-md-2 text-center">'
                     content += '                <a href="' + value.url + '" target="_blank">'
                     content += '                    <img class="attach-img"'
@@ -83,18 +88,23 @@ function initControl() {
                     content += '                          data-original-title="' + value.name + '">' + value.name + '</span>'
                     content += '                </div>'
                     content += '               <div class="clearfix">'
-                    content += '                    <a href="~/Equipment/DownFile?filePath=' + value.url + '&fileName=' + value.name + '" type="text"'
+                    content += '                    <a href="/Equipment/DownFile?filePath=' + value.url + '&fileName=' + value.name + '" type="text"'
                     content += '                           class="btn btn-warning btn-sm waves-effect waves-light m-t-5 copy">'
                     content += '                        <i class="fa fa-download"></i> <span>下载</span>'
                     content += '                    </a>'
                     content += '                    <button type="button" class="btn btn-danger btn-sm waves-effect waves-light m-t-5"'
-                    content += '                            onclick=delFile("' + value.name + '")>'
+                    content += '                            onclick="delFile(\'' + value.name + '\')">'
                     content += '                        <i class="fa fa-trash-o"></i> <span>删除</span>'
                     content += '                    </button>'
                     content += '                </div>'
-                    content += '           </div>'
+                    content += '           </div>';
+                    i++;
+                    if ((index+1) % 4 == 0 && i==4) {
+                        content += '       </div></div>';
+                        i = 0;
+                    }
                 });
-                $(".attach").prepend(content);
+                $("div[name='attach']").prepend(content);
             }
 
             //$('#fileupload').fileupload('option', 'done').call($('#fileupload'), $.Event('done'), { result: { files: data.files } })

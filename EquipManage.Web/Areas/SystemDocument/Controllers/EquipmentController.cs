@@ -4,17 +4,20 @@ using EquipManage.Domain.Entity.SystemDocument;
 using EquipManage.Web.FileHelper;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
+using System.Web.UI.HtmlControls;
 
 namespace EquipManage.Web.Areas.SystemDocument.Controllers
 {
     public class EquipmentController : ControllerBase
     {
         private EquipmentApp equipmentApp = new EquipmentApp();
+        private EquipmentPartsApp equipmentPartsApp = new EquipmentPartsApp();
 
         FilesHelper filesHelper;
         String tempPath = "~/equipment/";
@@ -26,9 +29,10 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         private string UrlBase = "/Files/equipment/";
         String DeleteURL = "/Equipment/DeleteFile/?file=";
         String DeleteType = "GET";
+        String subDir = null;
         public EquipmentController()
         {
-            filesHelper = new FilesHelper(DeleteURL, DeleteType, StorageRoot, UrlBase, tempPath, serverMapPath);
+            filesHelper = new FilesHelper(DeleteURL, DeleteType, StorageRoot, UrlBase, tempPath, serverMapPath,subDir);
         }
 
         [HttpGet]
@@ -74,6 +78,22 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             equipmentApp.DeleteForm(keyValue);
             return Success("删除成功。");
         }
+        
+        [HttpGet]
+        [HandlerAuthorize]
+        public ActionResult PartForm()
+        {
+            return View();
+        }
+        [HttpGet]
+        [HandlerAuthorize]
+        public ActionResult PartList()
+        {
+            return View();
+        }
+
+        #region 设备文档
+
         [HttpGet]
         [HandlerAuthorize]
         public ActionResult Files()
@@ -88,6 +108,8 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
 
             var CurrentContext = HttpContext;
 
+            filesHelper.subDir = FilesHelper.FormartQueryString(CurrentContext.Request.UrlReferrer.Query, "keyValue") + "\\";
+
             filesHelper.UploadAndShowResults(CurrentContext, resultList);
             JsonFiles files = new JsonFiles(resultList);
 
@@ -100,55 +122,11 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             {
                 return Json(files);
             }
-            //bool isSavedSuccessfully = true;
-            //string fName = "";
-            //try
-            //{
-            //    foreach (string fileName in Request.Files)
-            //    {
-            //        HttpPostedFileBase file = Request.Files[fileName];
-            //        //Save file content goes here
-            //        fName = file.FileName;
-            //        if (file != null && file.ContentLength > 0)
-            //        {
-
-            //            var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\EquipmentFiles", Server.MapPath(@"\")));
-
-            //            string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "imagepath");
-
-            //            var fileName1 = Path.GetFileName(file.FileName);
-
-            //            bool isExists = System.IO.Directory.Exists(pathString);
-
-            //            if (!isExists)
-            //                System.IO.Directory.CreateDirectory(pathString);
-
-            //            var path = string.Format("{0}\\{1}", pathString, file.FileName);
-            //            file.SaveAs(path);
-
-            //        }
-
-            //    }
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    isSavedSuccessfully = false;
-            //}
-
-
-            //if (isSavedSuccessfully)
-            //{
-            //    return Json(new { Message = fName, JsonRequestBehavior.AllowGet });
-            //}
-            //else
-            //{
-            //    return Json(new { Message = "Error in saving file", JsonRequestBehavior.AllowGet });
-            //}
         }
         public JsonResult GetFileList()
         {
             var CurrentContext = HttpContext;
+            filesHelper.subDir = FilesHelper.FormartQueryString(CurrentContext.Request.UrlReferrer.Query, "keyValue") + "\\";
             var list = filesHelper.GetFileList(HttpContext);
             return Json(list, JsonRequestBehavior.AllowGet);
         }
@@ -156,6 +134,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         public JsonResult DeleteFile(string file)
         {
             var CurrentContext = HttpContext;
+            filesHelper.subDir = FilesHelper.FormartQueryString(CurrentContext.Request.UrlReferrer.Query, "keyValue") + "\\";
             filesHelper.DeleteFile(CurrentContext, file);
             return Json("OK", JsonRequestBehavior.AllowGet);
         }
@@ -178,5 +157,90 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             Response.End();
             return new EmptyResult();
         }
+        #endregion
+
+        #region 设备部位管理
+        [HttpPost]
+        public ActionResult SubmitPartForm(FormCollection collection)
+        {
+
+            EquipmentPartsEntity equipmentPartsEntity = new EquipmentPartsEntity();
+
+            if (!"".Equals(collection["FId"].ToString()))
+            {
+                equipmentPartsEntity = equipmentPartsApp.GetForm(collection["FId"].ToString());
+            }
+            equipmentPartsEntity.FItemId = collection["FItemId"].ToString();
+            equipmentPartsEntity.FSystemId = collection["FSystemId"].ToString();
+            equipmentPartsEntity.FName = collection["FName"].ToString();
+
+            if (!string.IsNullOrEmpty(collection["FImage"]))
+            {
+                
+
+                var CurrentContext = HttpContext;
+                string PartsImagePath = "~/Files/PartsImg/";
+                String fullPath = Path.Combine(HostingEnvironment.MapPath(PartsImagePath));
+                Directory.CreateDirectory(fullPath);
+
+                if (!string.IsNullOrEmpty(equipmentPartsEntity.FFileName))
+                {
+                    System.IO.File.Delete(Path.Combine(HostingEnvironment.MapPath(PartsImagePath) + subDir, (equipmentPartsEntity.FFileName.ToString()+".jpg")));
+                }
+
+                string base64 = collection["FImage"].Substring(collection["FImage"].IndexOf(',') + 1);
+                base64 = base64.Trim('\0');
+                byte[] myData = Convert.FromBase64String(base64);
+
+                string saveFileName = DateTime.Now.ToFileTime().ToString();
+                MemoryStream ms = new MemoryStream(myData);
+                Bitmap bmp = new Bitmap(ms);
+                Image returnImage = bmp;
+                returnImage.Save(Server.MapPath(PartsImagePath) + saveFileName + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                string filename = saveFileName;
+
+                equipmentPartsEntity.FContentLength =Ext.ToString(base64.Length);
+                equipmentPartsEntity.FContentType = "image/jpg";
+                equipmentPartsEntity.FFileName = filename;
+            }
+            equipmentPartsApp.SubmitForm(equipmentPartsEntity, collection["FId"].ToString());
+            return Success("操作成功。");
+        }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetPartFormJson(string keyValue)
+        {
+            var data = equipmentPartsApp.GetForm(keyValue);
+            return Content(data.ToJson());
+        }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetPartGridJson(string itemId, string keyword = "")
+        {
+            var data = equipmentPartsApp.GetList(itemId, keyword);
+            return Content(data.ToJson());
+        }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        [HandlerAuthorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePartForm(string keyValue)
+        {
+            string PartsImagePath = "~/Files/PartsImg/";
+            EquipmentPartsEntity equipmentPartsEntity = new EquipmentPartsEntity();
+            equipmentPartsEntity = equipmentPartsApp.GetForm(keyValue);
+            equipmentPartsApp.DeleteForm(equipmentPartsEntity);
+            if (!string.IsNullOrEmpty(equipmentPartsEntity.FFileName))
+            {
+                System.IO.File.Delete(Path.Combine(HostingEnvironment.MapPath(PartsImagePath) + subDir, (equipmentPartsEntity.FFileName.ToString() + ".jpg")));
+            }
+            return Success("删除成功。");
+        }
+
+        #endregion
     }
 }

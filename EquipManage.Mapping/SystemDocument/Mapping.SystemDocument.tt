@@ -13,30 +13,38 @@
 <#@ import namespace="System.IO" #>
 <#@ include file="C:\project\EquipManage\DbHelper.ttinclude"  #>
 <#@ include file="C:\project\EquipManage\Manager.ttinclude"  #>
+
 <# 
-    var tableName=config.TableName.Replace("Sys_","")+"Entity";  
+    var dbTableName=config.TableName;
+    var tableName=config.TableName.Replace("Sys_","")+"Map";
+    var entity=config.TableName.Replace("Sys_","")+"Entity";
+    var list=  DbHelper.GetDbColumns(config.ConnectionString, config.DbDatabase, config.TableName);
+    var pk = DbHelper.GetPrimaryKey(list);
+
 	var manager = Manager.Create(Host, GenerationEnvironment);
  #>
-
-<# manager.StartHeader(); #>
-using System;
-namespace EquipManage.Domain.Entity.SystemDocument
+ <# manager.StartHeader(); #>
+using EquipManage.Domain.Entity.SystemDocument;
+using System.Data.Entity.ModelConfiguration;
+namespace EquipManage.Mapping.SystemDocument
 {    
 <# manager.EndBlock(); #>
 <#manager.StartNewFile(tableName+".cs");#>
     /// <summary>
     /// <#=tableName#>
     /// </summary>    
-    public class <#=tableName#>:IEntity<<#=tableName#>>, ICreationAudited, IDeleteAudited, IModificationAudited
+    public class <#=tableName#>:EntityTypeConfiguration<<#=entity#>>
     {
-<# foreach(DbColumn column in DbHelper.GetDbColumns(config.ConnectionString, config.DbDatabase, config.TableName)){#>
-      public <#= column.CSharpType#><# if(column.CommonType.IsValueType && column.IsNullable){#>?<#}#> <#=column.ColumnName#> { get; set; }
-<#}#> 
+       public <#=tableName#>()
+       {
+          this.ToTable("<#=dbTableName#>");
+          this.HasKey(t=>t.<#=pk#>);
+       }
     }
-	<# manager.EndBlock();  #>
+		<# manager.EndBlock();  #>
 }
 <# manager.StartFooter(); #>
-
+}
 <# manager.EndBlock(); #>
 
 <# manager.Process(true); #>
