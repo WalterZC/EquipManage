@@ -10,7 +10,7 @@
     });
     function treeView() {
         $("#itemTree").treeview({
-            url: "/SystemDocument/ItemsType/GetTreeJson",
+            url: "/SystemDocument/ItemsType/GetTreeViewJson",
             onnodeclick: function (item) {
                 $("#txt_keyword").val('');
                 $('#btn_search').trigger("click");

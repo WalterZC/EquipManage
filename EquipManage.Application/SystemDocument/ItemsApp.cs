@@ -26,12 +26,25 @@ namespace EquipManage.Application.SystemDocument
         {
             return service.FindEntity(keyValue);
         }
-        public List<ItemsEntity> GetEntitys(string keyword)
+        public ItemsEntity GetEntity(string keyword)
         {
             var expression = ExtLinq.True<ItemsEntity>();
             expression = expression.And(t => t.FFullName.Contains(keyword));
             expression = expression.Or(t => t.FEnCode.Contains(keyword));
-
+            return service.FindEntity(expression);
+        }
+        public List<ItemsEntity> GetEntitys(string itemId,string keyword)
+        {
+            var expression = ExtLinq.True<ItemsEntity>();
+            if (!string.IsNullOrEmpty(itemId))
+            {
+                expression = expression.And(t => t.FParentId == itemId);
+            }
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                expression = expression.And(t => t.FFullName.Contains(keyword));
+                expression = expression.Or(t => t.FEnCode.Contains(keyword));
+            }
             return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
         }
         public void DeleteForm(string keyValue)

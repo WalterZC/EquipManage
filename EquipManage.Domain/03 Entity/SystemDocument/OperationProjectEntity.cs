@@ -1,22 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace EquipManage.Domain.Entity.SystemDocument
 {
+    /// <summary>
+    /// OperationProjectEntity
+    /// </summary>    
     public class OperationProjectEntity : IEntity<OperationProjectEntity>, ICreationAudited, IDeleteAudited, IModificationAudited
     {
         public string FId { get; set; }
         public string FNumber { get; set; }
         public string FFullName { get; set; }
         public string FShortName { get; set; }
-        public string FOperationItems { get; set; }
         public string FOrganizeId { get; set; }
-        public int FSortCode { get; set; }
-        public bool FAllowEdit { get; set; }
-        public bool FAllowDelete { get; set; }
+        public int? FSortCode { get; set; }
+        public bool? FAllowEdit { get; set; }
+        public bool? FAllowDelete { get; set; }
         public bool? FDeleteMark { get; set; }
         public bool? FEnabledMark { get; set; }
         public string FDescription { get; set; }
@@ -26,5 +23,11 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FLastModifyUserId { get; set; }
         public DateTime? FDeleteTime { get; set; }
         public string FDeleteUserId { get; set; }
+        public string FItemIds { get; set; }
+        public string FOperationTypeId { get; set; }
+        public string FEquipmentTypeId { get; set; }
+        public string FDangerSource { get; set; }
+        public string FOperationLevelId { get; set; }
     }
+
 }

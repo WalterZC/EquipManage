@@ -1,4 +1,5 @@
-﻿using EquipManage.Domain.Entity.SystemDocument;
+﻿using EquipManage.Code;
+using EquipManage.Domain.Entity.SystemDocument;
 using EquipManage.Domain.IRepository.SystemDocument;
 using EquipManage.Repository.SystemDocument;
 using System.Collections.Generic;
@@ -12,7 +13,10 @@ namespace EquipManage.Application.SystemDocument
 
         public List<ChangeContentEntity> GetList()
         {
-            return service.IQueryable().OrderBy(t => t.FSortCode).ToList();
+            var expression = ExtLinq.True<ChangeContentEntity>();
+
+            expression = expression.And(t => t.FEnabledMark==true);
+            return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
         }
     }
 }

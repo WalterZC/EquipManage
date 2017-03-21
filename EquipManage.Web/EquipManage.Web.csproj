@@ -131,6 +131,8 @@
     <Compile Include="Areas\SystemDocument\Controllers\MaintainController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\OperationClassController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\OperationClassMemberController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\OperationItemController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\OperationProjectController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\PartsController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\PositionController.cs" />
     <Compile Include="Areas\SystemDocument\SystemDocumentAreaRegistration.cs" />
@@ -182,6 +184,12 @@
     <Content Include="Areas\SystemDocument\Scripts\Maintain\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\OperationClassMember\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\OperationClassMember\Index.js" />
+    <Content Include="Areas\SystemDocument\Scripts\OperationItem\Form.js" />
+    <Content Include="Areas\SystemDocument\Scripts\OperationItem\Index.js" />
+    <Content Include="Areas\SystemDocument\Scripts\OperationProject\Form.js" />
+    <Content Include="Areas\SystemDocument\Scripts\OperationProject\Index.js" />
+    <Content Include="Areas\SystemDocument\Scripts\OperationProject\ItemList.js" />
+    <Content Include="Areas\SystemDocument\Scripts\OperationProject\PartForm.js" />
     <Content Include="Areas\SystemDocument\Scripts\Parts\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\Parts\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\User\Details.js" />
@@ -693,6 +701,11 @@
     <Content Include="Areas\SystemDocument\Views\Equipment\PartList.cshtml" />
     <Content Include="Areas\SystemDocument\Views\Equipment\PartForm.cshtml" />
     <Content Include="Content\data.json" />
+    <Content Include="Areas\SystemDocument\Views\OperationItem\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\OperationProject\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\OperationProject\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\OperationItem\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\OperationProject\PartForm.cshtml" />
     <None Include="Properties\PublishProfiles\EquipManage.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

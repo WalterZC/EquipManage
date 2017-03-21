@@ -19,7 +19,15 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
 
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetTreeSelectJson()
+        public ActionResult GetGridSelectJson(string itemId, string keyword)
+        {
+            string FParentID = itemsApp.GetEntity(itemId).FId;
+            var data = itemsApp.GetEntitys(FParentID, keyword);
+            return Content(data.ToJson());
+        }
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetTreeJson()
         {
             var data = itemsApp.GetList();
             var treeList = new List<TreeSelectModel>();
@@ -35,7 +43,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         }
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetTreeJson()
+        public ActionResult GetTreeViewJson()
         {
             var data = itemsApp.GetList();
             var treeList = new List<TreeViewModel>();

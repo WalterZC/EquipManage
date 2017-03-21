@@ -6,7 +6,7 @@
     var keyValue = $.request("keyValue");
     $(function () {
         $("#FParentId").bindSelect({
-            url: "/SystemDocument/ItemsType/GetTreeSelectJson"
+            url: "/SystemDocument/ItemsType/GetTreeJson"
         });
         if (!!keyValue) {
             $.ajax({

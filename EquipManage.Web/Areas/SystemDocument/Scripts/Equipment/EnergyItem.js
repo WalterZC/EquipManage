@@ -3,6 +3,7 @@
     var initTable = function () {
 
         var table = $('#EnergyItemTable');
+        var CheckBoxContent = $("#FEnergys").val();
 
         table.dataTable({
             "processing": true,
@@ -46,7 +47,12 @@
                     "sClass": "text-center",
                     "data": "FId",
                     "render": function (data, type, full, meta) {
-                        return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkboxes"/><span></span></label>';
+                        if (CheckBoxContent.indexOf(data) >= 0) {
+                            return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkboxes" checked="checked"/><span></span></label>';
+                        } else {
+                            return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkboxes"/><span></span></label>';
+
+                        }
                     },
                     "bSortable": false,
                     "sWidth": "20px;"
@@ -113,32 +119,46 @@
             if ((FID == "") || (FID == null) || (FID == undefined)) {
                 return;
             }
+            var checkitemlist = new Array();
             var orgVal = $("#FEnergys").val();
-            var currentVal;
-            if ((orgVal == "") || (orgVal == null) || (orgVal == undefined)) {
-                currentVal = FID;
-            } else {
-                currentVal = orgVal + "," + FID;
+            checkitemlist = orgVal.split(",");
+            if (!contains(checkitemlist,FID)){
+                checkitemlist.push(FID);
             }
 
-            $("#FEnergys").val(currentVal);
+            $("#FEnergys").val(checkitemlist.toString());
         }
 
         function RemodeFId(FID) {
             if ((FID == "") || (FID == null) || (FID == undefined)) {
                 return;
             }
+            var checkitemlist = new Array();
             var orgVal = $("#FEnergys").val();
-            var currentVal;
-            if (orgVal.indexOf(',')==-1) {
-                currentVal = orgVal.replace((FID), "");;
-            } else {
-                currentVal = orgVal.replace((',' + FID), "");
-            }
+            checkitemlist = orgVal.split(",");
+            removeByValue(checkitemlist, FID);
 
-            $("#FEnergys").val(currentVal);
+            $("#FEnergys").val(checkitemlist.toString());
+        }
+        function removeByValue(arr, val) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] == val) {
+                    arr.splice(i, 1);
+                    break;
+                }
+            }
+        }
+        function contains(arr, obj) {
+            var i = arr.length;
+            while (i--) {
+                if (arr[i] === obj) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
+
     return {
 
         //main function to initiate the module

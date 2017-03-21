@@ -50,9 +50,7 @@
     <Compile Include="SystemDocument\ChangeTypeApp.cs" />
     <Compile Include="SystemDocument\EnergyItemApp.cs" />
     <Compile Include="SystemDocument\EquipmentApp.cs" />
-    <Compile Include="SystemDocument\EquipmentPartsApp.cs">
-      <DependentUpon>Application.SystemDocument.tt</DependentUpon>
-    </Compile>
+    <Compile Include="SystemDocument\EquipmentPartsApp.cs" />
     <Compile Include="SystemDocument\EquipmentSpotCheckItemApp.cs" />
     <Compile Include="SystemDocument\EquipmentTypeApp.cs" />
     <Compile Include="SystemDocument\ExpWareApp.cs" />

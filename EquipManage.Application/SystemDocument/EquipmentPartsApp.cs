@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +8,13 @@ using EquipManage.Repository.SystemDocument;
 using EquipManage.Code;
 
 namespace EquipManage.Application.SystemDocument
-{    
+{
     /// <summary>
     /// EquipmentPartsApp
     /// </summary>    
     public class EquipmentPartsApp
     {
-        private IEquipmentPartsRepository service=new EquipmentPartsRepository();
+        private IEquipmentPartsRepository service = new EquipmentPartsRepository();
 
         public List<EquipmentPartsEntity> GetList(string itemId = "", string keyword = "")
         {
@@ -52,4 +52,4 @@ namespace EquipManage.Application.SystemDocument
         }
 
     }
-	}
+}

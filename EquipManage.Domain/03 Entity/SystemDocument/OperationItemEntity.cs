@@ -22,5 +22,14 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public DateTime? FDeleteTime { get; set; }
         public string FDeleteUserId { get; set; }
         public string FOrganizeId { get; set; }
+        public string FContent { get; set; }
+        public string FItemId { get; set; }
+        public string FValType { get; set; }
+        public decimal? FMaxVal { get; set; }
+        public decimal? FMinVal { get; set; }
+        public string FSystemId { get; set; }
+        public string FContentLength { get; set; }
+        public string FContentType { get; set; }
+        public string FFileName { get; set; }
     }
 }

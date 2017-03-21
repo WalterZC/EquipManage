@@ -195,6 +195,7 @@ $.submitForm = function (options) {
                     $.modalMsg(data.message, data.state);
                     if (options.close == true) {
                         $.modalClose();
+                        //$(".operate").animate({ "left": '-100.1%' }, 200);
                     }
                 } else {
                     $.modalAlert(data.message, data.state);
