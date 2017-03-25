@@ -28,6 +28,7 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FEquipmentTypeId { get; set; }
         public string FDangerSource { get; set; }
         public string FOperationLevelId { get; set; }
+        public string FOperationRequest { get; set; }
     }
 
 }

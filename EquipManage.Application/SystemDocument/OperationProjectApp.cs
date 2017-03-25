@@ -12,9 +12,12 @@ namespace EquipManage.Application.SystemDocument
     {
         private IOperationProjectRepository service = new OperationProjectRepository();
 
-        public List<OperationProjectEntity> GetList()
+        public List<OperationProjectEntity> GetList(string itemId)
         {
-            return service.IQueryable().ToList();
+            var expression = ExtLinq.True<OperationProjectEntity>();
+            expression = expression.And(t => t.FEquipmentTypeId.Equals(itemId));
+
+            return service.IQueryable(expression).ToList();
         }
         public OperationProjectEntity GetForm(string keyValue)
         {

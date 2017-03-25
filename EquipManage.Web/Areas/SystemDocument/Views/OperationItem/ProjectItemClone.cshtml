@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "作业方案-设备部位克隆";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+<script>
+    var FEquipmentTypeId = $.request("FEquipmentTypeId");
+    var FOperationProjectId = $.request("FOperationProjectId")
+    $(function () {
+        $("#itemTree").treeview({
+            showcheck: true,
+            url: "/SystemDocument/OperationItem/GetCloneProjectItemTreeJson?FEquipmentTypeId=" + FEquipmentTypeId
+        });
+    });
+    function submitForm() {
+        var Ids = $("#itemTree").getCheckedNodes();
+        $.submitForm({
+            url: "/SystemDocument/OperationItem/SubmitCloneProjectItem",
+            param: {"FOperationProjectId": FOperationProjectId, FIds: String(Ids) },
+            success: function () {
+                top.frames["ProjectForm"].$('#PartItemTable').DataTable().ajax.reload();
+                //top["Parts"].$("#gridList").trigger("reloadGrid");
+                top["ProjectForm"].$(".operate").animate({ "left": '-100.1%' }, 200);
+            }
+        })
+    }
+</script>
+
+<div style="margin: 10px;">
+    <div id="itemTree"></div>
+</div>

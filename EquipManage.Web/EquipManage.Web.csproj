@@ -187,8 +187,8 @@
     <Content Include="Areas\SystemDocument\Scripts\OperationItem\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\OperationItem\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\OperationProject\Form.js" />
+    <Content Include="Areas\SystemDocument\Scripts\OperationProject\FormEquipPartIndex.js" />
     <Content Include="Areas\SystemDocument\Scripts\OperationProject\Index.js" />
-    <Content Include="Areas\SystemDocument\Scripts\OperationProject\ItemList.js" />
     <Content Include="Areas\SystemDocument\Scripts\OperationProject\PartForm.js" />
     <Content Include="Areas\SystemDocument\Scripts\Parts\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\Parts\Index.js" />
@@ -468,7 +468,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configs\log4net.config" />
-    <Content Include="Configs\system.config" />
+    <Content Include="Configs\system.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configs\database.config" />
@@ -706,6 +708,7 @@
     <Content Include="Areas\SystemDocument\Views\OperationProject\Form.cshtml" />
     <Content Include="Areas\SystemDocument\Views\OperationItem\Form.cshtml" />
     <Content Include="Areas\SystemDocument\Views\OperationProject\PartForm.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\OperationItem\ProjectItemClone.cshtml" />
     <None Include="Properties\PublishProfiles\EquipManage.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

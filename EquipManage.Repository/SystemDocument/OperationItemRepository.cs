@@ -27,5 +27,17 @@ namespace EquipManage.Repository.SystemDocument
             };
             return this.FindList(strSql.ToString(), parameter);
         }
+
+        public void SubmitCloneProjectItem(List<OperationItemEntity> entitys)
+        {
+            using (var db = new RepositoryBase().BeginTrans())
+            {
+                foreach (var item in entitys)
+                {
+                    db.Insert(item);
+                }
+                db.Commit();
+            }
+        }
     }
 }

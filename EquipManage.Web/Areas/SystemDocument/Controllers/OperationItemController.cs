@@ -3,15 +3,18 @@ using EquipManage.Code;
 using EquipManage.Domain.Entity.SystemDocument;
 using EquipManage.Web.FileHelper;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Web.Hosting;
 using System.Web.Mvc;
+using System.Linq;
 
 namespace EquipManage.Web.Areas.SystemDocument.Controllers
 {
     public class OperationItemController : ControllerBase
     {
+        private OperationProjectApp operationProjectApp = new OperationProjectApp();
         private OperationItemApp operationItemApp = new OperationItemApp();
         String subDir = null;
 
@@ -29,6 +32,12 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             operationItemEntity.FItemId = collection["FItemId"].ToString();
             operationItemEntity.FSystemId = collection["FSystemId"].ToString();
             operationItemEntity.FShortName = collection["FShortName"].ToString();
+            operationItemEntity.FMaxVal = Ext.ToDecimal(collection["FMaxVal"].ToString());
+            operationItemEntity.FMinVal = Ext.ToDecimal(collection["FMinVal"].ToString());
+            operationItemEntity.FValType = collection["FValType"].ToString();
+            operationItemEntity.FContent = collection["FContent"].ToString();
+            operationItemEntity.FNumber = collection["FNumber"].ToString();
+            operationItemEntity.FCheckItems = collection["FCheckItems"].ToString();
 
             if (!string.IsNullOrEmpty(collection["FImage"]))
             {
@@ -41,7 +50,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
 
                 if (!string.IsNullOrEmpty(operationItemEntity.FFileName))
                 {
-                    System.IO.File.Delete(Path.Combine(HostingEnvironment.MapPath(PartsImagePath) + subDir, (operationItemEntity.FFileName.ToString() + ".jpg")));
+                    System.IO.File.Delete(Path.Combine(HostingEnvironment.MapPath(PartsImagePath), (operationItemEntity.FFileName.ToString() + ".jpg")));
                 }
 
                 string base64 = collection["FImage"].Substring(collection["FImage"].IndexOf(',') + 1);
@@ -99,6 +108,56 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             return Success("删除成功。");
         }
 
+        [HttpGet]
+        public ActionResult ProjectItemClone()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetCloneProjectItemTreeJson(string FEquipmentTypeId)
+        {
+            var projectdata = operationProjectApp.GetList(FEquipmentTypeId);
+            var itemdata = operationItemApp.GetList();
+            var treeList = new List<TreeViewModel>();
+            foreach (OperationProjectEntity item in projectdata)
+            {
+                TreeViewModel tree = new TreeViewModel();
+                bool hasChildren = itemdata.Count(t => t.FItemId == item.FId) == 0 ? false : true;
+                tree.id = item.FId;
+                tree.text = item.FShortName;
+                tree.value = item.FId;
+                tree.parentId = "0";
+                tree.isexpand = true;
+                tree.complete = true;
+                tree.hasChildren = true;
+                treeList.Add(tree);
+            }
+            foreach (OperationItemEntity item in itemdata)
+            {
+                TreeViewModel tree = new TreeViewModel();
+                bool hasChildren = false;
+                tree.id = item.FId;
+                tree.text = item.FShortName;
+                tree.value = item.FId;
+                tree.parentId = item.FItemId;
+                tree.isexpand = true;
+                tree.complete = true;
+                tree.showcheck = true;
+                tree.hasChildren = hasChildren;
+
+                treeList.Add(tree);
+            }
+            return Content(treeList.TreeViewJson());
+        }
+        [HttpPost]
+        [HandlerAjaxOnly]
+        public ActionResult SubmitCloneProjectItem(string FOperationProjectId, string FIds)
+        {
+            operationItemApp.SubmitCloneProjectItem(FOperationProjectId, FIds);
+            return Success("克隆成功。");
+        }
         #endregion
     }
 }

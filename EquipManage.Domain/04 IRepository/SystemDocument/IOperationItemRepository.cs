@@ -7,5 +7,6 @@ namespace EquipManage.Domain.IRepository.SystemDocument
     public interface IOperationItemRepository:IRepositoryBase<OperationItemEntity>
     {
         List<OperationItemEntity> GetItemList(string FNumber);
+        void SubmitCloneProjectItem(List<OperationItemEntity> entitys);
     }
 }

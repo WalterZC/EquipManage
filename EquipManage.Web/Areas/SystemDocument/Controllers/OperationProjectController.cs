@@ -15,9 +15,9 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
 
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetGridJson(string keyword)
+        public ActionResult GetGridJson(string itemId)
         {
-            var data = operationProjectApp.GetList();
+            var data = operationProjectApp.GetList(itemId);
             return Content(data.ToJson());
         }
         [HttpGet]
@@ -30,11 +30,11 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]
-        public ActionResult SubmitForm(OperationProjectEntity roleEntity,string itemId, string keyValue)
+        public ActionResult SubmitForm(OperationProjectEntity Entity, string keyValue)
         {
-            roleEntity.FOperationTypeId = keyValue;
-            operationProjectApp.SubmitForm(roleEntity,itemId);
-            return Success("操作成功。");
+            //roleEntity.FOperationTypeId = keyValue;
+            string data = operationProjectApp.SubmitForm(Entity, Entity.FId);
+            return Content(data);
         }
         [HttpPost]
         [HandlerAjaxOnly]
@@ -50,6 +50,15 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         public ActionResult PartForm()
         {
             return View();
+        }
+        [HttpPost]
+        [HandlerAjaxOnly]
+        public ActionResult SubmitEquipRelateForm(FormCollection collection, string keyValue)
+        {
+            OperationProjectEntity entity = operationProjectApp.GetForm(keyValue);
+            entity.FItemIds = collection["FItemIds"]==null?"": collection["FItemIds"].ToString();
+            operationProjectApp.SubmitForm(entity, entity.FId);
+            return Success("操作成功。");
         }
     }
 }

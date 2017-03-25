@@ -8,7 +8,6 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FNumber { get; set; }
         public string FFullName { get; set; }
         public string FShortName { get; set; }
-        public string FOperationTypeID { get; set; }
         public string FSortCode { get; set; }
         public bool? FAllowEdit { get; set; }
         public bool? FAllowDelete { get; set; }
@@ -31,5 +30,6 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FContentLength { get; set; }
         public string FContentType { get; set; }
         public string FFileName { get; set; }
+        public string FCheckItems { get; set; }
     }
 }

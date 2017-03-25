@@ -5,6 +5,7 @@ $(function () {
 $.clientsInit = function () {
     var dataJson = {
         dataItems: [],
+        dataItemsFid:[],
         organize: [],
         role: [],
         duty: [],
@@ -20,6 +21,7 @@ $.clientsInit = function () {
             async: false,
             success: function (data) {
                 dataJson.dataItems = data.dataItems;
+                dataJson.dataItemsFid = data.dataItemsFid;
                 dataJson.organize = data.organize;
                 dataJson.role = data.role;
                 dataJson.duty = data.duty;

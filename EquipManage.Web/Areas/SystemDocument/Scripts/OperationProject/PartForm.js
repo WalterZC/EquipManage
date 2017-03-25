@@ -34,8 +34,9 @@ function submitForm() {
         param: postData,
         sync: false,
         success: function () {
-            top["Parts"].$("#gridList").trigger("reloadGrid");
-            top["Parts"].$(".operate").animate({ "left": '-100.1%' }, 200);
+            top.frames["ProjectForm"].$('#PartItemTable').DataTable().ajax.reload();
+            //top["Parts"].$("#gridList").trigger("reloadGrid");
+            top["ProjectForm"].$(".operate").animate({ "left": '-100.1%' }, 200);
         }
     });
 }

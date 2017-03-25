@@ -15,11 +15,23 @@ function treeView() {
 function gridList() {
     var $gridList = $("#gridList");
     $gridList.dataGrid({
-        height: $(window).height() - 96,
+        height: $(window).height() - 100,
         colModel: [
             { label: "主键", name: "FId", hidden: true, key: true },
-            { label: '名称', name: 'FItemName', width: 150, align: 'left' },
-            { label: '编号', name: 'FItemCode', width: 150, align: 'left' },
+            { label: '名称', name: 'FShortName', width: 200, align: 'left' },
+            { label: '编号', name: 'FNumber', width: 100, align: 'left' },            
+            {
+                label: '作业类型', name: 'FOperationTypeId', width: 150, align: 'center', classes: 'table-td-vertical-align',
+                formatter: function (cellvalue, options, rowObject) {
+                    return top.clients.dataItemsFid[cellvalue] == null ? "" : top.clients.dataItemsFid[cellvalue];
+                }
+            },
+            {
+                label: '作业级别', name: 'FOperationLevelId', width: 150, align: 'center', classes: 'table-td-vertical-align',
+                formatter: function (cellvalue, options, rowObject) {
+                    return top.clients.dataItemsFid[cellvalue] == null ? "" : top.clients.dataItemsFid[cellvalue];
+                }
+            },
             { label: '排序', name: 'FSortCode', width: 80, align: 'center' },
             {
                 label: "默认", name: "FIsDefault", width: 60, align: "center",
@@ -43,7 +55,7 @@ function gridList() {
     $("#btn_search").click(function () {
         $gridList.jqGrid('setGridParam', {
             url: "/SystemDocument/OperationProject/GetGridJson",
-            postData: { itemId: $("#itemTree").getCurrentNode().id, keyword: $("#txt_keyword").val() },
+            postData: { itemId: $("#itemTree").getCurrentNode().id},
         }).trigger('reloadGrid');
     });
 }
@@ -54,22 +66,24 @@ function btn_add() {
         return false;
     }
     $.modalOpen({
-        id: "Form",
+        id: "ProjectForm",
         title: itemName + " 》新增方案",
         url: "/SystemDocument/OperationProject/Form?itemId=" + itemId,
-        width: "650px",
+        width: "800px",
         height: "650px",
         btn: null
     });
 }
 function btn_edit() {
+    var itemId = $("#itemTree").getCurrentNode().id;
     var itemName = $("#itemTree").getCurrentNode().text;
     var keyValue = $("#gridList").jqGridRowValue().FId;
+    var projectName = $("#gridList").jqGridRowValue().FShortName;
     $.modalOpen({
-        id: "Form",
-        title: itemName + " 》修改方案",
-        url: "/SystemDocument/OperationProject/Form?keyValue=" + keyValue,
-        width: "650px",
+        id: "ProjectForm",
+        title: itemName + " 》 " + projectName + " 》修改方案",
+        url: "/SystemDocument/OperationProject/Form?keyValue=" + keyValue + "&itemId=" + itemId,
+        width: "800px",
         height: "650px",
         btn: null
     });
@@ -87,7 +101,7 @@ function btn_delete() {
 function btn_details() {
     var keyValue = $("#gridList").jqGridRowValue().FId;
     $.modalOpen({
-        id: "Details",
+        id: "CheckProjectDetails",
         title: "查看方案",
         url: "/SystemDocument/OperationProject/Details?keyValue=" + keyValue,
         width: "450px",

@@ -25,6 +25,7 @@ namespace EquipManage.Web.Controllers
             var data = new
             {
                 dataItems = this.GetDataItemList(),
+                dataItemsFid = this.GetDataItemFidList(),
                 organize = this.GetOrganizeList(),
                 role = this.GetRoleList(),
                 duty = this.GetDutyList(),
@@ -64,6 +65,20 @@ namespace EquipManage.Web.Controllers
                 }
                 dictionaryItem.Add(item.FEnCode, dictionaryItemList);
             }
+            return dictionaryItem;
+        }
+        private object GetDataItemFidList()
+        {
+            Dictionary<string, string> dictionaryItem = new Dictionary<string, string>();
+            foreach (var item in new ItemsApp().GetList())
+            {
+                dictionaryItem.Add(item.FId, item.FFullName);
+            }
+            foreach (var itemList in new ItemsDetailApp().GetList())
+            {
+                dictionaryItem.Add(itemList.FId, itemList.FItemName);
+            }
+            
             return dictionaryItem;
         }
         private object GetOrganizeList()

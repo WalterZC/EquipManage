@@ -16,7 +16,7 @@ namespace EquipManage.Application.SystemDocument
             if (!string.IsNullOrEmpty(itemId))
             {
                 expression = expression.And(t => t.FItemId == itemId);
-            }
+        }
             if (!string.IsNullOrEmpty(keyword))
             {
                 expression = expression.And(t => t.FFullName.Contains(keyword));
@@ -48,6 +48,20 @@ namespace EquipManage.Application.SystemDocument
                 OperationItemEntity.Create();
                 service.Insert(OperationItemEntity);
             }
+        }
+        public void SubmitCloneProjectItem(string FOperationProjectId, string FIds)
+        {
+            string[] ArrayId = FIds.Split(',');
+            var data = this.GetList();
+            List<OperationItemEntity> entitys = new List<OperationItemEntity>();
+            foreach (string item in ArrayId)
+            {
+                OperationItemEntity moduleButtonEntity = data.Find(t => t.FId == item);
+                moduleButtonEntity.FId = Common.GuId();
+                moduleButtonEntity.FItemId = FOperationProjectId;
+                entitys.Add(moduleButtonEntity);
+            }
+            service.SubmitCloneProjectItem(entitys);
         }
     }
 }

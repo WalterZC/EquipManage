@@ -49,9 +49,9 @@
 .actions.actions-footer{margin-top: -10px;position: relative;float: none;text-align: right;border: 0;background-color: #fff;-webkit-box-shadow: 0 0 4px rgba(0,0,0,.3);-moz-box-shadow: 0 0 4px rgba(0,0,0,.3);box-shadow: 0 0 4px rgba(0,0,0,.3);}
 .step-content{border-top: 0;background-clip: padding-box;padding: 0px;border: 1px solid #ccc;border-top:none;}
 .step-content .step-pane{display: none;}
-.step-content .active{display: block;}
+.step-content .active{display:unset}
 .step-content .active .btn-group .active{display: inline-block;}
 .chart{height: 220px;margin: 5px;}
 .chart-sm{height: 100px;}
 .chart-lg{height: 250px;}
-.chart-xl{height: 350px;}
+.chart-xl{height: 350px;}/**/
