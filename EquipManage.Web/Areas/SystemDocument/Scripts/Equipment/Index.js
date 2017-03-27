@@ -118,10 +118,10 @@ function btn_parts() {
     }
     $.modalOpen({
         id: "Parts",
-        title: FName + " 》设备部位",
+        title: FName + " 》设备方案",
         url: "/SystemDocument/Equipment/PartList?itemId=" + itemId + "&keyValue=" + keyValue,
-        width: "600px",
-        height: "550px",
+        width: "900px",
+        height: "600px",
         btn:null
     });
 }

@@ -9,13 +9,15 @@ using System.IO;
 using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Linq;
-
+//77777
 namespace EquipManage.Web.Areas.SystemDocument.Controllers
 {
     public class OperationItemController : ControllerBase
     {
         private OperationProjectApp operationProjectApp = new OperationProjectApp();
         private OperationItemApp operationItemApp = new OperationItemApp();
+        private ItemsApp itemsApp = new ItemsApp();
+        private ItemsDetailApp itemsDetailApp = new ItemsDetailApp();
         String subDir = null;
 
         #region 设备部位管理
@@ -38,6 +40,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             operationItemEntity.FContent = collection["FContent"].ToString();
             operationItemEntity.FNumber = collection["FNumber"].ToString();
             operationItemEntity.FCheckItems = collection["FCheckItems"].ToString();
+            operationItemEntity.FItemType = collection["FItemType"].ToString();
 
             if (!string.IsNullOrEmpty(collection["FImage"]))
             {
@@ -114,6 +117,11 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 根据设备类型获取项目方案
+        /// </summary>
+        /// <param name="FEquipmentTypeId">设备类型ID</param>
+        /// <returns></returns>
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetCloneProjectItemTreeJson(string FEquipmentTypeId)
@@ -151,6 +159,72 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             }
             return Content(treeList.TreeViewJson());
         }
+
+        /// <summary>
+        /// 根据设备ID获取该设备相关的作业方案
+        /// </summary>
+        /// <param name="FEquipmentId">设备主键ID</param>
+        /// <returns></returns>
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetEquipmentProjectItemTreeJson(string FEquipmentId)
+        {
+            string FParentID = itemsApp.GetEntity("OperationType").FId;
+            var dataList = itemsApp.GetEntitys(FParentID, "");
+            
+            //var itemParent =  itemsApp.GetGridSelectJson()
+            var projectdata = operationProjectApp.GetEntitysByEquipmentID(FEquipmentId);
+            var itemdata = itemsDetailApp.GetList();
+            var treeList = new List<TreeViewModel>();
+            foreach (ItemsEntity item in dataList)
+            {
+                List<ItemsDetailEntity> dataDetaillist = itemdata.Where(x => x.FItemId.Equals(item.FId)).ToList();
+
+                TreeViewModel tree = new TreeViewModel();
+                bool hasChildren = dataDetaillist.Count == 0 ? false : true;
+                tree.id = item.FId;
+                tree.text = item.FFullName;
+                tree.value = item.FId;
+                tree.parentId = "0";
+                tree.isexpand = hasChildren;
+                tree.complete = hasChildren;
+                tree.hasChildren = hasChildren;
+                treeList.Add(tree);
+
+                foreach (ItemsDetailEntity itemDetail in dataDetaillist)
+                {
+                    TreeViewModel detailtree = new TreeViewModel();
+                    bool detailhasChildren = projectdata.Count(t => t.FOperationLevelId.Contains(itemDetail.FId)) == 0 ? false : true;
+                    detailtree.id = itemDetail.FId;
+                    detailtree.text = itemDetail.FItemName;
+                    detailtree.value = itemDetail.FId;
+                    detailtree.parentId = item.FId;
+                    detailtree.isexpand = detailhasChildren;
+                    detailtree.complete = detailhasChildren;
+                    detailtree.hasChildren = detailhasChildren;
+                    treeList.Add(detailtree);
+                }
+            }
+            foreach (OperationProjectEntity item in projectdata)
+            {
+                TreeViewModel tree = new TreeViewModel();
+                //bool hasChildren = itemdata.Count(t => t.FId.Contains(item.FOperationLevelId)) == 0 ? false : true; ;
+                tree.id = item.FId;
+                tree.text = item.FShortName;
+                tree.value = item.FId;
+                tree.parentId = item.FOperationLevelId;
+                tree.isexpand = true;
+                tree.complete = true;
+                //tree.showcheck = true;
+                tree.hasChildren = false;
+
+                treeList.Add(tree);
+
+
+            }
+            return Content(treeList.TreeViewJson());
+        }
+
         [HttpPost]
         [HandlerAjaxOnly]
         public ActionResult SubmitCloneProjectItem(string FOperationProjectId, string FIds)

@@ -187,7 +187,6 @@
     <Content Include="Areas\SystemDocument\Scripts\OperationItem\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\OperationItem\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\OperationProject\Form.js" />
-    <Content Include="Areas\SystemDocument\Scripts\OperationProject\FormEquipPartIndex.js" />
     <Content Include="Areas\SystemDocument\Scripts\OperationProject\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\OperationProject\PartForm.js" />
     <Content Include="Areas\SystemDocument\Scripts\Parts\Form.js" />

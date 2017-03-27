@@ -1,5 +1,7 @@
 ﻿var keyValue = $.request("keyValue");
 var itemId = $.request("itemId");
+var FItemType = $.request("FItemType");
+
 $(function () {
     initControl();
     if (!!keyValue) {
@@ -29,8 +31,10 @@ function submitForm() {
     var postData = $("#form1").formSerialize();
     postData["FImage"] = $('.fileinput-preview img').attr('src');
     postData["keyValue"] = keyValue;
+    postData["FItemType"] = FItemType;
     $.submitForm({
-        url: "/SystemDocument/Equipment/SubmitPartForm?keyValue=" + keyValue,
+        //url: "/SystemDocument/Equipment/SubmitPartForm?keyValue=" + keyValue,
+        url: "/SystemDocument/OperationItem/SubmitPartForm?keyValue=" + keyValue,
         param: postData,
         sync: false,
         success: function () {

@@ -31,5 +31,6 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FContentType { get; set; }
         public string FFileName { get; set; }
         public string FCheckItems { get; set; }
+        public string FItemType { get; set; }
     }
 }

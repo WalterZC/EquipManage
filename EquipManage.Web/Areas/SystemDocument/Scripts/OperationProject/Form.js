@@ -1,6 +1,7 @@
 ﻿
 var keyValue = $.request("keyValue");//设备方案ID
 var itemId = $.request("itemId");//设备类型ID
+
 var oTable = null;
 var currentRow = null;
 
@@ -151,6 +152,7 @@ function initTable() {
             { "data": "FValType", "bSortable": false, "sTitle": "值类型", "sClass": "dt-center table-td-vertical-align" },
             { "data": "FMaxVal", "bSortable": false, "sTitle": "最大值", "sClass": "dt-center table-td-vertical-align" },
             { "data": "FMinVal", "bSortable": false, "sTitle": "最小值", "sClass": "dt-center table-td-vertical-align" },
+            { "data": "FItemType", "bSortable": false, "sTitle": "FId", "sClass": "hiddenCol" }
             //{ "data": "FContent", "bSortable": false, "sTitle": "选项" },
         ],
         "lengthMenu": [
@@ -211,7 +213,7 @@ function btn_add() {
     $.modalOpen({
         id: "ProjectPartAdd",
         title: "新增项目",
-        url: "/SystemDocument/OperationProject/PartForm?itemId=" + FEquipTypeID,
+        url: "/SystemDocument/OperationProject/PartForm?itemId=" + FEquipTypeID + "&FItemType=1",
         width: "600px",
         height: "600px",
         callBack: function (iframeId) {
@@ -220,14 +222,16 @@ function btn_add() {
     });
 }
 function btn_edit() {
-    //var itemName = $("#PartItemTable").jqGridRowValue().FName;
-    //var keyValue = $("#gridList").jqGridRowValue().FId;
     var aData = oTable.fnGetData(currentRow);
     var jqTds = $('>td', currentRow);
+    if (aData.FItemType == '2') {
+        alert("该项目为设备方案明细，不允许修改！");
+        return;
+    }
     $.modalOpen({
         id: "ProjectPartMod",
         title: aData.FShortName + " 》修改项目",
-        url: "/SystemDocument/OperationProject/PartForm?keyValue=" + aData.FId,
+        url: "/SystemDocument/OperationProject/PartForm?keyValue=" + aData.FId + "&FItemType=" + aData.FItemType,
         width: "600px",
         height: "600px",
         callBack: function (iframeId) {
@@ -236,6 +240,10 @@ function btn_edit() {
     });
 }
 function btn_delete() {
+    if (aData.FItemType == '2') {
+        alert("该项目为设备方案明细，不允许删除！");
+        return;
+    }
     $.deleteForm({
         url: "/SystemDocument/OperationItem/DeletePartForm",
         param: { keyValue: $("#gridList").jqGridRowValue().FId },

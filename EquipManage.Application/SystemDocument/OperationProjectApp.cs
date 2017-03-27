@@ -31,6 +31,13 @@ namespace EquipManage.Application.SystemDocument
 
             return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
         }
+        public List<OperationProjectEntity> GetEntitysByEquipmentID(string keyword)
+        {
+            var expression = ExtLinq.True<OperationProjectEntity>();
+            expression = expression.And(t => t.FItemIds.Contains(keyword));
+
+            return service.IQueryable(expression).OrderBy(t => t.FCreatorTime).ToList();
+        }
         public void DeleteForm(string keyValue)
         {
             if (service.IQueryable().Count(t => t.FItemIds.Equals(keyValue)) > 0)

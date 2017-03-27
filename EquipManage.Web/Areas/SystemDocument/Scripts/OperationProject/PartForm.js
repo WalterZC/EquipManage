@@ -1,5 +1,6 @@
 ﻿var keyValue = $.request("keyValue");
 var itemId = $.request("itemId");
+var FItemType = $.request("FItemType");
 $(function () {
     initControl();
     if (!!keyValue) {
@@ -29,14 +30,22 @@ function submitForm() {
     var postData = $("#form1").formSerialize();
     postData["FImage"] = $('.fileinput-preview img').attr('src');
     postData["keyValue"] = keyValue;
+    postData["FItemType"] = FItemType;
     $.submitForm({
         url: "/SystemDocument/OperationItem/SubmitPartForm?keyValue=" + keyValue,
         param: postData,
         sync: false,
         success: function () {
-            top.frames["ProjectForm"].$('#PartItemTable').DataTable().ajax.reload();
-            //top["Parts"].$("#gridList").trigger("reloadGrid");
-            top["ProjectForm"].$(".operate").animate({ "left": '-100.1%' }, 200);
+            if (typeof (top.frames["ProjectForm"]) != "undefined") {
+                top.frames["ProjectForm"].$('#PartItemTable').DataTable().ajax.reload();
+                //top["Parts"].$("#gridList").trigger("reloadGrid");
+                top["ProjectForm"].$(".operate").animate({ "left": '-100.1%' }, 200);
+            }
+            if (typeof(top.frames["Parts"]) != "undefined") {
+                //top.frames["ProjectForm"].$('#PartItemTable').DataTable().ajax.reload();
+                top["Parts"].$("#gridList").trigger("reloadGrid");
+                top["Parts"].$(".operate").animate({ "left": '-100.1%' }, 200);
+            }
         }
     });
 }
