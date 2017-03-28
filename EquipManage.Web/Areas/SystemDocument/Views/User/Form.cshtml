@@ -2,124 +2,137 @@
     ViewBag.Title = "Form";
     Layout = "~/Views/Shared/_Form.cshtml";
 }
+<style type="text/css">
+    .hiddenCol {
+        display: none;
+    }
+</style>
+<script src="~/Content/js/select2/select2.min.js"></script>
 <script src="~/Areas/SystemDocument/Scripts/User/Form.js"></script>
 
 <form id="form1">
-    <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#">基本信息</a></li>
-            @*<li ><a href="#">扩展信息</a></li>*@
-        </ul>
         <div style="padding-top: 10px; margin-right: 30px;">
-            <table class="form">
-                <tr>
-                    <th class="formTitle">账户</th>
-                    <td class="formValue">
-                        <input id="FAccount" name="FAccount" type="text" class="form-control required" placeholder="请输入账户" />
-                    </td>
-                    <th class="formTitle">密码</th>
-                    <td class="formValue">
-                        <input id="FUserPassword" name="FUserPassword" type="password" class="form-control required" placeholder="请输入密码" />
-                    </td>
-                </tr>
-                <tr>
-                    <th class="formTitle">公司</th>
-                    <td class="formValue">
-                        <select id="FOrganizeId" name="FOrganizeId" class="form-control required">
-                        </select>
-                    </td>
-                    <th class="formTitle">部门</th>
-                    <td class="formValue">
-                        <select id="FDepartmentId" name="FDepartmentId" class="form-control required">
-                            <option value="">==请选择==</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="formTitle">角色</th>
-                    <td class="formValue">
-                        <select id="FRoleId" name="FRoleId" class="form-control required">
-                            <option value="">==请选择==</option>
-                        </select>
-                    </td>
-                    <th class="formTitle">岗位</th>
-                    <td class="formValue">
-                        <select id="FDutyId" name="FDutyId" class="form-control required">
-                            <option value="">==请选择==</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="formTitle">姓名</th>
-                    <td class="formValue">
-                        <input id="FRealName" name="FRealName" type="text" class="form-control required" placeholder="请输入姓名" />
-                    </td>
-                    <th class="formTitle">性别</th>
-                    <td class="formValue">
-                        <select id="FGender" name="FGender" class="form-control required">
-                            <option value="true">男</option>
-                            <option value="false">女</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="formTitle">手机</th>
-                    <td class="formValue">
-                        <input id="FMobilePhone" name="FMobilePhone" type="text" class="form-control" />
-                    </td>
-                    <th class="formTitle">生日</th>
-                    <td class="formValue">
-                        <input id="FBirthday" name="FBirthday" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker()" />
-                    </td>
-                </tr>
-                <tr>
-                    <th class="formTitle">微信</th>
-                    <td class="formValue">
-                        <input id="FWeChat" name="FWeChat" type="text" class="form-control" />
-                    </td>
-                    <th class="formTitle">邮箱</th>
-                    <td class="formValue">
-                        <input id="FEmail" name="FEmail" type="text" class="form-control" />
-                    </td>
-                </tr>
-                <tr>
-                    <th class="formTitle">类型</th>
-                    <td class="formValue">
-                        <select id="FIsAdministrator" name="FIsAdministrator" class="form-control">
-                            <option value="false">普通用户</option>
-                            <option value="true">系统管理员</option>
-                        </select>
-                    </td>
-                    <th class="formTitle">允许登录</th>
-                    <td class="formValue">
-                        <select id="FEnabledMark" name="FEnabledMark" class="form-control">
-                            <option value="true">是</option>
-                            <option value="false">否</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="formTitle">工号</th>
-                    <td class="formValue">
-                        <input id="FMemberNo" name="FMemberNo" type="text" class="form-control" />
-                    </td>
-                    <th class="formTitle">数据来源</th>
-                    <td class="formValue">
-                        <select id="FSource" name="FSource" class="form-control">
-                            <option value="0">系统录入</option>
-                            <option value="1">Excel模板导入</option>
-                            <option value="2">系统集成导入</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="formTitle" valign="top" style="padding-top: 5px;">备注
-                    </th>
-                    <td class="formValue" colspan="3">
-                        <textarea id="FDescription" name="FDescription" class="form-control"></textarea>
-                    </td>
-                </tr>
-            </table>
+            <div id="BaseInfo">
+                <table class="form">
+                    <tr class="hiddenCol">
+                        <th class="formTitle">角色</th>
+                        <td class="formValue">
+                            <input id="FRoleId" name="FRoleId" type="text" class="form-control required" placeholder="角色" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">账户</th>
+                        <td class="formValue">
+                            <input id="FAccount" name="FAccount" type="text" class="form-control required" placeholder="请输入账户" />
+                        </td>
+                        <th class="formTitle">密码</th>
+                        <td class="formValue">
+                            <input id="FUserPassword" name="FUserPassword" type="password" class="form-control required" placeholder="请输入密码" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">公司</th>
+                        <td class="formValue">
+                            <select id="FOrganizeId" name="FOrganizeId" class="form-control required"></select>
+                        </td>
+                        <th class="formTitle">部门</th>
+                        <td class="formValue">
+                            <select id="FDepartmentId" name="FDepartmentId" class="form-control required">
+                                <option value="">==请选择==</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th class="formTitle">岗位</th>
+                        <td class="formValue">
+                            <select id="FDutyId" name="FDutyId" class="form-control required">
+                                <option value="">==请选择==</option>
+                            </select>
+                        </td>
+                        <th class="formTitle">工号</th>
+                        <td class="formValue">
+                            <input id="FMemberNo" name="FMemberNo" type="text" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">姓名</th>
+                        <td class="formValue">
+                            <input id="FRealName" name="FRealName" type="text" class="form-control required" placeholder="请输入姓名" />
+                        </td>
+                        <th class="formTitle">性别</th>
+                        <td class="formValue">
+                            <select id="FGender" name="FGender" class="form-control required">
+                                <option value="true">男</option>
+                                <option value="false">女</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">手机</th>
+                        <td class="formValue">
+                            <input id="FMobilePhone" name="FMobilePhone" type="text" class="form-control" />
+                        </td>
+                        <th class="formTitle">生日</th>
+                        <td class="formValue">
+                            <input id="FBirthday" name="FBirthday" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker()" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">微信</th>
+                        <td class="formValue">
+                            <input id="FWeChat" name="FWeChat" type="text" class="form-control" />
+                        </td>
+                        <th class="formTitle">邮箱</th>
+                        <td class="formValue">
+                            <input id="FEmail" name="FEmail" type="text" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">类型</th>
+                        <td class="formValue">
+                            <select id="FIsAdministrator" name="FIsAdministrator" class="form-control">
+                                <option value="false">普通用户</option>
+                                <option value="true">系统管理员</option>
+                            </select>
+                        </td>
+                        <th class="formTitle">允许登录</th>
+                        <td class="formValue">
+                            <select id="FEnabledMark" name="FEnabledMark" class="form-control">
+                                <option value="true">是</option>
+                                <option value="false">否</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <th class="formTitle">数据来源</th>
+                        <td class="formValue">
+                            <select id="FSource" name="FSource" class="form-control">
+                                <option value="0">系统录入</option>
+                                <option value="1">Excel模板导入</option>
+                                <option value="2">系统集成导入</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">角色</th>
+                        <td class="formValue" colspan="3">
+                            <select id="FRoleIdList" multiple="multiple" name="FRoleIdList" class="form-control required">
+                                <option value="">==请选择==</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle" valign="top" style="padding-top: 5px;">
+                            备注
+                        </th>
+                        <td class="formValue" colspan="3">
+                            <textarea id="FDescription" name="FDescription" class="form-control"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-    </div>
+
 </form>

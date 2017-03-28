@@ -37,7 +37,18 @@ namespace EquipManage.Application.SystemDocument
             else
             {
                 var moduledata = moduleApp.GetList();
-                var authorizedata = service.IQueryable(t => t.FObjectId == roleId && t.FItemType == 1).ToList();
+                List<RoleAuthorizeEntity> authorizedata = new List<RoleAuthorizeEntity>();
+                string[] FRoleArray = roleId.Split(',');
+                if (FRoleArray.Length > 0)
+                {
+                    foreach (string FRoleId in FRoleArray)
+                    {
+                        if (!string.IsNullOrEmpty(FRoleId))
+                        {
+                            authorizedata.AddRange(service.IQueryable(t => t.FObjectId == FRoleId && t.FItemType == 1).ToList());
+                        }
+                    }
+                }
                 foreach (var item in authorizedata)
                 {
                     ModuleEntity moduleEntity = moduledata.Find(t => t.FId == item.FItemId);
@@ -59,7 +70,20 @@ namespace EquipManage.Application.SystemDocument
             else
             {
                 var buttondata = moduleButtonApp.GetList();
-                var authorizedata = service.IQueryable(t => t.FObjectId == roleId && t.FItemType == 2).ToList();
+                //var authorizedata = service.IQueryable(t => t.FObjectId == roleId && t.FItemType == 2).ToList();
+
+                List<RoleAuthorizeEntity> authorizedata = new List<RoleAuthorizeEntity>();
+                string[] FRoleArray = roleId.Split(',');
+                if (FRoleArray.Length > 0)
+                {
+                    foreach (string FRoleId in FRoleArray)
+                    {
+                        if (!string.IsNullOrEmpty(FRoleId))
+                        {
+                            authorizedata.AddRange(service.IQueryable(t => t.FObjectId == FRoleId && t.FItemType == 2).ToList());
+                        }
+                    }
+                }
                 foreach (var item in authorizedata)
                 {
                     ModuleButtonEntity moduleButtonEntity = buttondata.Find(t => t.FId == item.FItemId);
@@ -79,7 +103,20 @@ namespace EquipManage.Application.SystemDocument
             {
                 var moduledata = moduleApp.GetList();
                 var buttondata = moduleButtonApp.GetList();
-                var authorizedata = service.IQueryable(t => t.FObjectId == roleId).ToList();
+
+                List<RoleAuthorizeEntity> authorizedata = new List<RoleAuthorizeEntity>();
+                string[] FRoleArray = roleId.Split(',');
+                if (FRoleArray.Length > 0)
+                {
+                    foreach (string FRoleId in FRoleArray)
+                    {
+                        if (!string.IsNullOrEmpty(FRoleId))
+                        {
+                            authorizedata.AddRange(service.IQueryable(t => t.FObjectId == FRoleId).ToList());
+                        }
+                    }
+                }
+                //var authorizedata = service.IQueryable(t => t.FObjectId == roleId).ToList();
                 foreach (var item in authorizedata)
                 {
                     if (item.FItemType == 1)

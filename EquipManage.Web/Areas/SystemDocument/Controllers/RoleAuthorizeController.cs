@@ -23,12 +23,19 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
 
         public ActionResult GetPermissionTree(string roleId)
         {
+            string[] FRoleArray = roleId.Split(',');
             var moduledata = moduleApp.GetList();
             var buttondata = moduleButtonApp.GetList();
-            var authorizedata = new List<RoleAuthorizeEntity>();
-            if (!string.IsNullOrEmpty(roleId))
+            List<RoleAuthorizeEntity> authorizedata = new List<RoleAuthorizeEntity>();
+            if (FRoleArray.Length > 0)
             {
-                authorizedata = roleAuthorizeApp.GetList(roleId);
+                foreach (string FRoleId in FRoleArray)
+                {
+                    if (!string.IsNullOrEmpty(FRoleId))
+                    {
+                        authorizedata.AddRange(roleAuthorizeApp.GetList(FRoleId));
+                    }
+                }
             }
             var treeList = new List<TreeViewModel>();
             foreach (ModuleEntity item in moduledata)

@@ -72,7 +72,7 @@ function btn_add() {
         title: "新增用户",
         url: "/SystemDocument/User/Form",
         width: "700px",
-        height: "550px",
+        height: "560px",
         callBack: function (iframeId) {
             top.frames[iframeId].submitForm();
         }
@@ -85,7 +85,7 @@ function btn_edit() {
         title: "修改用户",
         url: "/SystemDocument/User/Form?keyValue=" + keyValue,
         width: "700px",
-        height: "550px",
+        height: "560px",
         callBack: function (iframeId) {
             top.frames[iframeId].submitForm();
         }
