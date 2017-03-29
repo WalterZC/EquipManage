@@ -12,12 +12,13 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
     public class PositionController : ControllerBase
     {
         private PositionApp positionApp = new PositionApp();
+        private OrganizeApp organizeApp = new OrganizeApp();
 
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetTreeSelectJson(string FOrganize)
         {
-            var data = positionApp.GetList(FOrganize);
+            var data = positionApp.GetEntitys(FOrganize);
             var treeList = new List<TreeSelectModel>();
             foreach (PositionEntity item in data)
             {
@@ -34,7 +35,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         [HandlerAjaxOnly]
         public ActionResult GetTreeJson(string FOrganize)
         {
-            var data = positionApp.GetList(FOrganize);
+            var data = positionApp.GetEntitys(FOrganize);
             var treeList = new List<TreeViewModel>();
             foreach (PositionEntity item in data)
             {
@@ -52,13 +53,14 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             return Content(treeList.TreeViewJson());
         }
 
-        public ActionResult GetTreeGridJson(string keyword)
+        public ActionResult GetTreeGridJson(string itemId, string keyword)
         {
-            var data = positionApp.GetList(keyword);
-            if (!string.IsNullOrEmpty(keyword))
+            List<PositionEntity> data = new List<PositionEntity>();
+            if (!string.IsNullOrEmpty(itemId))
             {
-                data = data.TreeWhere(t => t.FFullName.Contains(keyword));
+                data = positionApp.GetItemList(itemId);
             }
+            
             var treeList = new List<TreeGridModel>();
             foreach (PositionEntity item in data)
             {
@@ -66,7 +68,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
                 bool hasChildren = data.Count(t => t.FParentID == item.FId) == 0 ? false : true;
                 treeModel.id = item.FId;
                 treeModel.isLeaf = hasChildren;
-                treeModel.parentId = item.FParentID;
+                treeModel.parentId = data.Count(t => t.FId == item.FParentID) == 0 ? "0" : item.FParentID;
                 treeModel.expanded = hasChildren;
                 treeModel.entityJson = item.ToJson();
                 treeList.Add(treeModel);
@@ -99,7 +101,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         }
         public ActionResult GetSelectJson(string keyValue)
         {
-            var data = positionApp.GetList(keyValue);
+            var data = positionApp.GetEntitys(keyValue);
             return Content(data.ToJson());
         }
     }

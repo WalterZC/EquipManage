@@ -57,7 +57,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         }
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetTreeGridJson(string keyword)
+        public ActionResult GetTreeGridJson(string itemId,string keyword)
         {
             var data = organizeApp.GetList();
             if (!string.IsNullOrEmpty(keyword))

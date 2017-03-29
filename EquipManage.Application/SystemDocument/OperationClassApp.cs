@@ -22,14 +22,17 @@ namespace EquipManage.Application.SystemDocument
         {
             return service.IQueryable().OrderBy(t => t.FCreatorTime).ToList();
         }
-        public List<OperationClassEntity> GetList(string keyword)
+        public List<OperationClassEntity> GetItemList(string itemId,string keyword)
         {
-            var expression = ExtLinq.True<OperationClassEntity>();
-            if (!string.IsNullOrEmpty(keyword))
+            if (string.IsNullOrEmpty(keyword))
             {
-                expression = expression.And(t => t.FBelongOrgID.Contains(keyword));
+                return service.GetItemList(itemId).OrderBy(t => t.FCreatorTime).ToList();
             }
-            return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
+            else
+            {
+                return service.GetItemList(itemId).Where(t => t.FNumber.Contains(keyword) || t.FShortName.Contains(keyword)).OrderBy(t => t.FCreatorTime).ToList();
+
+            }
         }
         public OperationClassEntity GetForm(string keyValue)
         {

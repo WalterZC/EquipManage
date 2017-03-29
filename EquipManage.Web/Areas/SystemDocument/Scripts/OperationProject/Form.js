@@ -149,7 +149,33 @@ function initTable() {
                 },
                 "sClass": "dt-center table-td-vertical-align"
             },
-            { "data": "FValType", "bSortable": false, "sTitle": "值类型", "sClass": "dt-center table-td-vertical-align" },
+            {
+                "data": "FValType",
+                "bSortable": false,
+                "sTitle": "值类型",
+                "sClass": "dt-center table-td-vertical-align",
+                "render": function (data, type, full, meta) {
+                    var returnVal;
+                    switch(data)
+                    {
+                        case "FCheck":
+                            returnVal="单选"
+                            break;
+                        case "FDecimal":
+                            returnVal="数值"
+                            break;
+                        case "FString":
+                            returnVal="文字"
+                            break;
+                        case "FMultiCheck":
+                            returnVal="多选"
+                            break;
+                        default:
+                            returnVal = "其他"
+                    }
+                    return returnVal;//top.clients.dataItems["EquipmentSystem"][data] == null ? "" : top.clients.dataItems["EquipmentSystem"][data];
+                },
+            },
             { "data": "FMaxVal", "bSortable": false, "sTitle": "最大值", "sClass": "dt-center table-td-vertical-align" },
             { "data": "FMinVal", "bSortable": false, "sTitle": "最小值", "sClass": "dt-center table-td-vertical-align" },
             { "data": "FItemType", "bSortable": false, "sTitle": "FId", "sClass": "hiddenCol" }

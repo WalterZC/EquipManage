@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EquipManage.Domain.Entity.SystemDocument
 {
@@ -30,5 +26,13 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FLastModifyUserId { get; set; }
         public DateTime? FDeleteTime { get; set; }
         public string FDeleteUserId { get; set; }
+        public string FMalfunctionType { get; set; }
+        public string FOperationLevelId { get; set; }
+        public string FMalfunctionSummary { get; set; }
+        public string FMalfunctionDetail { get; set; }
+        public string FMalfunctionReasonId { get; set; }
+        public string FMalfunctionReason { get; set; }
+        public string FMalfunctionImages { get; set; }
+        public string FOperationImages { get; set; }
     }
 }

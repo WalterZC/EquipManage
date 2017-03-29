@@ -1,6 +1,7 @@
 ﻿using EquipManage.Application.SystemDocument;
 using EquipManage.Code;
 using EquipManage.Domain.Entity.SystemDocument;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace EquipManage.Web.Areas.SystemDocument.Controllers
@@ -64,9 +65,9 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             operationClassApp.UpdateForm(operationClassEntity);
             return Success("启用成功。");
         }
-        public ActionResult GetSelectJson(string keyValue)
+        public ActionResult GetSelectJson(string itemId,string keyword)
         {
-            var data = operationClassApp.GetList(keyValue);
+            var data = itemId == null ? new List<OperationClassEntity>() : operationClassApp.GetItemList(itemId, keyword);
             return Content(data.ToJson());
         }
 

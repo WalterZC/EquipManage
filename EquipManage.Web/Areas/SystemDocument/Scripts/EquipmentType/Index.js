@@ -10,7 +10,7 @@ function gridList() {
         height: $(window).height() - 90,
         colModel: [
             { label: "主键", name: "FId", hidden: true, key: true },
-            { label: '名称', name: 'FFullName', width: 200, align: 'left' },
+            { label: '名称', name: 'FShortName', width: 200, align: 'left' },
             { label: '编号', name: 'FNumber', width: 100, align: 'left' },
             { label: '设备规格', name: 'FStandard', width: 80, align: 'center' },
             { label: '设备型号', name: 'FModel', width: 80, align: 'center' },

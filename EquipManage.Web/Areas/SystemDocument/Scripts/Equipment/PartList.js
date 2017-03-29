@@ -30,14 +30,40 @@ function gridList() {
                     return cellvalue == null ? '<img style="width: 150px; height: 90px;" class="img-responsive" src="/Content/img/no-image330x250.png" alt="无照片" />' : '<img style="width: 150px; height: 90px;" class="img-responsive" src="/Files/PartsImg/' + cellvalue + '.jpg" />';
                 }
             },
-            { label: "名称", name: "FShortName", width: 80, key: true, classes: 'table-td-vertical-align' },
+            { label: "名称", name: "FShortName", width: 100, key: true, classes: 'table-td-vertical-align' },
             {
                 label: '系统', name: 'FSystemId', width: 80, align: 'center', classes: 'table-td-vertical-align',
                 formatter: function (cellvalue, options, rowObject) {
                     return top.clients.dataItems["EquipmentSystem"][cellvalue] == null ? "" : top.clients.dataItems["EquipmentSystem"][cellvalue];
                 }
             },
-            { label: '值类型', name: 'FValType', width: 80, align: 'center', classes: 'table-td-vertical-align' },
+            {
+                label: '值类型',
+                name: 'FValType',
+                width: 80,
+                align: 'center',
+                classes: 'table-td-vertical-align',
+                formatter: function (data, options, rowObject) {
+                    var returnVal;
+                    switch (data) {
+                        case "FCheck":
+                            returnVal = "单选"
+                            break;
+                        case "FDecimal":
+                            returnVal = "数值"
+                            break;
+                        case "FString":
+                            returnVal = "文字"
+                            break;
+                        case "FMultiCheck":
+                            returnVal = "多选"
+                            break;
+                        default:
+                            returnVal = "其他"
+                    }
+                    return returnVal;
+                }
+            },
             { label: '最大值', name: 'FMaxVal', width: 80, align: 'center', classes: 'table-td-vertical-align' },
             { label: '最小值', name: 'FMinVal', width: 80, align: 'center', classes: 'table-td-vertical-align' },
             { label: '类型', name: 'FItemType',hidden:true, width: 80, align: 'center', classes: 'table-td-vertical-align' }

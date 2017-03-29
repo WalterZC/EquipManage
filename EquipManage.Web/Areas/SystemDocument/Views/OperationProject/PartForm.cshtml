@@ -44,17 +44,23 @@
                 </td>
                 <th class="formTitle">值类型</th>
                 <td class="formValue">
-                    <input id="FValType" name="FValType" type="text" class="form-control required" />
+                    <select id="FValType" name="FValType" class="form-control required">
+                        <option value="FCheck">单选</option>
+                        <option value="FDecimal">数值</option>
+                        <option value="FString">文字</option>
+                        <option value="FMultiCheck">多选</option>
+                    </select>
+                    @*<input id="FValType" name="FValType" type="text" class="form-control required" />*@
                 </td>
             </tr>  
             <tr>
                 <th class="formTitle">最大值</th>
                 <td class="formValue">
-                    <input id="FMaxVal" name="FMaxVal" type="text" class="form-control required" />
+                    <input id="FMaxVal" name="FMaxVal" type="text" number="true"  class="form-control required number" />
                 </td>
                 <th class="formTitle">最小值</th>
                 <td class="formValue">
-                    <input id="FMinVal" name="FMinVal" type="text" class="form-control required" />
+                    <input id="FMinVal" name="FMinVal" type="text" number="true" required class="form-control required number" />
                 </td>
             </tr>
             <tr>

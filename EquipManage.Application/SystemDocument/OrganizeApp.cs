@@ -4,6 +4,7 @@
  * Description: 设备管理系统-匠盟科技
  * Date:2017-02-17
 *********************************************************************************/
+using EquipManage.Code;
 using EquipManage.Domain.Entity.SystemDocument;
 using EquipManage.Domain.IRepository.SystemDocument;
 using EquipManage.Repository.SystemDocument;
@@ -20,6 +21,20 @@ namespace EquipManage.Application.SystemDocument
         public List<OrganizeEntity> GetList()
         {
             return service.IQueryable().OrderBy(t => t.FCreatorTime).ToList();
+        }
+        public List<OrganizeEntity> GetEntitys(string itemId, string keyword)
+        {
+            var expression = ExtLinq.True<OrganizeEntity>();
+            if (!string.IsNullOrEmpty(itemId))
+            {
+                expression = expression.And(t => t.FParentId == itemId);
+            }
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                expression = expression.And(t => t.FFullName.Contains(keyword));
+                expression = expression.Or(t => t.FEnCode.Contains(keyword));
+            }
+            return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
         }
         public OrganizeEntity GetForm(string keyValue)
         {

@@ -128,6 +128,7 @@
     <Compile Include="Areas\SystemDocument\Controllers\ChangeTypeController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\EnergyItemController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\EquipmentTypeController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\ExpWareController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\MaintainController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\OperationClassController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\OperationClassMemberController.cs" />
@@ -180,6 +181,9 @@
     <Content Include="Areas\SystemDocument\Scripts\Equipment\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\Equipment\PartForm.js" />
     <Content Include="Areas\SystemDocument\Scripts\Equipment\PartList.js" />
+    <Content Include="Areas\SystemDocument\Scripts\ExpWare\Details.js" />
+    <Content Include="Areas\SystemDocument\Scripts\ExpWare\Form.js" />
+    <Content Include="Areas\SystemDocument\Scripts\ExpWare\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\Maintain\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\Maintain\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\OperationClassMember\Form.js" />
@@ -708,6 +712,9 @@
     <Content Include="Areas\SystemDocument\Views\OperationItem\Form.cshtml" />
     <Content Include="Areas\SystemDocument\Views\OperationProject\PartForm.cshtml" />
     <Content Include="Areas\SystemDocument\Views\OperationItem\ProjectItemClone.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\ExpWare\Index.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\ExpWare\Form.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\ExpWare\Details.cshtml" />
     <None Include="Properties\PublishProfiles\EquipManage.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>
