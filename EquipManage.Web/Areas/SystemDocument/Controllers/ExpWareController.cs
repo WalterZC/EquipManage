@@ -72,26 +72,11 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         }
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetTreeGridJson(string itemId, string keyword)
+        public ActionResult GetGridJson(string FEquipTypeId, string itemId, string keyword)
         {
-            var data = expWareApp.GetList();
-            if (!string.IsNullOrEmpty(keyword))
-            {
-                data = data.TreeWhere(t => t.FFullName.Contains(keyword));
-            }
-            var treeList = new List<TreeGridModel>();
-            foreach (ExpWareEntity item in data)
-            {
-                TreeGridModel treeModel = new TreeGridModel();
-                //bool hasChildren = data.Count(t => t.FParentId == item.FId) == 0 ? false : true;
-                treeModel.id = item.FId;
-                //treeModel.isLeaf = hasChildren;
-                //treeModel.parentId = item.FParentId;
-                //treeModel.expanded = hasChildren;
-                treeModel.entityJson = item.ToJson();
-                treeList.Add(treeModel);
-            }
-            return Content(treeList.TreeGridJson());
+            var data = expWareApp.GetList(FEquipTypeId,itemId, keyword);
+            //var data = equipmentApp.GetList(itemId, keyword);
+            return Content(data.ToJson());
         }
         [HttpGet]
         [HandlerAjaxOnly]

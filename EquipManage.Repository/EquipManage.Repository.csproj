@@ -49,6 +49,7 @@
     <Compile Include="SystemDocument\EquipmentSpotCheckItemRepository.cs" />
     <Compile Include="SystemDocument\EquipmentTypeRepository.cs" />
     <Compile Include="SystemDocument\ExpWareRepository.cs" />
+    <Compile Include="SystemDocument\ItemRightRepository.cs" />
     <Compile Include="SystemDocument\ItemsDetailRepository.cs" />
     <Compile Include="SystemDocument\ItemsRepository.cs" />
     <Compile Include="SystemDocument\MaintainRepository.cs" />
@@ -86,6 +87,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SystemDocument\RepositoryTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RepositoryTemplate.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

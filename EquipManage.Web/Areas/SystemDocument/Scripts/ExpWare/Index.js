@@ -35,22 +35,46 @@ function gridList() {
         ]
     });
     $("#btn_search").click(function () {
+        var itemId = '';
+        var itemName = '';
+        var FEquipTypeId = '';
+        if ($("#itemTree").getCurrentNode().img == "fa fa-file-text-o") {
+            itemId = $("#itemTree").getCurrentNode().id;
+            itemName = $("#itemTree").getCurrentNode().text;
+            FEquipTypeId = $("#itemTree").getCurrentNode().parent.id;
+        } else if ($("#itemTree").getCurrentNode().img == "fa fa-folder-open") {
+            //itemId = $("#itemTree").getCurrentNode().id;
+            itemName = $("#itemTree").getCurrentNode().text;
+            FEquipTypeId = $("#itemTree").getCurrentNode().id;
+        }
+
         $gridList.jqGrid('setGridParam', {
             url: "/SystemDocument/ExpWare/GetGridJson",
-            postData: { itemId: $("#itemTree").getCurrentNode().id, keyword: $("#txt_keyword").val() },
+            postData: { FEquipTypeId: FEquipTypeId, itemId: itemId, keyword: $("#txt_keyword").val() },
         }).trigger('reloadGrid');
     });
 }
 function btn_add() {
-    var itemId = $("#itemTree").getCurrentNode().id;
-    var itemName = $("#itemTree").getCurrentNode().text;
-    if (!itemId) {
+    var itemId = '';
+    var itemName = '';
+    var FEquipTypeId = '';
+    if ($("#itemTree").getCurrentNode().img == "fa fa-file-text-o") {
+        itemId = $("#itemTree").getCurrentNode().id;
+        itemName = $("#itemTree").getCurrentNode().text;
+        FEquipTypeId = $("#itemTree").getCurrentNode().parent.id;
+    } else if ($("#itemTree").getCurrentNode().img == "fa fa-folder-open") {
+        //itemId = $("#itemTree").getCurrentNode().id;
+        itemName = $("#itemTree").getCurrentNode().text;
+        FEquipTypeId = $("#itemTree").getCurrentNode().id;
+    }
+
+    if (!FEquipTypeId) {
         return false;
     }
     $.modalOpen({
         id: "Form",
         title: itemName + " 》新增经验",
-        url: "/SystemDocument/ExpWare/Form?itemId=" + itemId,
+        url: "/SystemDocument/ExpWare/Form?itemId=" + itemId + "&FEquipTypeId=" + FEquipTypeId,
         width: "900px",
         height: "650px",
         callBack: function (iframeId) {
@@ -59,11 +83,12 @@ function btn_add() {
     });
 }
 function btn_edit() {
-    var itemName = $("#itemTree").getCurrentNode().text;
+    var itemName = $("#gridList").jqGridRowValue().FShortName;
+    var treeName = $("#itemTree").getCurrentNode().text;
     var keyValue = $("#gridList").jqGridRowValue().FId;
     $.modalOpen({
         id: "Form",
-        title: itemName + " 》修改经验",
+        title: treeName + " 》" + itemName + " 》修改经验",
         url: "/SystemDocument/ExpWare/Form?keyValue=" + keyValue,
         width: "900px",
         height: "650px",

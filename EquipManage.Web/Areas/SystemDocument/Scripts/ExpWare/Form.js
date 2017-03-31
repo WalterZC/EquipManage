@@ -1,5 +1,6 @@
-﻿var keyValue = $.request("keyValue");
-var itemId = $.request("itemId");
+﻿var keyValue = $.request("keyValue");//经验ID
+var itemId = $.request("itemId");    //设备ID
+var FEquipTypeId = $.request("FEquipTypeId");    //设备类型ID
 $(function () {
     initControl();
     if (!!keyValue) {
@@ -10,21 +11,22 @@ $(function () {
             async: false,
             success: function (data) {
                 $("#form1").formSerialize(data);
+                $("#FOperationLevelId").bindSelect({
+                    url: "/SystemDocument/ItemsData/GetGridJson",
+                    id: "FId",
+                    text: "FItemName",
+                    param: { itemId: data.FOperationLevelId, keyword: "" }
+                });
             }
         });
+    } else {
+        $("#FItemId").val(itemId);
+        $("#FEquipTypeId").val(FEquipTypeId);
+        $("#FId").val(keyValue);
     }
 });
 
 function initControl() {
-    //$("#FOperationTypeID").bindSelect({
-    //    url: "/SystemDocument/Organize/GetTreeSelectJson"
-    //});
-    //$("#FMalfunctionType").bindSelect({
-    //    url: "/SystemDocument/Organize/GetTreeSelectJson"
-    //});
-    //$("#FMalfunctionReasonId").bindSelect({
-    //    url: "/SystemDocument/Organize/GetTreeSelectJson"
-    //});
 
     var FParentNo = "OperationType";
 
@@ -34,7 +36,9 @@ function initControl() {
         text: "FFullName",
         param: { itemId: FParentNo, keyword: "" }
     });
-
+    $("#FOrganizeId").bindSelect({
+        url: "/SystemDocument/Organize/GetTreeSelectJson"
+    });
     $("#FMalfunctionType").bindSelect({
         url: "/SystemDocument/ItemsData/GetSelectJson",
         param: { enCode: "FMalfunctionType" }
@@ -62,9 +66,9 @@ function submitForm() {
         return false;
     }
     var postData = $("#form1").formSerialize();
-    postData["FEquipmentTypeId"] = itemId;
+    //postData["itemId"] = itemId;
     $.submitForm({
-        url: "/SystemDocument/Equipment/SubmitForm?keyValue=" + keyValue,
+        url: "/SystemDocument/ExpWare/SubmitForm?keyValue=" + keyValue,
         param: postData,
         success: function () {
             $.currentWindow().$("#gridList").trigger("reloadGrid");

@@ -154,3 +154,17 @@ function btn_enabled() {
         }
     });
 }
+
+function btn_orgAuthorize() {
+    var keyValue = $("#gridList").jqGridRowValue().FId;
+    $.modalOpen({
+        id: "OrgAuthorize",
+        title: "部门授权",
+        url: "/SystemDocument/User/OrgAuthorize?FUserId=" + keyValue,
+        width: "400px",
+        height: "600px",
+        callBack: function (iframeId) {
+            top.frames[iframeId].submitForm();
+        }
+    });
+}

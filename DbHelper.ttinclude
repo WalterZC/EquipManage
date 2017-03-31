@@ -343,6 +343,6 @@
     {
         public static readonly string ConnectionString = "Data Source=(local);Initial Catalog=EquipManageBase;User ID=sa;Password=123;";
         public static readonly string DbDatabase = "EquipManageBase";
-        public static readonly string TableName = "Sys_OperationProject";
+        public static readonly string TableName = "Sys_ItemRight";
     }
 #>

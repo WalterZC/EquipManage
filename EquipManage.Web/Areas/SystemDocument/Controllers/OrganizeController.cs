@@ -90,6 +90,8 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitForm(OrganizeEntity organizeEntity, string keyValue)
         {
+            OrganizeEntity ParentEntity = organizeApp.GetForm(organizeEntity.FParentId);
+            organizeEntity.FLayers = Ext.ToInt(ParentEntity == null ? 0 : ParentEntity.FLayers) + 1;
             organizeApp.SubmitForm(organizeEntity, keyValue);
             return Success("操作成功。");
         }

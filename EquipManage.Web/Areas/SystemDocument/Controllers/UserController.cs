@@ -9,13 +9,13 @@ using EquipManage.Code;
 using EquipManage.Domain.Entity.SystemDocument;
 using System.Web.Mvc;
 
-
 namespace EquipManage.Web.Areas.SystemDocument.Controllers
 {
     public class UserController : ControllerBase
     {
         private UserApp userApp = new UserApp();
         private UserLogOnApp userLogOnApp = new UserLogOnApp();
+        private ItemRightApp itemRightApp = new ItemRightApp();
 
         [HttpGet]
         [HandlerAjaxOnly]
@@ -103,6 +103,20 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         public ActionResult Info()
         {
             return View();
+        }
+        [HttpGet]
+        public ActionResult OrgAuthorize()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        [ValidateAntiForgeryToken]
+        public ActionResult SubmitAuthorizedOrg(string FOrgIds,string FUserId,string FObjectType)
+        {
+            itemRightApp.SubmitForm(FOrgIds.Split(','), FUserId, FObjectType);
+            return Success("操作成功。");
         }
     }
 }

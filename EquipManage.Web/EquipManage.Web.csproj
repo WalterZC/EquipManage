@@ -136,6 +136,7 @@
     <Compile Include="Areas\SystemDocument\Controllers\OperationProjectController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\PartsController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\PositionController.cs" />
+    <Compile Include="Areas\SystemDocument\Controllers\UserItemAuthorizeController.cs" />
     <Compile Include="Areas\SystemDocument\SystemDocumentAreaRegistration.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\AreaController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\DutyController.cs" />
@@ -193,11 +194,15 @@
     <Content Include="Areas\SystemDocument\Scripts\OperationProject\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\OperationProject\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\OperationProject\PartForm.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Organize\Details.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Organize\Form.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Organize\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\Parts\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\Parts\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\User\Details.js" />
     <Content Include="Areas\SystemDocument\Scripts\User\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\User\Index.js" />
+    <Content Include="Areas\SystemDocument\Scripts\User\OrgAuthorize.js" />
     <Content Include="Content\css\framework-font.css" />
     <Content Include="Content\css\framework-ui.css" />
     <Content Include="Content\css\framework-login.css" />
@@ -715,6 +720,7 @@
     <Content Include="Areas\SystemDocument\Views\ExpWare\Index.cshtml" />
     <Content Include="Areas\SystemDocument\Views\ExpWare\Form.cshtml" />
     <Content Include="Areas\SystemDocument\Views\ExpWare\Details.cshtml" />
+    <Content Include="Areas\SystemDocument\Views\User\OrgAuthorize.cshtml" />
     <None Include="Properties\PublishProfiles\EquipManage.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

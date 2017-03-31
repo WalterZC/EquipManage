@@ -3,13 +3,13 @@ using System.Data.Entity.ModelConfiguration;
 namespace EquipManage.Mapping.SystemDocument
 {
     /// <summary>
-    /// EquipmentPartsMap
+    /// ItemRightMap
     /// </summary>    
-    public class EquipmentPartsMap : EntityTypeConfiguration<EquipmentPartsEntity>
+    public class ItemRightMap : EntityTypeConfiguration<ItemRightEntity>
     {
-        public EquipmentPartsMap()
+        public ItemRightMap()
         {
-            this.ToTable("Sys_EquipmentParts");
+            this.ToTable("Sys_ItemRight");
             this.HasKey(t => t.FId);
         }
     }

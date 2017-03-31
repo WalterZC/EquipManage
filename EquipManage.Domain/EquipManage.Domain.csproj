@@ -54,6 +54,7 @@
     <Compile Include="03 Entity\SystemDocument\EquipmentSpotCheckItemEntity.cs" />
     <Compile Include="03 Entity\SystemDocument\EquipmentTypeEntity.cs" />
     <Compile Include="03 Entity\SystemDocument\ExpWareEntity.cs" />
+    <Compile Include="03 Entity\SystemDocument\ItemRightEntity.cs" />
     <Compile Include="03 Entity\SystemDocument\MaintainEntity.cs" />
     <Compile Include="03 Entity\SystemDocument\OperationProjectEntity.cs" />
     <Compile Include="03 Entity\SystemManage\ModuleButtonEntity.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="04 IRepository\SystemDocument\IOperationProjectRepository.cs" />
     <Compile Include="04 IRepository\SystemDocument\IPartsRepository.cs" />
     <Compile Include="04 IRepository\SystemDocument\IPositionRepository.cs" />
+    <Compile Include="04 IRepository\SystemDocument\ItemRightRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IModuleButtonRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IModuleRepository.cs" />
     <Compile Include="04 IRepository\SystemDocument\IOrganizeRepository.cs" />

@@ -20,6 +20,20 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="BaseInfo">
                     <table class="form">
+                        <tr style="display:none;">
+                            <th class="formTitle">设备ID</th>
+                            <td class="formValue">
+                                <input id="FItemId" name="FItemId" type="text" class="form-control" placeholder="请输入名称" />
+                            </td>
+                            <th class="formTitle">设备类型ID</th>
+                            <td class="formValue">
+                                <input id="FEquipTypeId" name="FEquipTypeId" type="text" class="form-control required" placeholder="请输入编号" />
+                            </td>
+                            <th class="formTitle">经验ID</th>
+                            <td class="formValue">
+                                <input id="FId" name="FId" type="text" class="form-control" placeholder="请输入编号" />
+                            </td>
+                        </tr>
                         <tr>
                             <th class="formTitle">名称</th>
                             <td class="formValue">
@@ -29,15 +43,11 @@
                             <td class="formValue">
                                 <input id="FNumber" name="FNumber" type="text" class="form-control required" placeholder="请输入编号" />
                             </td>
-                        </tr>
-                        <tr>
-                            <th class="formTitle">作业摘要</th>
+                            <th class="formTitle">所属部门</th>
                             <td class="formValue">
-                                <input id="FOperationSummary" name="FOperationSummary" type="text" class="form-control required" placeholder="请输入通用编号" />
-                            </td>
-                            <th class="formTitle">作业描述</th>
-                            <td class="formValue">
-                                <input id="FOperationDetail" name="FOperationDetail" type="text" class="form-control" />
+                                <select id="FOrganizeId" name="FOrganizeId" class="form-control required">
+                                    <option value="">==请选择==</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
@@ -47,29 +57,11 @@
                                     <option value="">==请选择==</option>
                                 </select>
                             </td>
-                            <th class="formTitle">故障类型</th>
-                            <td class="formValue">
-                                <select id="FMalfunctionType" name="FMalfunctionType" class="form-control required">
-                                    <option value="">==请选择==</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="formTitle">设备级别</th>
+                            <th class="formTitle">作业级别</th>
                             <td class="formValue">
                                 <select id="FOperationLevelId" name="FOperationLevelId" class="form-control required">
                                     <option value="">==请选择==</option>
                                 </select>
-                            </td>
-                            <th class="formTitle">故障摘要</th>
-                            <td class="formValue">
-                                <input id="FMalfunctionSummary" name="FMalfunctionSummary" type="text" class="form-control" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="formTitle">故障描述</th>
-                            <td class="formValue">
-                                <input id="FMalfunctionDetail" name="FMalfunctionDetail" type="text" class="form-control required" placeholder="请输入故障详情描述" />
                             </td>
                             <th class="formTitle">故障原因类型</th>
                             <td class="formValue">
@@ -79,25 +71,41 @@
                             </td>
                         </tr>
                         <tr>
-                            <th class="formTitle">故障原因明细</th>
+                            <th class="formTitle">故障类型</th>
                             <td class="formValue">
-                                <input id="FMalfunctionReason" name="FMalfunctionReason" type="text" class="form-control required" placeholder="故障原因明细" />
+                                <select id="FMalfunctionType" name="FMalfunctionType" class="form-control required">
+                                    <option value="">==请选择==</option>
+                                </select>
                             </td>
-                        </tr>
-                        <tr>
-                            <th class="formTitle" style="height: 35px;">选项</th>
-                            <td class="formValue" style="padding-top: 1px;">
-                                <div class="ckbox">
-                                    <input id="FEnabledMark" name="FEnabledMark" type="checkbox" checked="checked"><label for="FEnabledMark">有效</label>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="formTitle" valign="top" style="padding-top: 5px;">
-                                备注
-                            </th>
+                            <th class="formTitle">故障摘要</th>
                             <td class="formValue" colspan="3">
-                                <textarea id="FDescription" name="FDescription" class="form-control" style="height: 60px;"></textarea>
+                                <input id="FMalfunctionSummary" name="FMalfunctionSummary" type="text" class="form-control" placeholder="故障摘要"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="formTitle">故障描述</th>
+                            <td class="formValue" colspan="5">
+                                <textarea id="FMalfunctionDetail" name="FMalfunctionDetail" type="text" class="form-control required" placeholder="故障详情描述" style="height: 70px;"></textarea>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th class="formTitle">故障原因明细</th>
+                            <td class="formValue" colspan="5">
+                                <textarea id="FMalfunctionReason" name="FMalfunctionReason" type="text" class="form-control required" placeholder="故障发生原因" style="height: 70px;"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="formTitle">作业摘要</th>
+                            <td class="formValue" colspan="5">
+                                <input id="FOperationSummary" name="FOperationSummary" type="text" class="form-control required" placeholder="故障处理简述" />
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th class="formTitle">作业描述</th>
+                            <td class="formValue" colspan="5">
+                                <textarea id="FOperationDetail" name="FOperationDetail" type="text" class="form-control" placeholder="故障修复详细说明"  style="height: 80px;"></textarea>
                             </td>
                         </tr>
                     </table>

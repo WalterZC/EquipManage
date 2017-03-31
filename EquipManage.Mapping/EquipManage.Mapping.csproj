@@ -55,12 +55,11 @@
     <Compile Include="SystemDocument\ChangeTypeMap.cs" />
     <Compile Include="SystemDocument\EnergyItemMap.cs" />
     <Compile Include="SystemDocument\EquipmentMap.cs" />
-    <Compile Include="SystemDocument\EquipmentPartsMap.cs">
-      <DependentUpon>Mapping.SystemDocument.tt</DependentUpon>
-    </Compile>
+    <Compile Include="SystemDocument\EquipmentPartsMap.cs" />
     <Compile Include="SystemDocument\EquipmentSpotCheckItemMap.cs" />
     <Compile Include="SystemDocument\EquipmentTypeMap.cs" />
     <Compile Include="SystemDocument\ExpWareMap.cs" />
+    <Compile Include="SystemDocument\ItemRightMap.cs" />
     <Compile Include="SystemDocument\ItemsDetailMap.cs" />
     <Compile Include="SystemDocument\ItemsMap.cs" />
     <Compile Include="SystemDocument\MaintainMap.cs" />

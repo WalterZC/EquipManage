@@ -10,9 +10,9 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FShortName { get; set; }
         public string FOperationSummary { get; set; }
         public string FOperationDetail { get; set; }
-        public string FOperationTypeID { get; set; }
-        public string FItemID { get; set; }
-        public string FEquipTypeID { get; set; }
+        public string FOperationTypeId { get; set; }
+        public string FItemId { get; set; }
+        public string FEquipTypeId { get; set; }
         public string FOrganizeId { get; set; }
         public int FSortCode { get; set; }
         public bool FAllowEdit { get; set; }
