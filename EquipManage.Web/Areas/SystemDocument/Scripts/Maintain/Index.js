@@ -1,18 +1,32 @@
 ﻿$(function () {
+    $('#layout').layout();
+    treeView();
     gridList();
-})
+});
+function treeView() {
+    $("#itemTree").treeview({
+        url: "/SystemDocument/UserItemAuthorize/GetUseItemPermissionTree",
+        param: { FObjectType: "Organize" },
+        onnodeclick: function (item) {
+            $("#txt_keyword").val('');
+            $('#btn_search').trigger("click");
+        }
+    });
+}
+
 function gridList() {
     var $gridList = $("#gridList");
     $gridList.dataGrid({
-        treeGrid: true,
-        treeGridModel: "adjacency",
+        //treeGrid: true,
+        //treeGridModel: "adjacency",
         ExpandColumn: "FNumber",
-        url: "/SystemDocument/Maintain/GetTreeGridJson",
+        url: "/SystemDocument/Maintain/GetPermissionGridJson",
         height: $(window).height() - 96,
         colModel: [
             { label: "主键", name: "FId", hidden: true, key: true },
+            { label: '简称', name: 'FShortName', width: 80, align: 'left' },
             { label: '名称', name: 'FFullName', width: 200, align: 'left' },
-            { label: '编号', name: 'FNumber', width: 100, align: 'left' },
+            { label: '编号', name: 'FNumber', width: 80, align: 'left' },
             { label: '联系人', name: 'FLinkMan', width: 80, align: 'left' },
             { label: '手机', name: 'FMobilePhone', width: 100, align: 'left' },
             { label: '微信', name: 'FWeChat', width: 100, align: 'left' },
@@ -23,20 +37,6 @@ function gridList() {
                     return top.clients.organize[cellvalue] == null ? "" : top.clients.organize[cellvalue].fullname;
                 }
             },
-            //{
-            //    label: '分类', name: 'FCategoryId', width: 80, align: 'left',
-            //    formatter: function (cellvalue) {
-            //        if (cellvalue == "Group") {
-            //            return "集团";
-            //        } else if (cellvalue == "Company") {
-            //            return "公司";
-            //        } else if (cellvalue == "Department") {
-            //            return "部门";
-            //        } else if (cellvalue == "WorkGroup") {
-            //            return "小组";
-            //        }
-            //    }
-            //},
             {
                 label: '创建时间', name: 'FCreatorTime', width: 80, align: 'left',
                 formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
@@ -52,7 +52,7 @@ function gridList() {
     });
     $("#btn_search").click(function () {
         $gridList.jqGrid('setGridParam', {
-            postData: { keyword: $("#txt_keyword").val() },
+            postData: { itemId: $("#itemTree").getCurrentNode().id, keyword: $("#txt_keyword").val() },
         }).trigger('reloadGrid');
     });
 }

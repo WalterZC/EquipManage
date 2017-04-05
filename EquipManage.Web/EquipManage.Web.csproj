@@ -170,6 +170,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Areas\SystemDocument\Scripts\ChangeType\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\ChangeType\Index.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Duty\Details.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Duty\Form.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Duty\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\EnergyItem\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\EnergyItem\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\EquipmentType\Details.js" />
@@ -199,6 +202,9 @@
     <Content Include="Areas\SystemDocument\Scripts\Organize\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\Parts\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\Parts\Index.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Role\Details.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Role\Form.js" />
+    <Content Include="Areas\SystemDocument\Scripts\Role\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\User\Details.js" />
     <Content Include="Areas\SystemDocument\Scripts\User\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\User\Index.js" />

@@ -71,5 +71,6 @@ namespace EquipManage.Domain.Entity.SystemDocument
         public string FDeleteUserId { get; set; }
         public string FEquipmentTypeId { get; set; }
         public string FStandard { get; set;}
+        public string FPrincipalId { get; set; }
     }
 }

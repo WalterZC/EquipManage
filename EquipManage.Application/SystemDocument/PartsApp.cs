@@ -10,6 +10,7 @@ namespace EquipManage.Application.SystemDocument
     public class PartsApp
     {
         private IPartsRepository service = new PartsRepository();
+        private OrganizeApp organizeApp = new OrganizeApp();
 
         public List<PartsEntity> GetList(string keyword = "")
         {
@@ -24,6 +25,25 @@ namespace EquipManage.Application.SystemDocument
         public PartsEntity GetForm(string keyValue)
         {
             return service.FindEntity(keyValue);
+        }
+        public List<PartsEntity> GetPermissionGridList(string OrgId = "", string keyword = "")
+        {
+
+            List<PartsEntity> datalist = new List<PartsEntity>();
+            List<PartsEntity> rolelist = new List<PartsEntity>();
+            List<OrganizeEntity> orgList = new List<OrganizeEntity>();
+            orgList = organizeApp.GetPermissionGridList(OrgId);
+            rolelist = this.GetList();
+
+            datalist = (from c in rolelist
+                        join o in orgList on c.FOrganizeId equals o.FId
+                        select c).ToList();
+
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                datalist = datalist.Where(t => t.FFullName.Contains(keyword) || t.FNumber.Contains(keyword)).ToList();
+            }
+            return datalist;
         }
         public void DeleteForm(string keyValue)
         {

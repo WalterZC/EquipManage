@@ -32,7 +32,6 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitForm(OperationProjectEntity Entity, string keyValue)
         {
-            //roleEntity.FOperationTypeId = keyValue;
             string data = operationProjectApp.SubmitForm(Entity, Entity.FId);
             return Content(data);
         }

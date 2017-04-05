@@ -14,6 +14,6 @@ namespace EquipManage.Domain.IRepository.SystemDocument
     public interface IRoleRepository : IRepositoryBase<RoleEntity>
     {
         void DeleteForm(string keyValue);
-        void SubmitForm(RoleEntity roleEntity, List<RoleAuthorizeEntity> roleAuthorizeEntitys, string keyValue);
+        void SubmitForm(RoleEntity roleEntity, List<RoleAuthorizeEntity> roleAuthorizeEntitys, string keyValue); 
     }
 }

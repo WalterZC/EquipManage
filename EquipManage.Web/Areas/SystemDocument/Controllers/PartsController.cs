@@ -23,6 +23,13 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             var data = partsApp.GetForm(keyValue);
             return Content(data.ToJson());
         }
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetPermissionGridJson(string itemId, string keyword)
+        {
+            var data = partsApp.GetPermissionGridList(itemId, keyword);
+            return Content(data.ToJson());
+        }
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]

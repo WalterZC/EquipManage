@@ -19,31 +19,66 @@ namespace EquipManage.Application.SystemDocument
     {
         private IUserRepository service = new UserRepository();
         private UserLogOnApp userLogOnApp = new UserLogOnApp();
+        private OrganizeApp organizeApp = new OrganizeApp();
 
-        public List<UserEntity> GetList(Pagination pagination, string keyword)
+        //public List<UserEntity> GetList(Pagination pagination, string keyword)
+        //{
+        //    var expression = ExtLinq.True<UserEntity>();
+        //    if (!string.IsNullOrEmpty(keyword))
+        //    {
+        //        expression = expression.And(t => t.FAccount.Contains(keyword));
+        //        expression = expression.Or(t => t.FRealName.Contains(keyword));
+        //        expression = expression.Or(t => t.FMobilePhone.Contains(keyword));
+        //    }
+        //    expression = expression.And(t => t.FAccount != "admin");
+        //    return service.FindList(expression, pagination);
+        //}
+        //public List<UserEntity> GetList(string keyword)
+        //{
+        //    var expression = ExtLinq.True<UserEntity>();
+        //    if (!string.IsNullOrEmpty(keyword))
+        //    {
+        //        expression = expression.And(t => t.FOrganizeId.Contains(keyword));
+        //        expression = expression.Or(t => t.FDepartmentId.Contains(keyword));
+        //    }
+        //        expression = expression.And(t => t.FAccount != "admin");
+        //    return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
+        //}
+
+        public List<UserEntity> GetListByOrg(string FOrgId)
         {
-            var expression = ExtLinq.True<UserEntity>();
+            List<OrganizeEntity> orgList = new List<OrganizeEntity>();
+            List<UserEntity> uselist = new List<UserEntity>();
+            List<UserEntity> datalist = new List<UserEntity>();
+            orgList = organizeApp.GetSelectEntitys(FOrgId,"");
+            uselist = this.GetPermissionGridList();
+
+            datalist = (from c in uselist
+                        join o in orgList on c.FDepartmentId equals o.FId
+                        select c).ToList();
+
+            return datalist;
+        }
+
+        public List<UserEntity> GetPermissionGridList(string userId = "", string keyword = "")
+        {
+
+            List<UserEntity> datalist = new List<UserEntity>();
+            List<UserEntity> uselist = new List<UserEntity>();
+            List<OrganizeEntity> orgList = new List<OrganizeEntity>();
+            orgList = organizeApp.GetPermissionGridList(userId);
+            uselist = this.GetList();
+
+            datalist = (from c in uselist
+                        join o in orgList on c.FDepartmentId equals o.FId
+                        select c).ToList();
+
             if (!string.IsNullOrEmpty(keyword))
             {
-                expression = expression.And(t => t.FAccount.Contains(keyword));
-                expression = expression.Or(t => t.FRealName.Contains(keyword));
-                expression = expression.Or(t => t.FMobilePhone.Contains(keyword));
+                datalist = datalist.Where(t => t.FRealName.Contains(keyword) || t.FAccount.Contains(keyword)).ToList();
             }
-            expression = expression.And(t => t.FAccount != "admin");
-            return service.FindList(expression, pagination);
+            return datalist;
         }
-        public List<UserEntity> GetList(string keyword)
-        {
-            var expression = ExtLinq.True<UserEntity>();
-            if (!string.IsNullOrEmpty(keyword))
-            {
-                expression = expression.And(t => t.FOrganizeId.Contains(keyword));
-                expression = expression.Or(t => t.FDepartmentId.Contains(keyword));
-            }
-                expression = expression.And(t => t.FAccount != "admin");
-            return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
-        }
-
         public List<UserEntity> GetClassUserList(string keyword)
         {
             return service.GetUserList(keyword);

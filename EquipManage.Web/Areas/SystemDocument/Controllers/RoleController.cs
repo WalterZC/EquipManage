@@ -28,6 +28,15 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             var data = roleApp.GetList(keyword);
             return Content(data.ToJson());
         }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetPermissionGridJson(string itemId, string keyword)
+        {
+            var data = roleApp.GetPermissionGridList(itemId,keyword);
+            return Content(data.ToJson());
+        }      
+
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetFormJson(string keyValue)

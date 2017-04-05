@@ -2,7 +2,7 @@
 $(function () {
     $("#itemTree").treeview({
         showcheck: true,
-        url: "/SystemDocument/UserItemAuthorize/GetUseItemPermissionTree",
+        url: "/SystemDocument/UserItemAuthorize/GetUseItemPermissionSelectTree",
         param: { FUserId: FUserId,FObjectType: "Organize" }
     });
 });

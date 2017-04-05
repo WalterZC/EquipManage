@@ -1,11 +1,25 @@
 ﻿
 $(function () {
+    $('#layout').layout();
+    treeView();
     gridList();
 })
+
+function treeView(selectVal) {
+    $("#itemTree").treeview({
+        url: "/SystemDocument/UserItemAuthorize/GetUseItemPermissionTree",
+        param: { FObjectType: selectVal },
+        onnodeclick: function (item) {
+            $("#txt_keyword").val('');
+            $('#btn_search').trigger("click");
+        }
+    });
+}
+
 function gridList() {
     var $gridList = $("#gridList");
     $gridList.dataGrid({
-        url: "/SystemDocument/EnergyItem/GetGridJson",
+        url: "/SystemDocument/EnergyItem/GetPermissionGridJson",
         height: $(window).height() - 96,
         colModel: [
             { label: "主键", name: "FId", hidden: true, key: true },
@@ -34,7 +48,7 @@ function gridList() {
     });
     $("#btn_search").click(function () {
         $gridList.jqGrid('setGridParam', {
-            postData: { keyword: $("#txt_keyword").val() },
+            postData: { itemId: $("#itemTree").getCurrentNode().id, keyword: $("#txt_keyword").val() },
         }).trigger('reloadGrid');
     });
 }

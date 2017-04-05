@@ -23,6 +23,15 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             var data = energyItemApp.GetForm(keyValue);
             return Content(data.ToJson());
         }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetPermissionGridJson(string itemId, string keyword)
+        {
+            var data = energyItemApp.GetPermissionGridList(itemId, keyword);
+            return Content(data.ToJson());
+        }
+
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]

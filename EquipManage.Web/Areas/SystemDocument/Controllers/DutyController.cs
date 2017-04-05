@@ -24,6 +24,15 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             var data = dutyApp.GetList(keyword);
             return Content(data.ToJson());
         }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetPermissionGridJson(string itemId, string keyword)
+        {
+            var data = dutyApp.GetPermissionGridList(itemId, keyword);
+            return Content(data.ToJson());
+        }
+
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetFormJson(string keyValue)

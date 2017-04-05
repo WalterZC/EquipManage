@@ -11,6 +11,7 @@ namespace EquipManage.Application.SystemDocument
     public class MaintainApp
     {
         private IMaintainRepository service = new MaintainRepository();
+        private OrganizeApp organizeApp = new OrganizeApp();
 
         public List<MaintainEntity> GetList()
         {
@@ -19,6 +20,25 @@ namespace EquipManage.Application.SystemDocument
         public MaintainEntity GetForm(string keyValue)
         {
             return service.FindEntity(keyValue);
+        }
+        public List<MaintainEntity> GetPermissionGridList(string OrgId = "", string keyword = "")
+        {
+
+            List<MaintainEntity> datalist = new List<MaintainEntity>();
+            List<MaintainEntity> maintainlist = new List<MaintainEntity>();
+            List<OrganizeEntity> orgList = new List<OrganizeEntity>();
+            orgList = organizeApp.GetPermissionGridList(OrgId);
+            maintainlist = this.GetList();
+
+            datalist = (from c in maintainlist
+                        join o in orgList on c.FOrganizeId equals o.FId
+                        select c).ToList();
+
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                datalist = datalist.Where(t => t.FFullName.Contains(keyword) || t.FNumber.Contains(keyword)).ToList();
+            }
+            return datalist;
         }
         public void DeleteForm(string keyValue)
         {

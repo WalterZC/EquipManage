@@ -10,18 +10,40 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
     {
         private OperationClassApp operationClassApp = new OperationClassApp();
 
-        [HttpGet]
-        [HandlerAjaxOnly]
-        public ActionResult GetGridJson()
-        {
-            return Content(operationClassApp.GetList().ToJson());
-        }
+        //[HttpGet]
+        //[HandlerAjaxOnly]
+        //public ActionResult GetGridJson()
+        //{
+        //    return Content(operationClassApp.GetList().ToJson());
+        //}
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetFormJson(string keyValue)
         {
             var data = operationClassApp.GetForm(keyValue);
             return Content(data.ToJson());
+        }
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetTreeJson()
+        {
+            //var data = operationClassApp.GetList();
+            var data = operationClassApp.GetPermissionGridList("","");
+
+            var treeList = new List<TreeViewModel>();
+            foreach (OperationClassEntity item in data)
+            {
+                TreeViewModel tree = new TreeViewModel();
+                tree.id = item.FId;
+                tree.text = item.FShortName;
+                tree.value = item.FNumber;
+                tree.parentId = "0";
+                tree.isexpand = true;
+                tree.complete = true;
+                tree.hasChildren = false;
+                treeList.Add(tree);
+            }
+            return Content(treeList.TreeViewJson());
         }
         [HttpPost]
         [HandlerAjaxOnly]
@@ -67,7 +89,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         }
         public ActionResult GetSelectJson(string itemId,string keyword)
         {
-            var data = itemId == null ? new List<OperationClassEntity>() : operationClassApp.GetItemList(itemId, keyword);
+            var data = itemId == null ? new List<OperationClassEntity>() : operationClassApp.GetPermissionGridList(itemId, keyword);
             return Content(data.ToJson());
         }
 

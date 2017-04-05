@@ -1,21 +1,31 @@
 ﻿$(document).ready(function () {
     $('#layout').layout();
-    classView();
+    treeView();
+    //classView();
     gridList();
 });
-function classView() {
-    $.ajax({
-        type: "GET",   //传值方式
-        url: "/SystemDocument/OperationClass/GetGridJson",   //后台处理地址
-        contentType: "application/json",
-        dataType: "json", //表示返回值类型，不必须
-        success: function (msg) {    //返回信
-            msg.forEach(function (value, index, array) {
-                $("#classTree").append('<a href="javascript:;" onclick="a_OperationClass(\'' + value.FId + '\')" data-id="' + value.FId + '" class="list-group-item"> ' + value.FNumber + ' - ' + value.FShortName + ' </a>');
-            });
-        },
-        error: function (msg) { //错误信息
-            alert(msg.value);
+//function classView() {
+//    $.ajax({
+//        type: "GET",   //传值方式
+//        url: "/SystemDocument/OperationClass/GetGridJson",   //后台处理地址
+//        contentType: "application/json",
+//        dataType: "json", //表示返回值类型，不必须
+//        success: function (msg) {    //返回信
+//            msg.forEach(function (value, index, array) {
+//                $("#classTree").append('<a href="javascript:;" onclick="a_OperationClass(\'' + value.FId + '\')" data-id="' + value.FId + '" class="list-group-item"> ' + value.FNumber + ' - ' + value.FShortName + ' </a>');
+//            });
+//        },
+//        error: function (msg) { //错误信息
+//            alert(msg.value);
+//        }
+//    });
+//}
+function treeView() {
+    $("#itemTree").treeview({
+        url: "/SystemDocument/OperationClass/GetTreeJson",
+        onnodeclick: function (item) {
+            $("#txt_keyword").val('');
+            $('#btn_search').trigger("click");
         }
     });
 }
@@ -60,13 +70,13 @@ function gridList() {
     $("#btn_search").click(function () {
         $gridList.jqGrid('setGridParam', {
             url: "/SystemDocument/OperationClassMember/GetGridJson",
-            postData: { itemId: $("#classTree a:first").attr("data-id"), keyword: $("#txt_keyword").val() },
+            postData: { itemId: $("#itemTree").getCurrentNode().id, keyword: $("#txt_keyword").val() },
         }).trigger('reloadGrid');
     });
 }
 function btn_add() {
-    var itemId = $("#classTree a:first").attr("data-id");
-    var itemName = $("#classTree a:first").text().trim();
+    var itemId = $("#itemTree").getCurrentNode().id;
+    var itemName = $("#itemTree").getCurrentNode().text;
     if (!itemId) {
         return false;
     }

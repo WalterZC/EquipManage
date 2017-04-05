@@ -130,7 +130,20 @@
                                     <option value="">==请选择==</option>
                                 </select>
                             </td>
-
+                            <th class="formTitle">所属部门</th>
+                            <td class="formValue">
+                                <select id="FBelongOrgID" name="FBelongOrgID" class="form-control required">
+                                    <option value="">==请选择==</option>
+                                </select>
+                            </td>
+                            <th class="formTitle">资产负责人</th>
+                            <td class="formValue">
+                                <select id="FPrincipalId" name="FPrincipalId" class="form-control required">
+                                    <option value="">==请选择==</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
                             <th class="formTitle" style="height: 35px;">选项</th>
                             <td class="formValue" style="padding-top: 1px;">
                                 <div class="ckbox">
@@ -151,12 +164,7 @@
                 <div class="tab-pane" id="UseInfo">
                     <table class="form">
                         <tr>
-                            <th class="formTitle">所属部门</th>
-                            <td class="formValue">
-                                <select id="FBelongOrgID" name="FBelongOrgID" class="form-control required">
-                                    <option value="">==请选择==</option>
-                                </select>
-                            </td>
+
                             <th class="formTitle">使用部门</th>
                             <td class="formValue">
                                 <select id="FUseOrgID" name="FUseOrgID" class="form-control required">
@@ -166,6 +174,12 @@
                             <th class="formTitle">安装位置</th>
                             <td class="formValue">
                                 <select id="FPositionID" name="FPositionID" class="form-control required">
+                                    <option value="">==请选择==</option>
+                                </select>
+                            </td>
+                            <th class="formTitle">操作人员</th>
+                            <td class="formValue">
+                                <select id="FOperatorID" name="FOperatorID" class="form-control">
                                     <option value="">==请选择==</option>
                                 </select>
                             </td>
@@ -196,16 +210,13 @@
                             <td class="formValue">
                                 <input id="FGuaranteeTime" name="FGuaranteeTime" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker()" />
                             </td>
-
-                            <th class="formTitle">操作人员</th>
-                            <td class="formValue">
-                                <select id="FOperatorID" name="FOperatorID" class="form-control">
-                                    <option value="">==请选择==</option>
-                                </select>
-                            </td>
                             <th class="formTitle">电机数量</th>
                             <td class="formValue">
                                 <input id="FMachineCount" name="FMachineCount" type="text" class="form-control" />
+                            </td>
+                            <th class="formTitle">启用日期</th>
+                            <td class="formValue">
+                                <input id="FUseDate" name="FUseDate" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker()" />
                             </td>
                         </tr>
                         <tr>
@@ -218,10 +229,6 @@
                                 <select id="FAccuracy" name="FAccuracy" class="form-control">
                                     <option value="">==请选择==</option>
                                 </select>
-                            </td>
-                            <th class="formTitle">启用日期</th>
-                            <td class="formValue">
-                                <input id="FUseDate" name="FUseDate" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker()" />
                             </td>
                         </tr>
                         <tr>

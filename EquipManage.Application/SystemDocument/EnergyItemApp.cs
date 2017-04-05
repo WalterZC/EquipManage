@@ -10,6 +10,7 @@ namespace EquipManage.Application.SystemDocument
     public class EnergyItemApp
     {
         private IEnergyItemRepository service = new EnergyItemRepository();
+        private OrganizeApp organizeApp = new OrganizeApp();
 
         public List<EnergyItemEntity> GetList(string keyword = "")
         {
@@ -24,6 +25,26 @@ namespace EquipManage.Application.SystemDocument
         public EnergyItemEntity GetForm(string keyValue)
         {
             return service.FindEntity(keyValue);
+        }
+
+        public List<EnergyItemEntity> GetPermissionGridList(string OrgId = "", string keyword = "")
+        {
+
+            List<EnergyItemEntity> datalist = new List<EnergyItemEntity>();
+            List<EnergyItemEntity> energylist = new List<EnergyItemEntity>();
+            List<OrganizeEntity> orgList = new List<OrganizeEntity>();
+            orgList = organizeApp.GetPermissionGridList(OrgId);
+            energylist = this.GetList();
+
+            datalist = (from c in energylist
+                        join o in orgList on c.FOrganizeId equals o.FId
+                        select c).ToList();
+
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                datalist = datalist.Where(t => t.FFullName.Contains(keyword) || t.FNumber.Contains(keyword)).ToList();
+            }
+            return datalist;
         }
         public void DeleteForm(string keyValue)
         {

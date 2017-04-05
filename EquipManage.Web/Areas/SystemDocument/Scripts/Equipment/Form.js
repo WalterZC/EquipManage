@@ -48,34 +48,50 @@ function initControl() {
     $("#FUseOrgID").on("change", function () {
         var UseOrgID = $(this).val();
         if (!!UseOrgID) {
+            $("#FPositionID").empty().prepend("<option value=''>==请选择==</option>");
             $("#FPositionID").bindSelect({
                 url: "/SystemDocument/Position/GetSelectJson",
                 id: "FId",
                 text: "FShortName",
                 param: { keyValue: UseOrgID }
             });
+            $("#FOperatorID").empty().prepend("<option value=''>==请选择==</option>");
             $("#FOperatorID").bindSelect({
                 url: "/SystemDocument/User/GetGridJsonByOrg",
                 id: "FId",
                 text: "FRealName",
-                param: { keyword: UseOrgID }
+                param: { keyValue: UseOrgID }
+            });
+        }
+    });
+    $("#FBelongOrgID").on("change", function () {
+        var FBelongOrgID = $(this).val();
+        if (!!FBelongOrgID) {
+            $("#FPrincipalId").empty().prepend("<option value=''>==请选择==</option>");
+            $("#FPrincipalId").bindSelect({
+                url: "/SystemDocument/User/GetGridJsonByOrg",
+                id: "FId",
+                text: "FRealName",
+                param: { keyValue: FBelongOrgID }
             });
         }
     });
     $("#FManuOrgID").on("change", function () {
         var ManuOrgID = $(this).val();
         if (!!ManuOrgID) {
+            $("#FManuClassID").empty().prepend("<option value=''>==请选择==</option>");
             $("#FManuClassID").bindSelect({
                 url: "/SystemDocument/OperationClass/GetSelectJson",
                 id: "FId",
                 text: "FShortName",
-                param: { keyValue: ManuOrgID }
+                param: { itemId: ManuOrgID, keyword: "" }
             });
         }
     });
     $("#FManuClassID").on("change", function () {
         var ManuClassID = $(this).val();
         if (!!ManuClassID) {
+            $("#FManuPrincipalID").empty().prepend("<option value=''>==请选择==</option>");
             $("#FManuPrincipalID").bindSelect({
                 url: "/SystemDocument/OperationClassMember/GetSelectJson",
                 id: "FId",

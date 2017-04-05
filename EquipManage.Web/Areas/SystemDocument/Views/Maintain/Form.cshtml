@@ -8,16 +8,20 @@
     <div style="padding-top: 20px; margin-right: 20px;">
         <table class="form">
             <tr>
-                <th class="formTitle">上级</th>
+                @*<th class="formTitle">上级</th>
                 <td class="formValue">
                     <select id="FParentId" name="FParentId" class="form-control required">
                         <option value="0">父节点</option>
                     </select>
-                </td>
+                </td>*@
                 <th class="formTitle">归属组织</th>
                 <td class="formValue">
                     <select id="FOrganizeId" name="FOrganizeId" class="form-control required"></select>
                 </td>
+                <th class="formTitle">简称</th>
+                <td class="formValue">
+                    <input id="FShortName" name="FShortName" type="text" class="form-control required" placeholder="请输入简称" />
+                </td>                
             </tr>
             <tr>
                 <th class="formTitle">编码</th>

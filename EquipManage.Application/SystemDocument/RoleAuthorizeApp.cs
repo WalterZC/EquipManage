@@ -58,7 +58,7 @@ namespace EquipManage.Application.SystemDocument
                     }
                 }
             }
-            return data.OrderBy(t => t.FSortCode).ToList();
+            return data.Distinct().OrderBy(t => t.FSortCode).ToList();
         }
         public List<ModuleButtonEntity> GetButtonList(string roleId)
         {

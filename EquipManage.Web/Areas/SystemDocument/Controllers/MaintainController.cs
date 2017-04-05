@@ -79,6 +79,13 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             var data = maintainApp.GetForm(keyValue);
             return Content(data.ToJson());
         }
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetPermissionGridJson(string itemId, string keyword)
+        {
+            var data = maintainApp.GetPermissionGridList(itemId, keyword);
+            return Content(data.ToJson());
+        }
         [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]

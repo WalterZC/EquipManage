@@ -30,7 +30,9 @@ $(function () {
 })
 function initControl() {
     var FParentNo = "OperationType";
-
+    $("#FOrganizeId").bindSelect({
+        url: "/SystemDocument/Organize/GetTreeSelectJson"
+    });
     $("#FOperationTypeId").bindSelect({
         url: "/SystemDocument/ItemsType/GetGridSelectJson",
         id: "FId",
@@ -295,7 +297,7 @@ function treeView() {
     $("#itemTree").treeview({
         url: "/SystemDocument/EquipmentType/GetTreeJson",
         onnodeclick: function (item) {
-            equipTable.fnReloadAjax('/SystemDocument/Equipment/GetGridJson?itemId='+item.id);
+            equipTable.fnReloadAjax('/SystemDocument/Equipment/GetPermissionGridJson?FObjectType=EquipmentType&keyword=&itemId=' + item.id);
         }
     });
 }
@@ -326,7 +328,7 @@ function InitEquipmentTable() {
         "processing": true,
         "bAutoWidth": false,//自动宽度
         "ajax": {
-            "url": "/SystemDocument/Equipment/GetGridJson?itemId=" + itemId,
+            "url": "/SystemDocument/Equipment/GetPermissionGridJson?FObjectType=EquipmentType&keyword=&itemId=" + itemId,
             "dataType": "json",
             "dataSrc": function (data) {
                 var json = new Array();

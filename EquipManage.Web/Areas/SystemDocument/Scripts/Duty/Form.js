@@ -1,16 +1,9 @@
 ﻿var keyValue = $.request("keyValue");
-var itemId = $.request("itemId");
-
 $(function () {
-    $("#FMemberID").bindSelect({
-        url: "/SystemDocument/User/GetPermissionGridJson",
-        id: "FId",
-        text: "FRealName",
-        param: { itemId: "", keyword: "" }
-    });
+    initControl();
     if (!!keyValue) {
         $.ajax({
-            url: "/SystemDocument/OperationClassMember/GetFormJson",
+            url: "/SystemDocument/Duty/GetFormJson",
             data: { keyValue: keyValue },
             dataType: "json",
             async: false,
@@ -19,24 +12,21 @@ $(function () {
             }
         });
     }
-
-    $("#FOperationClassID").val(itemId);
 });
-
+function initControl() {
+    $("#FOrganizeId").bindSelect({
+        url: "/SystemDocument/Organize/GetTreeSelectJson",
+    });
+}
 function submitForm() {
     if (!$('#form1').formValid()) {
         return false;
     }
-    var postData = $("#form1").formSerialize();
-    postData["FItemId"] = itemId;
     $.submitForm({
-        url: "/SystemDocument/OperationClassMember/SubmitForm?keyValue=" + keyValue,
-        param: postData,
+        url: "/SystemDocument/Duty/SubmitForm?keyValue=" + keyValue,
+        param: $("#form1").formSerialize(),
         success: function () {
             $.currentWindow().$("#gridList").trigger("reloadGrid");
         }
     })
 }
-
-
-

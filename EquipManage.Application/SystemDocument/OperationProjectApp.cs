@@ -11,13 +11,26 @@ namespace EquipManage.Application.SystemDocument
     public class OperationProjectApp
     {
         private IOperationProjectRepository service = new OperationProjectRepository();
+        private OrganizeApp organizeApp = new OrganizeApp();
 
         public List<OperationProjectEntity> GetList(string itemId)
         {
             var expression = ExtLinq.True<OperationProjectEntity>();
             expression = expression.And(t => t.FEquipmentTypeId.Equals(itemId));
+            List<OperationProjectEntity> datalist = new List<OperationProjectEntity>();
+            List<OperationProjectEntity> projectlist = new List<OperationProjectEntity>();
+            List<OrganizeEntity> orgList = new List<OrganizeEntity>();
+            orgList = organizeApp.GetPermissionGridList();
+            projectlist = service.IQueryable(expression).ToList();
 
-            return service.IQueryable(expression).ToList();
+            datalist = (from c in projectlist
+                        join o in orgList on c.FOrganizeId equals o.FId
+                        select c).ToList();
+
+            return datalist;
+
+
+            //return service.IQueryable(expression).ToList();
         }
         public OperationProjectEntity GetForm(string keyValue)
         {

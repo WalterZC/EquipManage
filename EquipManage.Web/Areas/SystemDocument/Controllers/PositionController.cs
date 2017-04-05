@@ -58,7 +58,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             List<PositionEntity> data = new List<PositionEntity>();
             if (!string.IsNullOrEmpty(itemId))
             {
-                data = positionApp.GetItemList(itemId);
+                data = positionApp.GetPermissionGridList(itemId);
             }
             
             var treeList = new List<TreeGridModel>();

@@ -11,7 +11,7 @@ namespace EquipManage.Application.SystemDocument
     public class PositionApp
     {
         private IPositionRepository service = new PositionRepository();
-        private IOrganizeRepository organizeservice = new OrganizeRepository();
+        private OrganizeApp organizeApp = new OrganizeApp();
 
         public List<PositionEntity> GetList()
         {
@@ -35,6 +35,26 @@ namespace EquipManage.Application.SystemDocument
         {
             return service.GetItemList(itemId).OrderBy(t => t.FCreatorTime).ToList();
         }
+        public List<PositionEntity> GetPermissionGridList(string OrgId = "", string keyword = "")
+        {
+
+            List<PositionEntity> datalist = new List<PositionEntity>();
+            List<PositionEntity> positionlist = new List<PositionEntity>();
+            List<OrganizeEntity> orgList = new List<OrganizeEntity>();
+            orgList = organizeApp.GetPermissionGridList(OrgId);
+            positionlist = this.GetItemList(OrgId);
+
+            datalist = (from c in positionlist
+                        join o in orgList on c.FBelongOrgID equals o.FId
+                        select c).ToList();
+
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                datalist = datalist.Where(t => t.FFullName.Contains(keyword) || t.FNumber.Contains(keyword)).ToList();
+            }
+            return datalist;
+        }
+
 
         public PositionEntity GetForm(string keyValue)
         {

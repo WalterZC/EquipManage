@@ -16,26 +16,37 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         private UserApp userApp = new UserApp();
         private UserLogOnApp userLogOnApp = new UserLogOnApp();
         private ItemRightApp itemRightApp = new ItemRightApp();
+        private OrganizeApp organizeApp = new OrganizeApp();
+
+        //[HttpGet]
+        //[HandlerAjaxOnly]
+        //public ActionResult GetGridJson(Pagination pagination, string keyword)
+        //{
+        //    var data = new
+        //    {
+        //        rows = userApp.GetList(pagination, keyword),
+        //        total = pagination.total,
+        //        page = pagination.page,
+        //        records = pagination.records
+        //    };
+        //    return Content(data.ToJson());
+        //}
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetGridJsonByOrg(string keyValue = "")
+        {
+
+            return Content(userApp.GetListByOrg(keyValue).ToJson());
+        }
 
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetGridJson(Pagination pagination, string keyword)
+        public ActionResult GetPermissionGridJson(string itemId, string keyword)
         {
-            var data = new
-            {
-                rows = userApp.GetList(pagination, keyword),
-                total = pagination.total,
-                page = pagination.page,
-                records = pagination.records
-            };
+            var data = userApp.GetPermissionGridList(itemId, keyword);
             return Content(data.ToJson());
         }
-        [HttpGet]
-        [HandlerAjaxOnly]
-        public ActionResult GetGridJsonByOrg(string keyword="")
-        {
-            return Content(userApp.GetList(keyword).ToJson());
-        }
+
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetFormJson(string keyValue)

@@ -35,25 +35,32 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             filesHelper = new FilesHelper(DeleteURL, DeleteType, StorageRoot, UrlBase, tempPath, serverMapPath,subDir);
         }
 
+        /// <summary>
+        /// 选择部门后，根据权限显示相应的设备列表
+        /// </summary>
+        /// <param name="itemId">部门Id</param>
+        /// <param name="keyword">检索关键字</param>
+        /// <returns></returns>
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetGridJson(string itemId, string keyword)
+        public ActionResult GetPermissionGridJson(string FObjectType,string itemId, string keyword)
         {
-            var data = equipmentApp.GetList(itemId, keyword);
+            var data = equipmentApp.GetPermissionGridList(FObjectType, itemId, keyword);
             return Content(data.ToJson());
         }
-        [HttpGet]
-        [HandlerAjaxOnly]
-        public ActionResult GetSelectJson(string enCode)
-        {
-            var data = equipmentApp.GetItemList(enCode);
-            List<object> list = new List<object>();
-            foreach (EquipmentEntity item in data)
-            {
-                list.Add(new { id = item.FNumber, text = item.FFullName });
-            }
-            return Content(list.ToJson());
-        }
+
+        //[HttpGet]
+        //[HandlerAjaxOnly]
+        //public ActionResult GetSelectJson()
+        //{
+        //    var data = equipmentApp.GetItemList(OperatorProvider.Provider.GetCurrent().DepartmentId, OperatorProvider.Provider.GetCurrent().UserId);
+        //    List<object> list = new List<object>();
+        //    foreach (EquipmentEntity item in data)
+        //    {
+        //        list.Add(new { id = item.FNumber, text = item.FFullName });
+        //    }
+        //    return Content(list.ToJson());
+        //}
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetFormJson(string keyValue)

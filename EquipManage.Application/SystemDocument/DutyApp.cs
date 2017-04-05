@@ -16,6 +16,7 @@ namespace EquipManage.Application.SystemDocument
     public class DutyApp
     {
         private IRoleRepository service = new RoleRepository();
+        private OrganizeApp organizeApp = new OrganizeApp();
 
         public List<RoleEntity> GetList(string keyword = "")
         {
@@ -27,6 +28,26 @@ namespace EquipManage.Application.SystemDocument
             }
             expression = expression.And(t => t.FCategory == 2);
             return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
+        }
+
+        public List<RoleEntity> GetPermissionGridList(string OrgId = "", string keyword = "")
+        {
+
+            List<RoleEntity> datalist = new List<RoleEntity>();
+            List<RoleEntity> rolelist = new List<RoleEntity>();
+            List<OrganizeEntity> orgList = new List<OrganizeEntity>();
+            orgList = organizeApp.GetPermissionGridList(OrgId);
+            rolelist = this.GetList().Where(t => t.FCategory == 2).ToList();
+
+            datalist = (from c in rolelist
+                        join o in orgList on c.FOrganizeId equals o.FId
+                        select c).ToList();
+
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                datalist = datalist.Where(t => t.FFullName.Contains(keyword) || t.FEnCode.Contains(keyword)).ToList();
+            }
+            return datalist;
         }
         public RoleEntity GetForm(string keyValue)
         {

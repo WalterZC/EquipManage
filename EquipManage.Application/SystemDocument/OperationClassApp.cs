@@ -18,21 +18,42 @@ namespace EquipManage.Application.SystemDocument
     {
         private IOperationClassRepository service = new OperationClassRepository();
         private IOperationClassMemberRepository detailService = new OperationClassMemberRepository();
+        private OrganizeApp organizeApp = new OrganizeApp();
+
         public List<OperationClassEntity> GetList()
         {
             return service.IQueryable().OrderBy(t => t.FCreatorTime).ToList();
         }
-        public List<OperationClassEntity> GetItemList(string itemId,string keyword)
+        //public List<OperationClassEntity> GetSelectEntitys(string itemId, string keyword)
+        //{
+        //    return service.GetItemList(itemId).Where(t => t.FEnCode.Contains(keyword) || t.FShortName.Contains(keyword)).ToList();
+        //}
+        public List<OperationClassEntity> GetPermissionGridList(string itemId,string keyword)
         {
-            if (string.IsNullOrEmpty(keyword))
-            {
-                return service.GetItemList(itemId).OrderBy(t => t.FCreatorTime).ToList();
-            }
-            else
-            {
-                return service.GetItemList(itemId).Where(t => t.FNumber.Contains(keyword) || t.FShortName.Contains(keyword)).OrderBy(t => t.FCreatorTime).ToList();
+            List<OperationClassEntity> datalist = new List<OperationClassEntity>();
+            List<OperationClassEntity> classlist = new List<OperationClassEntity>();
+            List<OrganizeEntity> orgList = new List<OrganizeEntity>();
+            orgList = organizeApp.GetPermissionGridList(itemId);
+            classlist = string.IsNullOrEmpty(itemId) == true ? this.GetList() : service.GetItemList(itemId);
 
+            datalist = (from c in classlist
+                        join o in orgList on c.FBelongOrgID equals o.FId
+                        select c).ToList();
+
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                datalist = datalist.Where(t => t.FShortName.Contains(keyword) || t.FNumber.Contains(keyword)).OrderBy(t => t.FCreatorTime).ToList();
             }
+            return datalist.OrderBy(t => t.FCreatorTime).ToList();
+            //if (string.IsNullOrEmpty(keyword))
+            //{
+            //    return service.GetItemList(itemId).OrderBy(t => t.FCreatorTime).ToList();
+            //}
+            //else
+            //{
+            //    return service.GetItemList(itemId).Where(t => t.FNumber.Contains(keyword) || t.FShortName.Contains(keyword)).OrderBy(t => t.FCreatorTime).ToList();
+
+            //}
         }
         public OperationClassEntity GetForm(string keyValue)
         {

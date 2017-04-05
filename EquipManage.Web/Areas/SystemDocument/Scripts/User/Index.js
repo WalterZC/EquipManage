@@ -1,11 +1,23 @@
 ﻿$(function () {
+    $('#layout').layout();
+    treeView();
     gridList();
 })
+function treeView() {
+    $("#itemTree").treeview({
+        url: "/SystemDocument/UserItemAuthorize/GetUseItemPermissionTree",
+        param: { FObjectType: "Organize" },
+        onnodeclick: function (item) {
+            $("#txt_keyword").val('');
+            $('#btn_search').trigger("click");
+        }
+    });
+}
 function gridList() {
     var $gridList = $("#gridList");
     $gridList.dataGrid({
-        url: "/SystemDocument/User/GetGridJson",
-        height: $(window).height() - 128,
+        url: "/SystemDocument/User/GetPermissionGridJson",
+        height: $(window).height() - 96,
         colModel: [
             { label: '主键', name: 'FId', hidden: true },
             { label: '账户', name: 'FAccount', width: 80, align: 'left' },
@@ -62,7 +74,7 @@ function gridList() {
     });
     $("#btn_search").click(function () {
         $gridList.jqGrid('setGridParam', {
-            postData: { keyword: $("#txt_keyword").val() },
+            postData: { itemId: $("#itemTree").getCurrentNode().id, keyword: $("#txt_keyword").val() },
         }).trigger('reloadGrid');
     });
 }

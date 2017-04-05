@@ -1,11 +1,18 @@
 ﻿$(function () {
     $('#layout').layout();
-    treeView();
+    treeView($('#FSelectType').val());
     gridList();
+
+    $('#FSelectType').change(function () {
+        var selectVal = $(this).find('option:selected').val();//这就是selected的值 
+        treeView(selectVal);
+    });
 });
-function treeView() {
+
+function treeView(selectVal) {
     $("#itemTree").treeview({
-        url: "/SystemDocument/EquipmentType/GetTreeJson",
+        url: "/SystemDocument/UserItemAuthorize/GetUseItemPermissionTree",
+        param: { FObjectType: selectVal },
         onnodeclick: function (item) {
             $("#txt_keyword").val('');
             $('#btn_search').trigger("click");
@@ -36,14 +43,24 @@ function gridList() {
     });
     $("#btn_search").click(function () {
         $gridList.jqGrid('setGridParam', {
-            url: "/SystemDocument/Equipment/GetGridJson",
-            postData: { itemId: $("#itemTree").getCurrentNode().id, keyword: $("#txt_keyword").val() },
+            url: "/SystemDocument/Equipment/GetPermissionGridJson",
+            postData: { FObjectType: $('#FSelectType').val(), itemId: $("#itemTree").getCurrentNode().id, keyword: $("#txt_keyword").val() },
         }).trigger('reloadGrid');
     });
 }
 function btn_add() {
-    var itemId = $("#itemTree").getCurrentNode().id;
-    var itemName = $("#itemTree").getCurrentNode().text;
+    if (typeof ($("#itemTree").getCurrentNode()) == 'undefined')
+    {
+        $.modalAlert("请选择部门或分类", "warning");
+        return;
+    }
+    var itemId = $("#itemTree").getCurrentNode().id;     //选中的项目Id
+    var itemName = $("#itemTree").getCurrentNode().text; //选中的项目名称
+    if ($('#FSelectType').val() == 'Organize')
+    {
+        $.modalAlert("请按设备类型添加新设备", "warning");
+        return;
+    }
     if (!itemId) {
         return false;
     }

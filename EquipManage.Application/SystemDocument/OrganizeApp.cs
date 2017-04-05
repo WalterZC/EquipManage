@@ -17,25 +17,61 @@ namespace EquipManage.Application.SystemDocument
     public class OrganizeApp
     {
         private IOrganizeRepository service = new OrganizeRepository();
+        private ItemRightApp itemRightApp = new ItemRightApp();
 
+        /// <summary>
+        /// 获取所有部门
+        /// </summary>
+        /// <returns></returns>
         public List<OrganizeEntity> GetList()
         {
             return service.IQueryable().OrderBy(t => t.FCreatorTime).ToList();
         }
-        public List<OrganizeEntity> GetEntitys(string itemId, string keyword)
+        /// <summary>
+        /// 获取当前选中部门及其子部门
+        /// </summary>
+        /// <param name="itemId"></param>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
+        public List<OrganizeEntity> GetSelectEntitys(string itemId, string keyword)
         {
-            var expression = ExtLinq.True<OrganizeEntity>();
-            if (!string.IsNullOrEmpty(itemId))
-            {
-                expression = expression.And(t => t.FParentId == itemId);
-            }
-            if (!string.IsNullOrEmpty(keyword))
-            {
-                expression = expression.And(t => t.FFullName.Contains(keyword));
-                expression = expression.Or(t => t.FEnCode.Contains(keyword));
-            }
-            return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
+            return service.GetItemList(itemId).Where(t=>t.FEnCode.Contains(keyword)||t.FShortName.Contains(keyword)).ToList();
         }
+        /// <summary>
+        /// 获取当前用户拥有权限的所有部门
+        /// </summary>
+        /// <returns></returns>
+        public List<OrganizeEntity> GetPermissionGridList(string ItemId="")
+        {
+            List<OrganizeEntity> organizeList = new List<OrganizeEntity>();
+
+            List<OrganizeEntity> itemList = new List<OrganizeEntity>();
+
+            if (!string.IsNullOrEmpty(ItemId))
+            {
+                itemList = this.GetSelectEntitys(ItemId,"");
+            }
+            else
+            {
+                itemList = this.GetList();
+            }
+            
+            var Rightdata = itemRightApp.GetList(OperatorProvider.Provider.GetCurrent().UserId, "Organize");
+
+            if (OperatorProvider.Provider.GetCurrent().IsSystem)
+            {
+                organizeList = itemList;
+            }
+            else
+            {
+                organizeList = (from c in itemList
+                                join o in Rightdata on c.FId equals o.FObjectId
+                                select c).ToList();
+            }
+            return organizeList;
+        }
+
+        
         public OrganizeEntity GetForm(string keyValue)
         {
             return service.FindEntity(keyValue);
