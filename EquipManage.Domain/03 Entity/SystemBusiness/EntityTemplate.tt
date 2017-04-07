@@ -1,0 +1,41 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="System.Core.dll" #>
+<#@ assembly name="System.Data.dll" #>
+<#@ assembly name="System.Data.DataSetExtensions.dll" #>
+<#@ assembly name="System.Xml.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ include file="C:\project\EquipManage\DbHelper.ttinclude"  #>
+<#@ include file="C:\project\EquipManage\Manager.ttinclude"  #>
+<# 
+    var tableName=config.TableName.Replace("Sys_","")+"Entity";  
+	var manager = Manager.Create(Host, GenerationEnvironment);
+ #>
+
+<# manager.StartHeader(); #>
+using System;
+namespace EquipManage.Domain.Entity.SystemBusiness
+{    
+<#manager.StartNewFile(tableName+".cs");#>
+    /// <summary>
+    /// <#=tableName#>
+    /// </summary>    
+    public class <#=tableName#>:IEntity<<#=tableName#>>, ICreationAudited, IDeleteAudited, IModificationAudited
+    {
+<# foreach(DbColumn column in DbHelper.GetDbColumns(config.ConnectionString, config.DbDatabase, config.TableName)){#>
+      public <#= column.CSharpType#><# if(column.CommonType.IsValueType && column.IsNullable){#>?<#}#> <#=column.ColumnName#> { get; set; }
+<#}#> 
+    }
+	<# manager.EndBlock();  #>
+
+<# manager.StartFooter(); #>
+}
+<# manager.EndBlock(); #>
+
+<# manager.Process(true); #>

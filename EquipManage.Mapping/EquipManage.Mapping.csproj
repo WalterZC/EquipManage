@@ -50,7 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemBusiness\OperationalPlanEquipEntryMap.cs" />
+    <Compile Include="SystemBusiness\OperationalPlanMap.cs" />
+    <Compile Include="SystemBusiness\OperationalPlanPartsEntryMap.cs" />
     <Compile Include="SystemDocument\AreaMap.cs" />
+    <Compile Include="SystemManage\BillCodeRuleMap.cs" />
     <Compile Include="SystemDocument\ChangeContentMap.cs" />
     <Compile Include="SystemDocument\ChangeTypeMap.cs" />
     <Compile Include="SystemDocument\EnergyItemMap.cs" />
@@ -87,6 +91,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SystemBusiness\Mapping.SystemBusiness.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Mapping.SystemBusiness.cs</LastGenOutput>
+    </Content>
     <Content Include="SystemDocument\Mapping.SystemDocument.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Mapping.SystemDocument.cs</LastGenOutput>
@@ -95,6 +103,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

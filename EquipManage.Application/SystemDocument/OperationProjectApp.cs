@@ -28,9 +28,6 @@ namespace EquipManage.Application.SystemDocument
                         select c).ToList();
 
             return datalist;
-
-
-            //return service.IQueryable(expression).ToList();
         }
         public OperationProjectEntity GetForm(string keyValue)
         {

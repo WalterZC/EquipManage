@@ -41,11 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="01 Infrastructure\ICancelAudited.cs" />
+    <Compile Include="01 Infrastructure\ICheckAudited.cs" />
     <Compile Include="01 Infrastructure\ICreationAudited.cs" />
     <Compile Include="01 Infrastructure\IDeleteAudited.cs" />
     <Compile Include="01 Infrastructure\IEntity.cs" />
     <Compile Include="01 Infrastructure\IModificationAudited.cs" />
+    <Compile Include="03 Entity\SystemBusiness\OperationalPlanEntity.cs" />
+    <Compile Include="03 Entity\SystemBusiness\OperationalPlanEquipEntryEntity.cs" />
+    <Compile Include="03 Entity\SystemBusiness\OperationalPlanPartsEntryEntity.cs" />
     <Compile Include="03 Entity\SystemDocument\AreaEntity.cs" />
+    <Compile Include="03 Entity\SystemManage\BillCodeRuleEntity.cs" />
     <Compile Include="03 Entity\SystemDocument\ChangeContentEntity.cs" />
     <Compile Include="03 Entity\SystemDocument\ChangeTypeEntity.cs" />
     <Compile Include="03 Entity\SystemDocument\EnergyItemEntity.cs" />
@@ -71,6 +77,10 @@
     <Compile Include="03 Entity\SystemSecurity\FilterIPEntity.cs" />
     <Compile Include="03 Entity\SystemSecurity\LogEntity.cs" />
     <Compile Include="02 ViewModel\AuthorizeActionModel.cs" />
+    <Compile Include="04 IRepository\SystemBusiness\OperationalPlanEquipEntryRepository.cs" />
+    <Compile Include="04 IRepository\SystemBusiness\OperationalPlanPartsEntryRepository.cs" />
+    <Compile Include="04 IRepository\SystemBusiness\OperationalPlanRepository.cs" />
+    <Compile Include="04 IRepository\SystemManage\BillCodeRuleRepository.cs" />
     <Compile Include="04 IRepository\SystemDocument\IEquipmentPartsRepository.cs" />
     <Compile Include="04 IRepository\SystemDocument\IAreaRepository.cs" />
     <Compile Include="04 IRepository\SystemDocument\IChangeContentRepository.cs" />
@@ -128,9 +138,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="03 Entity\SystemBusiness\EntityTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EntityTemplate.cs</LastGenOutput>
+    </Content>
     <Content Include="03 Entity\SystemDocument\EntityTemplate.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EntityTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="04 IRepository\SystemBusiness\Domain.IRepository.SystemBusiness.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Domain.IRepository.SystemBusiness.cs</LastGenOutput>
     </Content>
     <Content Include="04 IRepository\SystemDocument\Domain.IRepository.SystemDocument.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

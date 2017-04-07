@@ -44,5 +44,49 @@ namespace EquipManage.Domain
             entity.FDeleteTime = DateTime.Now;
             entity.FDeleteMark = true;
         }
+        public void Check()
+        {
+            var entity = this as ICheckAudited;
+            var LoginInfo = OperatorProvider.Provider.GetCurrent();
+            if (LoginInfo != null)
+            {
+                entity.FCheckerId = LoginInfo.UserId;
+            }
+            entity.FCheckTime = DateTime.Now;
+            entity.FCheckMark = true;
+        }
+        public void UnCheck()
+        {
+            var entity = this as ICheckAudited;
+            var LoginInfo = OperatorProvider.Provider.GetCurrent();
+            if (LoginInfo != null)
+            {
+                entity.FCheckerId = "";
+            }
+            entity.FCheckTime = null;
+            entity.FCheckMark = false;
+        }
+        public void Cancel()
+        {
+            var entity = this as ICancelAudited;
+            var LoginInfo = OperatorProvider.Provider.GetCurrent();
+            if (LoginInfo != null)
+            {
+                entity.FCancelUserId = LoginInfo.UserId;
+            }
+            entity.FCancelTime = DateTime.Now;
+            entity.FCanceledMark = true;
+        }
+        public void UnCancel()
+        {
+            var entity = this as ICancelAudited;
+            var LoginInfo = OperatorProvider.Provider.GetCurrent();
+            if (LoginInfo != null)
+            {
+                entity.FCancelUserId = "";
+            }
+            entity.FCancelTime = null;
+            entity.FCanceledMark = false;
+        }
     }
 }

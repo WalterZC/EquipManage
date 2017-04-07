@@ -10,6 +10,7 @@ namespace EquipManage.Application.SystemDocument
     public class ExpWareApp
     {
         private IExpWareRepository service = new ExpWareRepository();
+        private OrganizeApp organizeApp = new OrganizeApp();
 
         public List<ExpWareEntity> GetList(string FEquipTypeId,string itemId="", string keyword="")
         {
@@ -27,7 +28,19 @@ namespace EquipManage.Application.SystemDocument
                 expression = expression.And(t => t.FShortName.Contains(keyword));
                 expression = expression.Or(t => t.FNumber.Contains(keyword));
             }
-            return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
+
+            List<ExpWareEntity> datalist = new List<ExpWareEntity>();
+            List<ExpWareEntity> expwarelist = new List<ExpWareEntity>();
+            List<OrganizeEntity> orgList = new List<OrganizeEntity>();
+            orgList = organizeApp.GetPermissionGridList();
+            expwarelist = service.IQueryable(expression).ToList();
+
+            datalist = (from c in expwarelist
+                        join o in orgList on c.FOrganizeId equals o.FId
+                        select c).ToList();
+
+            return datalist;
+            //return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
         }
         public ExpWareEntity GetForm(string keyValue)
         {

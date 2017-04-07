@@ -46,6 +46,9 @@
   <ItemGroup>
     <Compile Include="Infrastructure\DbLogType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemBusiness\OperationalPlanApp.cs" />
+    <Compile Include="SystemBusiness\OperationalPlanEquipEntryApp.cs" />
+    <Compile Include="SystemBusiness\OperationalPlanPartsEntryApp.cs" />
     <Compile Include="SystemDocument\ChangeContentApp.cs" />
     <Compile Include="SystemDocument\ChangeTypeApp.cs" />
     <Compile Include="SystemDocument\EnergyItemApp.cs" />
@@ -64,6 +67,7 @@
     <Compile Include="SystemDocument\OperationProjectApp.cs" />
     <Compile Include="SystemDocument\PartsApp.cs" />
     <Compile Include="SystemDocument\PositionApp.cs" />
+    <Compile Include="SystemManage\BillCodeRuleApp.cs" />
     <Compile Include="SystemManage\ModuleApp.cs" />
     <Compile Include="SystemManage\ModuleButtonApp.cs" />
     <Compile Include="SystemDocument\AreaApp.cs" />
@@ -96,6 +100,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SystemBusiness\Application.SystemBusiness.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Application.SystemBusiness.cs</LastGenOutput>
+    </Content>
     <Content Include="SystemDocument\Application.SystemDocument.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Application.SystemDocument.cs</LastGenOutput>
@@ -104,6 +112,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

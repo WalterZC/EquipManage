@@ -124,6 +124,8 @@
     <Compile Include="Areas\ReportManage\Controllers\EchartsController.cs" />
     <Compile Include="Areas\ReportManage\Controllers\HighchartsController.cs" />
     <Compile Include="Areas\ReportManage\ReportManageAreaRegistration.cs" />
+    <Compile Include="Areas\SystemBusiness\Controllers\OperationalPlanController.cs" />
+    <Compile Include="Areas\SystemBusiness\SystemBusinessAreaRegistration.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\ChangeContentController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\ChangeTypeController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\EnergyItemController.cs" />
@@ -631,6 +633,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\ReportManage\Views\Echarts\" />
+    <Folder Include="Areas\SystemBusiness\Scripts\" />
     <Folder Include="assets\" />
     <Folder Include="Content\img\Free-file-icons\" />
     <Folder Include="Content\js\layer\" />
@@ -727,6 +730,8 @@
     <Content Include="Areas\SystemDocument\Views\ExpWare\Form.cshtml" />
     <Content Include="Areas\SystemDocument\Views\ExpWare\Details.cshtml" />
     <Content Include="Areas\SystemDocument\Views\User\OrgAuthorize.cshtml" />
+    <Content Include="Areas\SystemBusiness\Views\OperationalPlan\Index.cshtml" />
+    <Content Include="Areas\SystemBusiness\Views\OperationalPlan\Form.cshtml" />
     <None Include="Properties\PublishProfiles\EquipManage.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>
