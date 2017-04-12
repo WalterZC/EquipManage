@@ -35,7 +35,6 @@ namespace EquipManage.Domain.Entity.SystemBusiness
         public string FOrganizeId { get; set; }
         public int? FRunTimes { get; set; }
         public DateTime? FEndDate { get; set; }
-        public string FOperationProjectId { get; set; }
         public string FCheckerId { get; set; }
         public DateTime? FCheckTime { get; set; }
     }

@@ -14,6 +14,7 @@ namespace EquipManage.Domain.Entity.SystemBusiness
         public decimal? FQty { get; set; }
         public string FStock { get; set; }
         public string FDescription { get; set; }
-
+        public DateTime? FCreatorTime { get; set; }
+        public string FCreatorUserId { get; set; }
     }
 }

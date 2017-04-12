@@ -4,7 +4,7 @@ namespace EquipManage.Domain.Entity.SystemBusiness
     /// <summary>
     /// OperationalPlanEquipEntryEntity
     /// </summary>    
-    public class OperationalPlanEquipEntryEntity : IEntity<OperationalPlanEquipEntryEntity>
+    public class OperationalPlanEquipEntryEntity : IEntity<OperationalPlanEquipEntryEntity>,ICreationAudited
     {
         public string FId { get; set; }
         public string FItemId { get; set; }
@@ -13,9 +13,10 @@ namespace EquipManage.Domain.Entity.SystemBusiness
         public string FObjectId { get; set; }
         public string FOperationClassId { get; set; }
         public string FOperatorId { get; set; }
-        public string FOperationItemId { get; set; }
+        public string FOperationProjectId { get; set; }
         public string FDescription { get; set; }
         public string FProjectId { get; set; }
-
+        public DateTime? FCreatorTime { get; set; }
+        public string FCreatorUserId { get; set; }
     }
 }

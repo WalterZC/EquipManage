@@ -170,6 +170,8 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="Areas\SystemBusiness\Scripts\OperationalPlan\Form.js" />
+    <Content Include="Areas\SystemBusiness\Scripts\OperationalPlan\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\ChangeType\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\ChangeType\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\Duty\Details.js" />
@@ -633,7 +635,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\ReportManage\Views\Echarts\" />
-    <Folder Include="Areas\SystemBusiness\Scripts\" />
     <Folder Include="assets\" />
     <Folder Include="Content\img\Free-file-icons\" />
     <Folder Include="Content\js\layer\" />
@@ -730,9 +731,11 @@
     <Content Include="Areas\SystemDocument\Views\ExpWare\Form.cshtml" />
     <Content Include="Areas\SystemDocument\Views\ExpWare\Details.cshtml" />
     <Content Include="Areas\SystemDocument\Views\User\OrgAuthorize.cshtml" />
+    <Content Include="Areas\SystemBusiness\Views\Web.config" />
     <Content Include="Areas\SystemBusiness\Views\OperationalPlan\Index.cshtml" />
     <Content Include="Areas\SystemBusiness\Views\OperationalPlan\Form.cshtml" />
     <None Include="Properties\PublishProfiles\EquipManage.Framework.Release.pubxml" />
+    <Content Include="Views\Shared\_Create.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
