@@ -5,6 +5,8 @@ using System.Text;
 using EquipManage.Domain.Entity.SystemBusiness;
 using EquipManage.Domain.IRepository.SystemBusiness;
 using EquipManage.Repository.SystemBusiness;
+using EquipManage.Code;
+
 namespace EquipManage.Application.SystemBusiness
 {
     /// <summary>
@@ -14,10 +16,10 @@ namespace EquipManage.Application.SystemBusiness
     {
         private IOperationalPlanRepository service = new OperationalPlanRepository();
 
-        public List<OperationalPlanEntity> GetList()
-        {
-            return service.IQueryable().ToList();
-        }
+        //public List<OperationalPlanEntity> GetList()
+        //{
+        //    return service.IQueryable().ToList();
+        //}
 
         public OperationalPlanEntity GetForm(string keyValue)
         {
@@ -47,6 +49,18 @@ namespace EquipManage.Application.SystemBusiness
                 entity.UnCancel();
                 service.Insert(entity);
             }
+        }
+
+        public List<OperationalPlanEntity> GetList(Pagination pagination, string keyword)
+        {
+            var expression = ExtLinq.True<OperationalPlanEntity>();
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                expression = expression.And(t => t.FNumber.Contains(keyword));
+                expression = expression.Or(t => t.FName.Contains(keyword));
+            }
+            //expression = expression.And(t => t.FAccount != "admin");
+            return service.FindList(expression, pagination);
         }
 
     }

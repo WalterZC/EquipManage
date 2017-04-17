@@ -18,12 +18,14 @@
     table.dataTable tbody td {
         padding: 3px;
     }
+
     .table-td-vertical-align {
         vertical-align: middle !important;
     }
+
     .form-group {
-     margin-bottom: 0px; 
-}
+        margin-bottom: 0px;
+    }
 </style>
 <link href="~/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
 
@@ -31,13 +33,14 @@
     <div class="portlet light bordered">
         <div class="portlet-title">
             <div class="caption">
-                <i class="fa fa-edit"></i> @ViewBag.Title
+                <i class="fa fa-edit"></i>
+                <span class="caption-subject">@ViewBag.Title</span>
             </div>
             <div class="actions">
-                <a id="NF-parts" class="btn btn-default btn-circle" authorize="yes" data-toggle="modal" href="#partselectlist"><i class="fa fa-pencil-square-o"></i> 选择备件</a>
-                <a id="NF-edit" class="btn btn-default btn-circle" authorize="yes" onclick="btn_addRow()"><i class="fa fa-pencil-square-o"></i> 加行</a>
-                <a id="NF-delete" class="btn btn-default btn-circle" authorize="yes" onclick="btn_deleteRow()"><i class="fa fa-trash-o"></i> 删行</a>
-                <a id="NF-Save" class="btn btn-default btn-circle" authorize="yes" onclick="btn_save()"><i class="fa fa-save"></i> 保存</a>
+                <a id="NF-parts" class="btn btn-default" authorize="yes" data-toggle="modal" href="#partselectlist"><i class="fa fa-pencil-square-o"></i> 选择备件</a>
+                <a id="NF-edit" class="btn btn-default" authorize="yes" onclick="btn_addRow()"><i class="fa fa-pencil-square-o"></i> 加行</a>
+                <a id="NF-delete" class="btn btn-default" authorize="yes" onclick="btn_deleteRow()"><i class="fa fa-trash-o"></i> 删行</a>
+                <a id="NF-Save" class="btn btn-default" authorize="yes" onclick="btn_save()"><i class="fa fa-save"></i> 保存</a>
             </div>
         </div>
         <div class="portlet-body">
@@ -46,275 +49,275 @@
                 <div class="form-body" style="padding: 0px;">
                     <div class="row">
                         <div class="hiddenCol">
-                                <input type="text" id="FId" name="FId" class="form-control input-sm" readonly />
+                            <input type="text" id="FId" name="FId" class="form-control input-sm" readonly />
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 col-sm-6">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label">计划编号<span class="required"> * </span></label>
+                                <input type="text" id="FNumber" name="FNumber" class="form-control input-sm" readonly placeholder="编号">
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-2 col-sm-6">
-                                <div class="form-group form-group-sm">
-                                    <label class="control-label">计划编号<span class="required"> * </span></label>
-                                    <input type="text" id="FNumber" name="FNumber" class="form-control input-sm" readonly placeholder="编号">
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="form-group form-group-sm">
-                                    <label class="control-label">计划名称<span class="required"> * </span></label>
-                                    <div class="input-icon right">
-                                        <i class="fa"></i>
-                                        <input type="text" id="FName" name="FName" class="form-control input-sm" placeholder="名称">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-12">
-                                <div class="form-group form-group-sm">
-                                    <label class="control-label">组织部门<span class="required"> * </span></label>
-                                    <select id="FOrganizeId" name="FOrganizeId" class="form-control select2me input-sm" style="width:100%;"></select>
-                                </div>
-                            </div>
-                            <div class="col-md-2 col-sm-6">
-                                <div class="form-group form-group-sm">
-                                    <label class="control-label">作业类型<span class="required"> * </span></label>
-                                    <select id="FOperationTypeId" name="FOperationTypeId" class="form-control select2me input-sm" style="width:100%;">
-                                        <option value="">==请选择==</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2 col-sm-6">
-                                <div class="form-group form-group-sm">
-                                    <label class="control-label">作业级别<span class="required"> * </span></label>
-                                    <select id="FOperationLevelId" name="FOperationLevelId" class="form-control select2me input-sm" style="width:100%;">
-                                        <option value="">==请选择==</option>
-                                    </select>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label">计划名称<span class="required"> * </span></label>
+                                <div class="input-icon right">
+                                    <i class="fa"></i>
+                                    <input type="text" id="FName" name="FName" class="form-control input-sm" placeholder="名称">
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-2 col-sm-3">
-                                <div class="form-group form-group-sm">
-                                    <label class="control-label">时间单位<span class="required"> * </span></label>
-                                    <select class="form-control select2me input-sm" id="FCyclicTypeId" name="FCyclicTypeId" style="width:100%;">
-                                        <option value="" selected="selected">==请选择==</option>
-                                        <option value="1">天</option>
-                                        <option value="2">周</option>
-                                        <option value="3">月</option>
-                                        <option value="4">季度</option>
-                                        <option value="5">年</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="form-group form-group-sm">
-                                    <label class="control-label">开始日期<span class="required"> * </span></label>
-                                    <div class="input-group date form_datetime" data-date="2012-12-21T15:25:00Z">
-                                        <input type="text" size="16" readonly id="FStartDate" name="FStartDate" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button class="btn default date-reset input-sm" type="button">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                            <button class="btn default date-set input-sm" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-sm-6">
-                                <div class="form-group form-group-sm">
-                                    <label class="control-label">终止日期<span class="required"> * </span></label>
-                                    <div class="input-group date form_datetime" data-date="2012-12-21 15:25">
-                                        <input type="text" size="16" readonly id="FEndDate" name="FEndDate" class="form-control input-sm">
-                                        <span class="input-group-btn">
-                                            <button class="btn default date-reset input-sm" type="button">
-                                                <i class="fa fa-times"></i>
-                                            </button>
-                                            <button class="btn default date-set input-sm" type="button">
-                                                <i class="fa fa-calendar"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 col-sm-3">
-                                <div class="form-group form-group-sm">
-                                    <label class="control-label">间隔<span class="required"> * </span></label>
-                                    <div class="input-icon right">
-                                        <i class="fa"></i>
-                                        <input type="text" id="FInterval" name="FInterval" class="form-control input-sm" placeholder="时间间隔">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-2 col-sm-3">
-                                <label class="control-label">选项</label>
-                                <div class="form-group form-group-sm">
-                                    <label class="mt-checkbox mt-checkbox-outline">
-                                        生成任务
-                                        <input type="checkbox" id="FIsCreateTask" name="FIsCreateTask" value="1" />
-                                        <span></span>
-                                    </label>
-                                </div>
+                        <div class="col-md-3 col-sm-12">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label">组织部门<span class="required"> * </span></label>
+                                <select id="FOrganizeId" name="FOrganizeId" class="form-control select2me input-sm" style="width:100%;"></select>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                                <div class="form-group form-group-sm">
-                                    <label class="control-label">备注</label>
-                                    <input type="text" id="FDescription" name="FDescription" class="form-control input-sm" placeholder="备注">
-                                </div>
+                        <div class="col-md-2 col-sm-6">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label">作业类型<span class="required"> * </span></label>
+                                <select id="FOperationTypeId" name="FOperationTypeId" class="form-control select2me input-sm" style="width:100%;">
+                                    <option value="">==请选择==</option>
+                                </select>
                             </div>
                         </div>
-                        <br />
-                        <div class="row">
-                            <ul class="nav nav-tabs">
-                                <li class="active">
-                                    <a href="#EquipProject" data-toggle="tab"> 项目 </a>
-                                </li>
-                                <li>
-                                    <a href="#EquipParts" data-toggle="tab"> 备件 </a>
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane fade active in" id="EquipProject">
-                                    <div class="col-md-12">
-                                        <table class="table table-striped table-bordered table-advance table-condensed order-column display nowrap" id="EquipTable" cellspacing="0" width="100%" style="table-layout:fixed">
-                                            <thead>
-                                                <tr>
-                                                    <th>FId</th>
-                                                    <th>FItemId</th>
-                                                    <th>FEntryId</th>
-                                                    <th>FObjectTypeId</th>
-                                                    <th>FObjectId</th>
-                                                    <th>FProjectId</th>
-                                                    <th>FOperationProjectId</th>
-                                                    <th>FOperationClassId</th>
-                                                    <th>FOperatorId</th>
-                                                    <th>FDescription</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr class="odd gradeX">
-                                                    <td>
-                                                        <input type="text" class="form-control input-sm" name="FId" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control input-sm" name="FItemId" />
-                                                    </td>
-                                                    <td>
-                                                        <span name="FEntryId">1</span> 
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group-sm">
-                                                            <select class="form-control input-sm select2-FObjectType" name="FObjectTypeId" style="width: 100%">
-                                                                <option value="" selected="selected">==请选择==</option>
-                                                                <option value="Equipment">设备</option>
-                                                                <option value="EquipmentType">设备类型</option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group-sm">
-                                                            <select class="form-control input-sm select2-FObjectId" name="FObjectId" style="width: 100%">
-                                                                <option value="">==请选择==</option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group-sm">
-                                                            <select class="form-control input-sm select2-FProjectId" name="FProjectId" style="width: 100%">
-                                                                <option value="">==请选择==</option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <div class="form-group-sm">
-                                                            <select class="form-control input-sm select2-FOperationProjectId" name="FOperationProjectId" style="width: 100%">
-                                                                <option value="">==请选择==</option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group-sm">
-                                                            <select class="form-control input-sm select2-FOperationClassId" name="FOperationClassId" style="width: 100%">
-                                                                <option value="">==请选择==</option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group-sm">
-                                                            <select class="form-control input-sm select2-FOperatorId" name="FOperatorId" style="width: 100%">
-                                                                <option value="">==请选择==</option>
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control input-sm" name="FDescription" />
-                                                    </td>
-
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="EquipParts">
-                                    <div class="col-md-12">
-                                        <table class="table table-striped table-bordered table-advance table-condensed order-column display nowrap" id="PartTable" cellspacing="0" width="100%" style="table-layout:fixed">
-                                            <thead>
-                                                <tr>
-                                                    <th>FId</th>
-                                                    <th>FItemId</th>
-                                                    <th>FEntryId</th>
-                                                    <th>FPartsId</th>
-                                                    <th>FNumber</th>
-                                                    <th>FFullName</th>
-                                                    <th>FModel</th>
-                                                    <th>FUnitId</th>
-                                                    <th>FQty</th>
-                                                    <th>FStock</th>
-                                                    <th>操作</th>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="modal fade draggable-modal bs-modal-lg" id="partselectlist" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h4 class="modal-title">选择备件</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="PartSelect">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>选择</th>
-                                                            <th> FId </th>
-                                                            <th> FNumber </th>
-                                                            <th> FFullName </th>
-                                                            <th> FUnit </th>
-                                                            <th> FModel </th>
-                                                            <th> FCategory </th>
-                                                            <th> FFigure </th>
-                                                            <th> FWarehouse </th>
-                                                            <th> FSupply </th>
-                                                        </tr>
-                                                    </thead>
-                                                </table>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary" id="SelectSubmit" data-dismiss="modal">确认</button>
-                                                <button type="button" class="btn btn-danger btn-outline" data-dismiss="modal">关闭</button>
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
-                                <!-- /.modal -->
+                        <div class="col-md-2 col-sm-6">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label">作业级别<span class="required"> * </span></label>
+                                <select id="FOperationLevelId" name="FOperationLevelId" class="form-control select2me input-sm" style="width:100%;">
+                                    <option value="">==请选择==</option>
+                                </select>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-2 col-sm-3">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label">时间单位<span class="required"> * </span></label>
+                                <select class="form-control select2me input-sm" id="FCyclicTypeId" name="FCyclicTypeId" style="width:100%;">
+                                    <option value="" selected="selected">==请选择==</option>
+                                    <option value="1">天</option>
+                                    <option value="2">周</option>
+                                    <option value="3">月</option>
+                                    <option value="4">季度</option>
+                                    <option value="5">年</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label">开始日期<span class="required"> * </span></label>
+                                <div class="input-group date form_datetime" data-date="2012-12-21T15:25:00Z">
+                                    <input type="text" size="16" readonly id="FStartDate" name="FStartDate" class="form-control input-sm">
+                                    <span class="input-group-btn">
+                                        <button class="btn default date-reset input-sm" type="button">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                        <button class="btn default date-set input-sm" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label">终止日期<span class="required"> * </span></label>
+                                <div class="input-group date form_datetime" data-date="2012-12-21 15:25">
+                                    <input type="text" size="16" readonly id="FEndDate" name="FEndDate" class="form-control input-sm">
+                                    <span class="input-group-btn">
+                                        <button class="btn default date-reset input-sm" type="button">
+                                            <i class="fa fa-times"></i>
+                                        </button>
+                                        <button class="btn default date-set input-sm" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 col-sm-3">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label">间隔<span class="required"> * </span></label>
+                                <div class="input-icon right">
+                                    <i class="fa"></i>
+                                    <input type="text" id="FInterval" name="FInterval" class="form-control input-sm" placeholder="时间间隔">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-3">
+                            <label class="control-label">选项</label>
+                            <div class="form-group form-group-sm">
+                                <label class="mt-checkbox mt-checkbox-outline">
+                                    生成任务
+                                    <input type="checkbox" id="FIsCreateTask" name="FIsCreateTask" value="1" />
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group form-group-sm">
+                                <label class="control-label">备注</label>
+                                <input type="text" id="FDescription" name="FDescription" class="form-control input-sm" placeholder="备注">
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#EquipProject" data-toggle="tab"> 项目 </a>
+                            </li>
+                            <li>
+                                <a href="#EquipParts" data-toggle="tab"> 备件 </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="EquipProject">
+                                <div class="col-md-12">
+                                    <table class="table table-striped table-bordered table-advance table-condensed order-column display nowrap" id="EquipTable" cellspacing="0" width="100%" style="table-layout:fixed">
+                                        <thead>
+                                            <tr>
+                                                <th>FId</th>
+                                                <th>FItemId</th>
+                                                <th>FEntryId</th>
+                                                <th>FObjectTypeId</th>
+                                                <th>FObjectId</th>
+                                                <th>FProjectId</th>
+                                                <th>FOperationProjectId</th>
+                                                <th>FOperationClassId</th>
+                                                <th>FOperatorId</th>
+                                                <th>FDescription</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="odd gradeX">
+                                                <td>
+                                                    <input type="text" class="form-control input-sm" name="FId" />
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control input-sm" name="FItemId" />
+                                                </td>
+                                                <td>
+                                                    <span name="FEntryId">1</span>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group-sm">
+                                                        <select class="form-control input-sm select2-FObjectType" name="FObjectTypeId" style="width: 100%">
+                                                            <option value="" selected="selected">==请选择==</option>
+                                                            <option value="Equipment">设备</option>
+                                                            <option value="EquipmentType">设备类型</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group-sm">
+                                                        <select class="form-control input-sm select2-FObjectId" name="FObjectId" style="width: 100%">
+                                                            <option value="">==请选择==</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group-sm">
+                                                        <select class="form-control input-sm select2-FProjectId" name="FProjectId" style="width: 100%">
+                                                            <option value="">==请选择==</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="form-group-sm">
+                                                        <select class="form-control input-sm select2-FOperationProjectId" name="FOperationProjectId" style="width: 100%">
+                                                            <option value="">==请选择==</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group-sm">
+                                                        <select class="form-control input-sm select2-FOperationClassId" name="FOperationClassId" style="width: 100%">
+                                                            <option value="">==请选择==</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-group-sm">
+                                                        <select class="form-control input-sm select2-FOperatorId" name="FOperatorId" style="width: 100%">
+                                                            <option value="">==请选择==</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control input-sm" name="FDescription" />
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="EquipParts">
+                                <div class="col-md-12">
+                                    <table class="table table-striped table-bordered table-advance table-condensed order-column display nowrap" id="PartTable" cellspacing="0" width="100%" style="table-layout:fixed">
+                                        <thead>
+                                            <tr>
+                                                <th>FId</th>
+                                                <th>FItemId</th>
+                                                <th>FEntryId</th>
+                                                <th>FPartsId</th>
+                                                <th>FNumber</th>
+                                                <th>FFullName</th>
+                                                <th>FModel</th>
+                                                <th>FUnitId</th>
+                                                <th>FQty</th>
+                                                <th>FStock</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal fade draggable-modal bs-modal-lg" id="partselectlist" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <h4 class="modal-title">选择备件</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="PartSelect">
+                                                <thead>
+                                                    <tr>
+                                                        <th>选择</th>
+                                                        <th> FId </th>
+                                                        <th> FNumber </th>
+                                                        <th> FFullName </th>
+                                                        <th> FUnit </th>
+                                                        <th> FModel </th>
+                                                        <th> FCategory </th>
+                                                        <th> FFigure </th>
+                                                        <th> FWarehouse </th>
+                                                        <th> FSupply </th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" id="SelectSubmit" data-dismiss="modal">确认</button>
+                                            <button type="button" class="btn btn-danger btn-outline" data-dismiss="modal">关闭</button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>

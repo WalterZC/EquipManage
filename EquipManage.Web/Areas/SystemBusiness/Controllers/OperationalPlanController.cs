@@ -1,4 +1,5 @@
 ﻿using EquipManage.Application.SystemBusiness;
+using EquipManage.Code;
 using EquipManage.Domain.Entity.SystemBusiness;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,37 @@ namespace EquipManage.Web.Areas.SystemBusiness.Controllers
             operationalPlanPartsEntryApp.SubmitForm(headEntity,PartsEntryList);
 
             return Success("操作成功。");
+        }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        public ActionResult GetGridJson(FormCollection formdata)
+        {
+            Pagination pagination = new Pagination();
+            pagination.rows = Ext.ToInt(formdata["length"]);
+            pagination.page = Ext.ToInt(formdata["page"]);
+            pagination.sord = formdata["sord"];
+            pagination.sidx= formdata["sidx"];
+            string keyword = formdata["search[value]"];
+            var data = new
+            {
+                rows = operationalPlanApp.GetList(pagination, keyword),
+                total = pagination.total,
+                page = pagination.page,
+                records = pagination.records
+            };
+            return Content(data.ToJson());
+        }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        public ActionResult Delete(string FId)
+        {
+            if (!string.IsNullOrEmpty(FId))
+            {
+                operationalPlanApp.Delete(operationalPlanApp.GetForm(FId));
+            }
+            return Success("删除成功。");
         }
     }
 }
