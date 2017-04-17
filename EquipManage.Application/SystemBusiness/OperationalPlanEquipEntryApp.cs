@@ -5,14 +5,16 @@ using System.Text;
 using EquipManage.Domain.Entity.SystemBusiness;
 using EquipManage.Domain.IRepository.SystemBusiness;
 using EquipManage.Repository.SystemBusiness;
+using EquipManage.Code;
+
 namespace EquipManage.Application.SystemBusiness
-{    
+{
     /// <summary>
     /// OperationalPlanEquipEntryApp
     /// </summary>    
     public class OperationalPlanEquipEntryApp
     {
-        private IOperationalPlanEquipEntryRepository service=new OperationalPlanEquipEntryRepository();
+        private IOperationalPlanEquipEntryRepository service = new OperationalPlanEquipEntryRepository();
 
         public List<OperationalPlanEquipEntryEntity> GetList()
         {
@@ -24,24 +26,26 @@ namespace EquipManage.Application.SystemBusiness
             return service.FindEntity(keyValue);
         }
 
-        public void Delete(OperationalPlanEquipEntryEntity entity)
+        public void Delete(string FId)
         {
-            service.Delete(entity);
+            var expression = ExtLinq.True<OperationalPlanEquipEntryEntity>();
+            expression = expression.And(t => t.FItemId==FId);
+            service.Delete(expression);
         }
 
-        public void SubmitForm(OperationalPlanEquipEntryEntity entity, string keyValue)
+        public void SubmitForm(OperationalPlanEntity headEntity,List<OperationalPlanEquipEntryEntity> entitylist)
         {
-            if (!string.IsNullOrEmpty(keyValue))
-            {
-                entity.Modify(keyValue);
-                service.Update(entity);
-            }
-            else
-            {
-                entity.Create();
-                service.Insert(entity);
+            if (entitylist.Count > 0)
+            { 
+                foreach (OperationalPlanEquipEntryEntity Entity in entitylist)
+                {
+                    Entity.FItemId = headEntity.FId;
+                    Entity.Create();
+                }
+
+                service.Insert(entitylist);
             }
         }
 
     }
-	}
+}

@@ -22,6 +22,16 @@ namespace EquipManage.Domain
             }
             entity.FCreatorTime = DateTime.Now;
         }
+        public void BillHeadCreate()
+        {
+            var entity = this as ICreationAudited;
+            var LoginInfo = OperatorProvider.Provider.GetCurrent();
+            if (LoginInfo != null)
+            {
+                entity.FCreatorUserId = LoginInfo.UserId;
+            }
+            entity.FCreatorTime = DateTime.Now;
+        }
         public void Modify(string keyValue)
         {
             var entity = this as IModificationAudited;

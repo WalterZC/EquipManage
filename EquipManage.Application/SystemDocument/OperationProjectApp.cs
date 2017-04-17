@@ -33,13 +33,21 @@ namespace EquipManage.Application.SystemDocument
         {
             return service.FindEntity(keyValue);
         }
-        public List<OperationProjectEntity> GetEntitys(string keyword)
+        public List<OperationProjectEntity> GetConditionsEntitys(string FOperationTypeId, string FOperationLevelId, string FObjectTypeId, string FObjectId)
         {
+            List<OperationProjectEntity> list = new List<OperationProjectEntity>();
             var expression = ExtLinq.True<OperationProjectEntity>();
-            expression = expression.And(t => t.FFullName.Contains(keyword));
-            expression = expression.Or(t => t.FNumber.Contains(keyword));
 
-            return service.IQueryable(expression).OrderBy(t => t.FSortCode).ToList();
+            if (("Equipment").Equals(FObjectTypeId))
+            {
+                list = this.GetEntitysByEquipmentID(FObjectId);
+            }
+            else if (("EquipmentType").Equals(FObjectTypeId))
+            {
+                list = this.GetList(FObjectId);
+            }
+
+            return list.Where(t=>t.FOperationTypeId.Equals(FOperationTypeId)).Where(t => t.FOperationLevelId.Equals(FOperationLevelId)).OrderBy(t => t.FCreatorTime).ToList();
         }
         public List<OperationProjectEntity> GetEntitysByEquipmentID(string keyword)
         {

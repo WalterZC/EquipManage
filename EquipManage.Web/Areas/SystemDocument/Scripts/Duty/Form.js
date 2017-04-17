@@ -19,7 +19,7 @@ function initControl() {
     });
 }
 function submitForm() {
-    if (!$('#form1').formValid()) {
+    if (!$('#form').formValid()) {
         return false;
     }
     $.submitForm({

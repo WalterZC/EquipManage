@@ -140,7 +140,7 @@ namespace EquipManage.Code
                 string url = "http://apis.juhe.cn/ip/ip2addr?ip=" + ip + "&dtype=json&key=b39857e36bee7a305d55cdb113a9d725";
                 res = HttpMethods.HttpGet(url);
                 var resjson = res.ToObject<objex>();
-                res = resjson.result.area + " " + resjson.result.location;
+                res = resjson.result == null ? "" : (resjson.result.area + " " + resjson.result.location);
             }
             catch
             {

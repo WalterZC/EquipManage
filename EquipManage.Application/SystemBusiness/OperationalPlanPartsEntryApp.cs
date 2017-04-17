@@ -5,6 +5,8 @@ using System.Text;
 using EquipManage.Domain.Entity.SystemBusiness;
 using EquipManage.Domain.IRepository.SystemBusiness;
 using EquipManage.Repository.SystemBusiness;
+using EquipManage.Code;
+
 namespace EquipManage.Application.SystemBusiness
 {
     /// <summary>
@@ -24,22 +26,24 @@ namespace EquipManage.Application.SystemBusiness
             return service.FindEntity(keyValue);
         }
 
-        public void Delete(OperationalPlanPartsEntryEntity entity)
+        public void Delete(string FId)
         {
-            service.Delete(entity);
+            var expression = ExtLinq.True<OperationalPlanPartsEntryEntity>();
+            expression = expression.And(t => t.FItemId == FId);
+            service.Delete(expression);
         }
 
-        public void SubmitForm(OperationalPlanPartsEntryEntity entity, string keyValue)
+        public void SubmitForm(OperationalPlanEntity headEntity,List<OperationalPlanPartsEntryEntity> entitylist)
         {
-            if (!string.IsNullOrEmpty(keyValue))
-            {
-                entity.Modify(keyValue);
-                service.Update(entity);
-            }
-            else
-            {
-                entity.Create();
-                service.Insert(entity);
+            if((!(entitylist==null)) && entitylist.Count>0)
+            { 
+                foreach (OperationalPlanPartsEntryEntity Entity in entitylist)
+                {
+                    Entity.FItemId = headEntity.FId;
+                    Entity.Create();
+                }
+
+                service.Insert(entitylist);
             }
         }
 

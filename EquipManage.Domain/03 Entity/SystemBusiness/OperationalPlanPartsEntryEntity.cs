@@ -4,7 +4,7 @@ namespace EquipManage.Domain.Entity.SystemBusiness
     /// <summary>
     /// OperationalPlanPartsEntryEntity
     /// </summary>    
-    public class OperationalPlanPartsEntryEntity : IEntity<OperationalPlanPartsEntryEntity>
+    public class OperationalPlanPartsEntryEntity : IEntity<OperationalPlanPartsEntryEntity>,ICreationAudited
     {
         public string FId { get; set; }
         public string FItemId { get; set; }
@@ -14,6 +14,9 @@ namespace EquipManage.Domain.Entity.SystemBusiness
         public decimal? FQty { get; set; }
         public string FStock { get; set; }
         public string FDescription { get; set; }
+        public DateTime? FCreatorTime { get; set; }
+        public string FCreatorUserId { get; set; }
 
+        //public virtual OperationalPlanEntity OperationalPlanEntity { get; set; }
     }
 }

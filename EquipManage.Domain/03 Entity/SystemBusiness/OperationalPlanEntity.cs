@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace EquipManage.Domain.Entity.SystemBusiness
 {
     /// <summary>
@@ -23,7 +25,7 @@ namespace EquipManage.Domain.Entity.SystemBusiness
         public string FCancelUserId { get; set; }
         public DateTime? FCancelTime { get; set; }
         public string FOperationTypeId { get; set; }
-        public int? FCyclicTypeID { get; set; }
+        public int? FCyclicTypeId { get; set; }
         public string FCyclicTypeName { get; set; }
         public string FOperationLevelId { get; set; }
         public DateTime? FLastOperaDate { get; set; }
@@ -35,9 +37,12 @@ namespace EquipManage.Domain.Entity.SystemBusiness
         public string FOrganizeId { get; set; }
         public int? FRunTimes { get; set; }
         public DateTime? FEndDate { get; set; }
-        public string FOperationProjectId { get; set; }
         public string FCheckerId { get; set; }
         public DateTime? FCheckTime { get; set; }
+
+        //public virtual ICollection<OperationalPlanEquipEntryEntity> OperationalPlanEquipEntryEntityList { get; set; }
+        //public virtual ICollection<OperationalPlanPartsEntryEntity> OperationalPlanPartsEntryEntityList { get; set; }
+
     }
 }
 

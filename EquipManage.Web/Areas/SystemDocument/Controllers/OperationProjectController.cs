@@ -22,6 +22,13 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         }
         [HttpGet]
         [HandlerAjaxOnly]
+        public ActionResult GetConditionsGridJson(string FOperationTypeId,string FOperationLevelId,string FObjectTypeId,string FObjectId)
+        {
+            var data = operationProjectApp.GetConditionsEntitys(FOperationTypeId, FOperationLevelId, FObjectTypeId, FObjectId);
+            return Content(data.ToJson());
+        }
+        [HttpGet]
+        [HandlerAjaxOnly]
         public ActionResult GetFormJson(string keyValue)
         {
             var data = operationProjectApp.GetForm(keyValue);

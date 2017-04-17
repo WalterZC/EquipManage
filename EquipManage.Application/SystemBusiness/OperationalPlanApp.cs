@@ -26,19 +26,25 @@ namespace EquipManage.Application.SystemBusiness
 
         public void Delete(OperationalPlanEntity entity)
         {
-            service.Delete(entity);
+            if (!(entity == null))
+            {
+                service.Delete(entity);
+            }
         }
 
         public void SubmitForm(OperationalPlanEntity entity, string keyValue)
         {
-            if (!string.IsNullOrEmpty(keyValue))
+            var Entity = this.GetForm(keyValue);
+            if (!(Entity == null))
             {
                 entity.Modify(keyValue);
                 service.Update(entity);
             }
             else
             {
-                entity.Create();
+                entity.BillHeadCreate();
+                entity.UnCheck();
+                entity.UnCancel();
                 service.Insert(entity);
             }
         }
