@@ -73,7 +73,7 @@ namespace EquipManage.Domain
             {
                 entity.FCheckerId = "";
             }
-            entity.FCheckTime = null;
+            entity.FCheckTime = Ext.ToDate("1900-01-01");
             entity.FCheckMark = false;
         }
         public void Cancel()

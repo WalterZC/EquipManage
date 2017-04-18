@@ -67,5 +67,24 @@ namespace EquipManage.Web.Areas.SystemBusiness.Controllers
             }
             return Success("删除成功。");
         }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        public ActionResult Check(string FId,string checkType)
+        {
+            bool result = false;
+            if ((!string.IsNullOrEmpty(FId))&&(!string.IsNullOrEmpty(checkType)))
+            {
+                result=operationalPlanApp.CheckForm(operationalPlanApp.GetForm(FId),Ext.ToBool(checkType));
+            }
+            if (result)
+            {
+                return Success("操作成功。");
+            }
+            else
+            {
+                return Error("操作失败。");
+            }
+        }
     }
 }

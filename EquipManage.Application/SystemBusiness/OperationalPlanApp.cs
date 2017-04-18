@@ -51,6 +51,27 @@ namespace EquipManage.Application.SystemBusiness
             }
         }
 
+        public bool CheckForm(OperationalPlanEntity entity, bool FIfCheck)
+        {
+            bool result = false;
+            if (!(entity == null))
+            {
+                if (FIfCheck)
+                {
+                    entity.Check();
+                }
+                else
+                {
+                    entity.UnCheck();
+                }
+                if (service.Update(entity) > 0)
+                {
+                    result = true;
+                }
+            }
+            return result;
+        }
+
         public List<OperationalPlanEntity> GetList(Pagination pagination, string keyword)
         {
             var expression = ExtLinq.True<OperationalPlanEntity>();

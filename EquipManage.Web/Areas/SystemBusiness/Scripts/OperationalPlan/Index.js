@@ -1,4 +1,5 @@
 ﻿var currentRow = null; 
+var currentRowcheckType = false;
 var TableDatatablesScroller = function () {
     var initTable = function () {
         var table = $('#DataList');
@@ -91,14 +92,28 @@ var TableDatatablesScroller = function () {
                         return data == 1 ? "<i class=\"fa fa-toggle-on  font-green\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                     }
                 },
-                { "data": "FCreatorTime", "sTitle": "制作日期" },
+                {
+                    "data": "FCreatorTime", "sTitle": "制作日期",
+                    "render": function (data, type, full, meta) {
+                        return data.substring(0, 10);
+                    }
+                },
                 {
                     "data": "FCreatorUserId", "sTitle": "制作人",
                     "render": function (data, type, full, meta) {
                         return top.clients.user[data] == null ? "" : top.clients.user[data]["fullname"];
                     }
                 },
-                { "data": "FCheckTime", "sTitle": "审核日期" },
+                {
+                    "data": "FCheckTime", "sTitle": "审核日期",
+                    "render": function (data, type, full, meta) {
+                        if (data == '1900-01-01 00:00:00') {
+                            return ''
+                        } else {
+                            return data.substring(0,10);
+                        }
+                    }
+                },
                 {
                     "data": "FCheckerId", "sTitle": "审核人",
                     "render": function (data, type, full, meta) {
@@ -157,21 +172,36 @@ var TableDatatablesScroller = function () {
                 [10, 20,100, 500,1000] // change per page values here
             ],
             "pageLength": 10,
+            // setup responsive extension: http://datatables.net/extensions/responsive/
+            //responsive: true,
+
+            // setup colreorder extension: http://datatables.net/extensions/colreorder/
+            colReorder: {
+                reorderCallback: function () {
+                    console.log('callback');
+                }
+            },
         });
 
         //记住行号和点击行改变颜色
         oTable.on('mousedown', 'tbody tr', function (e) {
             if ($(this).hasClass('selected')) {
                 if ($(this)[0] == currentRow) {
-                    return;
-                } else {
                     currentRow = null;//清楚选中行
                     $(this).removeClass('selected');
+                    currentRowcheckType = false;
                 }
             } else {
                 currentRow = this;//记录选中行
                 oTable.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
+                if ($('span[name="FCheckMark"]', currentRow).text().trim() == '已审核') {
+                    currentRowcheckType = true;
+                    btn_check.html("<i class='fa fa-check-square-o'> 反审核</i>");
+                } else if ($('span[name="FCheckMark"]', currentRow).text().trim() == '未审核') {
+                    currentRowcheckType = false;
+                    btn_check.html("<i class='fa fa-check-square-o'> 审核</i>");
+                }
                 //var aData = oTable.fnGetData(currentRow);
             }
         });
@@ -184,17 +214,34 @@ var TableDatatablesScroller = function () {
                 return;
             }
             var aData = oTable.fnGetData(currentRow);
-            if ($('span[name="FCheckMark"]', currentRow).text().trim()=='已审核') {
+            if (currentRowcheckType) {
                 $.modalMsg("该单据已经审核,请先反审核~", 'warning');
                 return;
             }
-            var aData = oTable.fnGetData(currentRow);
-
             $.deleteForm({
                 url: "/SystemBusiness/OperationalPlan/Delete",
                 param: { FId: aData.FId },
                 success: function () {
                     oTable.fnDeleteRow(currentRow);
+                    currentRow = null;
+                }
+            });
+        });
+
+        //审核按钮事件
+        btn_check.on("click", function (e) {
+            e.preventDefault();
+            if (currentRow == null) {
+                $.modalMsg("请先选择一条需要操作的单据～", 'warning');
+                return;
+            }
+            var aData = oTable.fnGetData(currentRow);
+
+            $.submitForm({
+                url: "/SystemBusiness/OperationalPlan/Check",
+                param: { FId: aData.FId, checkType: !currentRowcheckType},
+                success: function () {
+                    table.DataTable().ajax.reload(null, false);
                     currentRow = null;
                 }
             });
