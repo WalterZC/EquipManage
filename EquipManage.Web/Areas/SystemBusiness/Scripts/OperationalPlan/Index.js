@@ -193,8 +193,10 @@ var TableDatatablesScroller = function () {
                 }
             } else {
                 currentRow = this;//记录选中行
+                var aData = oTable.fnGetData(currentRow);
                 oTable.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
+                btn_edit.attr('href', '/SystemBusiness/OperationalPlan/Form?FId=' + aData.FId);
                 if ($('span[name="FCheckMark"]', currentRow).text().trim() == '已审核') {
                     currentRowcheckType = true;
                     btn_check.html("<i class='fa fa-check-square-o'> 反审核</i>");
@@ -246,6 +248,7 @@ var TableDatatablesScroller = function () {
                 }
             });
         });
+
     }
     return {
 

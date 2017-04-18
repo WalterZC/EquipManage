@@ -40,8 +40,8 @@ namespace EquipManage.Domain.Entity.SystemBusiness
         public string FCheckerId { get; set; }
         public DateTime? FCheckTime { get; set; }
 
-        //public virtual ICollection<OperationalPlanEquipEntryEntity> OperationalPlanEquipEntryEntityList { get; set; }
-        //public virtual ICollection<OperationalPlanPartsEntryEntity> OperationalPlanPartsEntryEntityList { get; set; }
+        public virtual ICollection<OperationalPlanEquipEntryEntity> OperationalPlanEquipEntryEntityList { get; set; }
+        public virtual ICollection<OperationalPlanPartsEntryEntity> OperationalPlanPartsEntryEntityList { get; set; }
 
     }
 }

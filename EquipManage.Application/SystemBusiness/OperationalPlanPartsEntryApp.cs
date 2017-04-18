@@ -16,9 +16,11 @@ namespace EquipManage.Application.SystemBusiness
     {
         private IOperationalPlanPartsEntryRepository service = new OperationalPlanPartsEntryRepository();
 
-        public List<OperationalPlanPartsEntryEntity> GetList()
+        public List<OperationalPlanPartsEntryEntity> GetList(string FId)
         {
-            return service.IQueryable().ToList();
+            var expression = ExtLinq.True<OperationalPlanPartsEntryEntity>();
+            expression = expression.And(t => t.FItemId == FId);
+            return service.IQueryable(expression).ToList();
         }
 
         public OperationalPlanPartsEntryEntity GetForm(string keyValue)

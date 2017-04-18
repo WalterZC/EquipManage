@@ -56,7 +56,29 @@ namespace EquipManage.Web.Areas.SystemBusiness.Controllers
             };
             return Content(data.ToJson());
         }
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetFormJson(string FId)
+        {
+            var data = operationalPlanApp.GetForm(FId);
+            return Content(data.ToJson());
+        }
 
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetEquipFormJson(string FId)
+        {
+            var data = operationalPlanApp.GetForm(FId);
+            return Content(data.ToJson());
+        }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetPartFormJson(string FId)
+        {
+            var data = operationalPlanApp.GetForm(FId);
+            return Content(data.ToJson());
+        }
         [HttpPost]
         [HandlerAjaxOnly]
         public ActionResult Delete(string FId)

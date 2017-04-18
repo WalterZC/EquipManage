@@ -12,16 +12,23 @@ var currentRow = null;
 var arrayData = new Array();
 $(function () {
     initControl();
+    initEquipTable();
+    PartSelectTable();
+    initPartsTable();
     if (!!FId) {
         $.ajax({
-            url: "/SystemBusiness/OperationPlan/GetFormJson",
-            data: { keyValue: FId },
+            url: "/SystemBusiness/OperationalPlan/GetFormJson",
+            data: { FId: FId },
             dataType: "json",
             async: false,
             success: function (data) {
-                $("#form").formSerialize(data);
+                $("#form").formSerialize(data);  
             }
         });
+
+        var aiNew = oTable.fnAddData(['', '', '', '', '', '', '', '', '', '']);
+        var nRow = oTable.fnGetNodes(aiNew[0]);
+        editRow(oTable, nRow);
     } else {
         $.ajax({
             url: "/SystemManage/BillCodeRule/GetNewBillInfoJson",
@@ -36,9 +43,7 @@ $(function () {
             }
         });
     }
-    initEquipTable();
-    PartSelectTable();
-    initPartsTable();
+
     handleValidation();
     //top.frames["ProjectForm"].$('#Equipmentlayout').layout();
     //treeView();
@@ -87,6 +92,7 @@ function initControl() {
             $("#FOperationLevelId").empty().prepend("<option value=''>==请选择==</option>");
             $("#FOperationLevelId").bindSelect({
                 url: "/SystemDocument/ItemsData/GetGridJson",
+                async: false,
                 id: "FId",
                 text: "FItemName",
                 param: { itemId: FOperationTypeId, keyword: "" }

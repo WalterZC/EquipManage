@@ -15,6 +15,8 @@ namespace EquipManage.Application.SystemBusiness
     public class OperationalPlanApp
     {
         private IOperationalPlanRepository service = new OperationalPlanRepository();
+        private OperationalPlanEquipEntryApp equipentryApp = new OperationalPlanEquipEntryApp();
+        private OperationalPlanPartsEntryApp partsentryApp = new OperationalPlanPartsEntryApp();
 
         //public List<OperationalPlanEntity> GetList()
         //{
@@ -23,7 +25,11 @@ namespace EquipManage.Application.SystemBusiness
 
         public OperationalPlanEntity GetForm(string keyValue)
         {
-            return service.FindEntity(keyValue);
+            OperationalPlanEntity Entity = new OperationalPlanEntity();
+            Entity = service.FindEntity(keyValue);
+            Entity.OperationalPlanEquipEntryEntityList = equipentryApp.GetList(keyValue);
+            Entity.OperationalPlanPartsEntryEntityList = partsentryApp.GetList(keyValue);
+            return Entity;
         }
 
         public void Delete(OperationalPlanEntity entity)
