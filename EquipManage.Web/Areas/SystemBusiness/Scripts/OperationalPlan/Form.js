@@ -677,7 +677,7 @@ function btn_save() {
     var FStartDate = $("#FStartDate").val();
     var FEndDate = $("#FEndDate").val();
     var FInterval = $("#FInterval").val();
-    var FIsCreateTask = $("#FIsCreateTask").attr('checked');
+    var FIsCreateTask = $("#FIsCreateTask").prop('checked');
     var FDescription = $("#FDescription").val();
 
     dataHead.push({
@@ -749,23 +749,15 @@ function btn_save() {
             "dataPartsEntry": dataPartsEntry
         }),
         //dataType: "json",
-        success: function (data) {
-            if (data == true) {
+        success: function () {
                 saved = true;
-                $.modalAlert("保存成功！", "sucess");
+                $.modalMsg("保存成功！", "success"); 
                 dataHead = [];
                 dataEntry = [];
                 GoodsArray = [];
-            } else if (data == false) {
-                saved = false;
-                dataHead = [];
-                dataEntry = [];
-                GoodsArray = [];
-                $.modalAlert("保存成功！", "sucess");
-            }
         },
         error: function (data) {
-            $.modalAlert("保存失败！", "error");
+            $.modalMsg("保存失败！", "error");
             //window.location.reload();
         }
     });
