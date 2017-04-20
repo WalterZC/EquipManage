@@ -20,7 +20,7 @@ namespace EquipManage.Application.SystemBusiness
         {
             var expression = ExtLinq.True<OperationalPlanPartsEntryEntity>();
             expression = expression.And(t => t.FItemId == FId);
-            return service.IQueryable(expression).ToList();
+            return service.IQueryable(expression).OrderBy(t => t.FEntryId).ToList();
         }
 
         public OperationalPlanPartsEntryEntity GetForm(string keyValue)

@@ -32,6 +32,8 @@ namespace EquipManage.Web.Controllers
                 user = this.GetUserList(),
                 authorizeMenu = this.GetMenuList(),
                 authorizeButton = this.GetMenuButtonList(),
+                equipment = this.GetEquipmentList(),
+                parts = this.GetPartsList(),
             };
             return Content(data.ToJson());
         }
@@ -108,6 +110,45 @@ namespace EquipManage.Web.Controllers
                 {
                     encode = item.FEnCode,
                     fullname = item.FFullName
+                };
+                dictionary.Add(item.FId, fieldItem);
+            }
+            return dictionary;
+        }
+        private object GetEquipmentList()
+        {
+            EquipmentApp equipApp = new EquipmentApp();
+            var data = equipApp.GetList();
+            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+            foreach (EquipmentEntity item in data)
+            {
+                var fieldItem = new
+                {
+                    FId = item.FId,
+                    FShortName = item.FShortName,
+                    FNumber = item.FNumber,
+                    FModel = item.FModel,
+                    FUnitId = item.FUnit,
+                };
+                dictionary.Add(item.FId, fieldItem);
+            }
+            return dictionary;
+        }
+        private object GetPartsList()
+        {
+            PartsApp partsApp = new PartsApp();
+            var data = partsApp.GetList();
+            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+            foreach (PartsEntity item in data)
+            {
+                var fieldItem = new
+                {
+                    FId = item.FId,
+                    FFullName = item.FFullName,
+                    FNumber = item.FNumber,
+                    FModel = item.FModel,
+                    FUnit = item.FUnit,
+                    FWarehouse = item.FWarehouse
                 };
                 dictionary.Add(item.FId, fieldItem);
             }

@@ -25,10 +25,36 @@ $(function () {
                 $("#form").formSerialize(data);  
             }
         });
+        $.ajax({
+            url: "/SystemBusiness/OperationalPlan/GetEquipFormJson",
+            data: { FId: FId },
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                $(data).each(function (i, model) {
+                    var aiNew = oTable.fnAddData([model.FId, model.FItemId, model.FEntryId, model.FObjectTypeId, model.FObjectId, model.FProjectId, model.FOperationProjectId, model.FOperationClassId, model.FOperatorId, model.FDescription]);
+                    var nRow = oTable.fnGetNodes(aiNew[0]);
+                    editRow(oTable, nRow);
+                    RowNum = model.FEntryId + 1;
+                });
+                oTable.fnDeleteRow(oTable[0].rows[1]);
+            }
+        });
+        $.ajax({
+            url: "/SystemBusiness/OperationalPlan/GetPartFormJson",
+            data: { FId: FId },
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                //$("#form").formSerialize(data);
+                $(data).each(function (i, aData) {
+                    var aiNew = pTable.fnAddData([aData.FId, aData.FItemId, aData.FEntryId, aData.FPartsId, top.clients.parts[aData.FPartsId].FNumber, top.clients.parts[aData.FPartsId].FFullName, top.clients.parts[aData.FPartsId].FModel, top.clients.parts[aData.FPartsId].FUnit, aData.FQty, top.clients.parts[aData.FPartsId].FWarehouse, '']);
+                var nRow = pTable.fnGetNodes(aiNew[0]);
+                editPartRow(pTable, nRow);
+                });
+            }
+        });
 
-        var aiNew = oTable.fnAddData(['', '', '', '', '', '', '', '', '', '']);
-        var nRow = oTable.fnGetNodes(aiNew[0]);
-        editRow(oTable, nRow);
     } else {
         $.ajax({
             url: "/SystemManage/BillCodeRule/GetNewBillInfoJson",
@@ -523,7 +549,7 @@ function editRow(oTable, nRow) {
     var jqTds = $('>td', nRow);
     jqTds[0].innerHTML = '<input type="text" class="form-control input-sm" name="FId" value="' + aData[0] + '">';
     jqTds[1].innerHTML = '<input type="text" class="form-control input-sm" name="FItemId" value="' + aData[1] + '">';
-    jqTds[2].innerHTML = '<span name="FEntryId">' + RowNum + '</span>';
+    jqTds[2].innerHTML = '<span name="FEntryId">' + aData[2] + '</span>';
     jqTds[3].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FObjectTypeId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
     jqTds[4].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FObjectId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
     jqTds[5].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FProjectId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
@@ -531,7 +557,6 @@ function editRow(oTable, nRow) {
     jqTds[7].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FOperationClassId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
     jqTds[8].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FOperatorId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
     jqTds[9].innerHTML = '<input type="text" class="form-control input-sm dt-center table-td-vertical-align" name="FDescription" />';
-
 
     $("select", nRow).select2({
         placeholder: '请选择',
@@ -588,14 +613,22 @@ function editRow(oTable, nRow) {
         }
     });
 
+    $("select[name='FObjectTypeId']", nRow).val(aData[3]).trigger("change");
+    $("select[name='FObjectId']", nRow).val(aData[4]).trigger("change");
+    $("select[name='FProjectId']", nRow).val(aData[5]).trigger("change");
+    $("select[name='FOperationProjectId']", nRow).val(aData[6]).trigger("change");
+    $("select[name='FOperationClassId']", nRow).val(aData[7]).trigger("change");
+    $("select[name='FOperatorId']", nRow).val(aData[8]).trigger("change");
+    $("input[name='FDescription']", nRow).val(aData[9]);
+
     RowNum++;
 }
 
 function editPartRow(pTable, nRow) {
     var aData = pTable.fnGetData(nRow);
     var jqTds = $('>td', nRow);
-    jqTds[0].innerHTML = '<span name="FId"><\span>';
-    jqTds[1].innerHTML = '';
+    jqTds[0].innerHTML = '<span name="FId">' + aData[0]+'<\span>';
+    jqTds[1].innerHTML = '<span name="FEntryId">' + aData[1] + '<\span>';
     jqTds[2].innerHTML = '<span name="FEntryId">' + aData[2] + '<\span>';
     jqTds[3].innerHTML = '<span name="FPartsId">' + aData[3] + '<\span>';
     jqTds[4].innerHTML = '<span name="FNumber">' + aData[4] + '<\span>';
@@ -605,7 +638,7 @@ function editPartRow(pTable, nRow) {
     jqTds[8].innerHTML = '<div class="control-group  form-group-sm"><input type="text" class="form-control input-small" value="' + aData[8] + '" style="width: 100%!important" name="FQty"></div>';
     jqTds[9].innerHTML = '<span name="FStock">' + aData[9] + '<\span>';
     jqTds[10].innerHTML = '<a href="javascript:;" class="btn btn-sm blue" name="delPartRow"><i class="fa fa-times"></i> 删除</a>';
-
+    //}
     $("input[name='FQty']", nRow).inputmask('decimal', {
         //rightAlignNumerics: false,
         rightAlign: false,
@@ -621,7 +654,7 @@ function editPartRow(pTable, nRow) {
 }
 
 function btn_addRow() {
-    var aiNew = oTable.fnAddData(['', '', '', '', '', '', '', '', '', '']);
+    var aiNew = oTable.fnAddData(['', '', RowNum, '', '', '', '', '', '', '']);
     var nRow = oTable.fnGetNodes(aiNew[0]);
     editRow(oTable, nRow);
     nEditing = aiNew;

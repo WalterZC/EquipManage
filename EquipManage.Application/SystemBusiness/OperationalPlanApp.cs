@@ -27,8 +27,8 @@ namespace EquipManage.Application.SystemBusiness
         {
             OperationalPlanEntity Entity = new OperationalPlanEntity();
             Entity = service.FindEntity(keyValue);
-            Entity.OperationalPlanEquipEntryEntityList = equipentryApp.GetList(keyValue);
-            Entity.OperationalPlanPartsEntryEntityList = partsentryApp.GetList(keyValue);
+            //Entity.OperationalPlanEquipEntryEntityList = equipentryApp.GetList(keyValue);
+            //Entity.OperationalPlanPartsEntryEntityList = partsentryApp.GetList(keyValue);
             return Entity;
         }
 

@@ -68,7 +68,7 @@ namespace EquipManage.Web.Areas.SystemBusiness.Controllers
         [HandlerAjaxOnly]
         public ActionResult GetEquipFormJson(string FId)
         {
-            var data = operationalPlanApp.GetForm(FId);
+            var data = operationalPlanEquipEntryApp.GetList(FId);
             return Content(data.ToJson());
         }
 
@@ -76,7 +76,7 @@ namespace EquipManage.Web.Areas.SystemBusiness.Controllers
         [HandlerAjaxOnly]
         public ActionResult GetPartFormJson(string FId)
         {
-            var data = operationalPlanApp.GetForm(FId);
+            var data = operationalPlanPartsEntryApp.GetList(FId);
             return Content(data.ToJson());
         }
         [HttpPost]
