@@ -54,7 +54,7 @@ namespace EquipManage.Web.Areas.SystemBusiness.Controllers
                 page = pagination.page,
                 records = pagination.records
             };
-            return Content(data.ToJson());
+            return Content(data.ToJson()); 
         }
         [HttpGet]
         [HandlerAjaxOnly]
