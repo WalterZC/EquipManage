@@ -1,10 +1,7 @@
 ﻿using EquipManage.Application.SystemBusiness;
 using EquipManage.Code;
 using EquipManage.Domain.Entity.SystemBusiness;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace EquipManage.Web.Areas.SystemBusiness.Controllers
@@ -29,9 +26,9 @@ namespace EquipManage.Web.Areas.SystemBusiness.Controllers
 
             operationalPlanApp.Delete(operationalPlanApp.GetForm(headEntity.FId));
             operationalPlanApp.SubmitForm(headEntity, headEntity == null ? "" : headEntity.FId);
-            operationalPlanEquipEntryApp.Delete(headEntity.FId);
+            //operationalPlanEquipEntryApp.Delete(headEntity.FId);
             operationalPlanEquipEntryApp.SubmitForm(headEntity,EquipEntryList);
-            operationalPlanPartsEntryApp.Delete(headEntity.FId);
+            //operationalPlanPartsEntryApp.Delete(headEntity.FId);
             operationalPlanPartsEntryApp.SubmitForm(headEntity,PartsEntryList);
 
             return Success("操作成功。");

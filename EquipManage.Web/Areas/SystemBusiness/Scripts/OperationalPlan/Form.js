@@ -56,6 +56,7 @@ $(function () {
         });
 
     } else {
+        $("#EM-back").css("display", "none");
         $.ajax({
             url: "/SystemManage/BillCodeRule/GetNewBillInfoJson",
             data: { FBillName: 'Sys_OperationalPlan', FROB: true },
@@ -71,9 +72,6 @@ $(function () {
     }
 
     handleValidation();
-    //top.frames["ProjectForm"].$('#Equipmentlayout').layout();
-    //treeView();
-    //InitEquipmentTable();
 });
 function initControl() {
     $(".form_datetime").datetimepicker({
