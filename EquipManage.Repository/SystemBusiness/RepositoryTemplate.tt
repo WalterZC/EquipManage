@@ -11,8 +11,8 @@
 <#@ import namespace="System.Data.SqlClient" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.IO" #>
-<#@ include file="C:\project\EquipManage\DbHelper.ttinclude"  #>
-<#@ include file="C:\project\EquipManage\Manager.ttinclude"  #>
+<#@ include file="C:\project\EquipManage-master\DbHelper.ttinclude"  #>
+<#@ include file="C:\project\EquipManage-master\Manager.ttinclude"  #>
 
 <# 
     var tableName=config.TableName.Replace("Sys_","")+"Repository";

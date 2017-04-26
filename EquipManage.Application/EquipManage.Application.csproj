@@ -49,6 +49,10 @@
     <Compile Include="SystemBusiness\OperationalPlanApp.cs" />
     <Compile Include="SystemBusiness\OperationalPlanEquipEntryApp.cs" />
     <Compile Include="SystemBusiness\OperationalPlanPartsEntryApp.cs" />
+    <Compile Include="SystemBusiness\OperationalTaskApp.cs" />
+    <Compile Include="SystemBusiness\OperationalTaskEquipEntryApp.cs" />
+    <Compile Include="SystemBusiness\OperationalTaskFaultEntryApp.cs" />
+    <Compile Include="SystemBusiness\OperationalTaskPartsEntryApp.cs" />
     <Compile Include="SystemDocument\ChangeContentApp.cs" />
     <Compile Include="SystemDocument\ChangeTypeApp.cs" />
     <Compile Include="SystemDocument\EnergyItemApp.cs" />

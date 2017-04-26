@@ -44,6 +44,10 @@
     <Compile Include="SystemBusiness\OperationalPlanEquipEntryRepository.cs" />
     <Compile Include="SystemBusiness\OperationalPlanPartsEntryRepository.cs" />
     <Compile Include="SystemBusiness\OperationalPlanRepository.cs" />
+    <Compile Include="SystemBusiness\OperationalTaskEquipEntryRepository.cs" />
+    <Compile Include="SystemBusiness\OperationalTaskFaultEntryRepository.cs" />
+    <Compile Include="SystemBusiness\OperationalTaskPartsEntryRepository.cs" />
+    <Compile Include="SystemBusiness\OperationalTaskRepository.cs" />
     <Compile Include="SystemManage\BillCodeRuleRepository.cs" />
     <Compile Include="SystemDocument\ChangeContentRepository.cs" />
     <Compile Include="SystemDocument\ChangeTypeRepository.cs" />

@@ -109,6 +109,7 @@
     <Compile Include="Areas\ReportManage\Controllers\HighchartsController.cs" />
     <Compile Include="Areas\ReportManage\ReportManageAreaRegistration.cs" />
     <Compile Include="Areas\SystemBusiness\Controllers\OperationalPlanController.cs" />
+    <Compile Include="Areas\SystemBusiness\Controllers\OperationalTaskController.cs" />
     <Compile Include="Areas\SystemBusiness\SystemBusinessAreaRegistration.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\ChangeContentController.cs" />
     <Compile Include="Areas\SystemDocument\Controllers\ChangeTypeController.cs" />
@@ -157,6 +158,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Content Include="Areas\SystemBusiness\Scripts\OperationalPlan\Form.js" />
     <Content Include="Areas\SystemBusiness\Scripts\OperationalPlan\Index.js" />
+    <Content Include="Areas\SystemBusiness\Scripts\OperationalTask\Form.js" />
+    <Content Include="Areas\SystemBusiness\Scripts\OperationalTask\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\ChangeType\Form.js" />
     <Content Include="Areas\SystemDocument\Scripts\ChangeType\Index.js" />
     <Content Include="Areas\SystemDocument\Scripts\Duty\Details.js" />
@@ -722,6 +725,8 @@
     <Content Include="Areas\SystemBusiness\Views\OperationalPlan\Index.cshtml" />
     <Content Include="Areas\SystemBusiness\Views\OperationalPlan\Form.cshtml" />
     <Content Include="packages.config" />
+    <Content Include="Areas\SystemBusiness\Views\OperationalTask\Form.cshtml" />
+    <Content Include="Areas\SystemBusiness\Views\OperationalTask\Index.cshtml" />
     <None Include="Properties\PublishProfiles\EquipManage.Framework.Release.pubxml" />
     <Content Include="Views\Shared\_Create.cshtml" />
     <Content Include="Views\Shared\_List.cshtml" />

@@ -50,11 +50,11 @@ namespace EquipManage.Application.SystemManage
 
             if (!FROB)
             {
-                expression = expression.Or(t => t.FROB.Equals(false));
+                expression = expression.And(t => t.FROB.Equals(false));
             }
             else
             {
-                expression = expression.Or(t => t.FROB.Equals(true));
+                expression = expression.And(t => t.FROB.Equals(true));
             }
             BillCodeRuleEntity entity = new BillCodeRuleEntity();
             entity = service.FindEntity(expression);

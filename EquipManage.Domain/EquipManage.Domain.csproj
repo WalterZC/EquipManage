@@ -50,6 +50,10 @@
     <Compile Include="03 Entity\SystemBusiness\OperationalPlanEntity.cs" />
     <Compile Include="03 Entity\SystemBusiness\OperationalPlanEquipEntryEntity.cs" />
     <Compile Include="03 Entity\SystemBusiness\OperationalPlanPartsEntryEntity.cs" />
+    <Compile Include="03 Entity\SystemBusiness\OperationalTaskEntity.cs" />
+    <Compile Include="03 Entity\SystemBusiness\OperationalTaskEquipEntryEntity.cs" />
+    <Compile Include="03 Entity\SystemBusiness\OperationalTaskFaultEntryEntity.cs" />
+    <Compile Include="03 Entity\SystemBusiness\OperationalTaskPartsEntryEntity.cs" />
     <Compile Include="03 Entity\SystemDocument\AreaEntity.cs" />
     <Compile Include="03 Entity\SystemManage\BillCodeRuleEntity.cs" />
     <Compile Include="03 Entity\SystemDocument\ChangeContentEntity.cs" />
@@ -80,6 +84,10 @@
     <Compile Include="04 IRepository\SystemBusiness\OperationalPlanEquipEntryRepository.cs" />
     <Compile Include="04 IRepository\SystemBusiness\OperationalPlanPartsEntryRepository.cs" />
     <Compile Include="04 IRepository\SystemBusiness\OperationalPlanRepository.cs" />
+    <Compile Include="04 IRepository\SystemBusiness\OperationalTaskEquipEntryRepository.cs" />
+    <Compile Include="04 IRepository\SystemBusiness\OperationalTaskFaultEntryRepository.cs" />
+    <Compile Include="04 IRepository\SystemBusiness\OperationalTaskPartsEntryRepository.cs" />
+    <Compile Include="04 IRepository\SystemBusiness\OperationalTaskRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\BillCodeRuleRepository.cs" />
     <Compile Include="04 IRepository\SystemDocument\IEquipmentPartsRepository.cs" />
     <Compile Include="04 IRepository\SystemDocument\IAreaRepository.cs" />

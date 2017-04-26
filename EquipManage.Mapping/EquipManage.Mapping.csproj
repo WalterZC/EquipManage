@@ -53,6 +53,10 @@
     <Compile Include="SystemBusiness\OperationalPlanEquipEntryMap.cs" />
     <Compile Include="SystemBusiness\OperationalPlanMap.cs" />
     <Compile Include="SystemBusiness\OperationalPlanPartsEntryMap.cs" />
+    <Compile Include="SystemBusiness\OperationalTaskEquipEntryMap.cs" />
+    <Compile Include="SystemBusiness\OperationalTaskFaultEntryMap.cs" />
+    <Compile Include="SystemBusiness\OperationalTaskMap.cs" />
+    <Compile Include="SystemBusiness\OperationalTaskPartsEntryMap.cs" />
     <Compile Include="SystemDocument\AreaMap.cs" />
     <Compile Include="SystemManage\BillCodeRuleMap.cs" />
     <Compile Include="SystemDocument\ChangeContentMap.cs" />

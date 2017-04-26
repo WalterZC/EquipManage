@@ -1,6 +1,4 @@
-﻿
-
- using EquipManage.Data;
+﻿using EquipManage.Data;
 using EquipManage.Domain.Entity.SystemBusiness;
 using EquipManage.Domain.IRepository.SystemBusiness;
 using System;
@@ -10,7 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace EquipManage.Repository.SystemBusiness
-{    
+{
+
+    /// <summary>
+    /// OperationalTaskRepository
+    /// </summary>    
+    public class OperationalTaskRepository : RepositoryBase<OperationalTaskEntity>, IOperationalTaskRepository
+    {
+
+    }
 
 }
-
