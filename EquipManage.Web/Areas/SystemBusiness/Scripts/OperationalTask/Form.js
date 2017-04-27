@@ -93,7 +93,14 @@ function initControl() {
         var startdate = $("#FStartDate").val();
         $("#FUseDay").val(parseInt(DateDiff(startdate, enddate)) + 1);
     });
+
+    $("#FOrganizeId").empty().prepend("<option value=''>==请选择==</option>");
     $("#FOrganizeId").bindSelect({
+        url: "/SystemDocument/Organize/GetOperationTreeSelectJson",
+    });
+
+    $("#FUseDeptId").empty().prepend("<option value=''>==请选择==</option>");
+    $("#FUseDeptId").bindSelect({
         url: "/SystemDocument/Organize/GetTreeSelectJson",
     });
 
@@ -130,7 +137,7 @@ function initControl() {
     $("#FPickingUserId").select2({
         data: UserListData
     });
-    $("#FBelongDeptManagerId").select2({
+    $("#FUseDeptManagerId").select2({
         data: UserListData
     });
     
@@ -166,26 +173,8 @@ function initControl() {
     //通过对象类型绑定对象列表
     $("#FObjectTypeId").on("change", function () {
         var ItemId = $(this).val();
-        var FOrgId = $("#FOrganizeId").val();
-        if (!!ItemId) {
-            $("#FObjectId").empty().prepend("<option value=''>==请选择==</option>");
-            $("#FOperationProjectId").empty().prepend("<option value=''>==请选择==</option>");
-            if (ItemId === 'Equipment') {
-                $("#FObjectId").bindSelect({
-                    url: "/SystemDocument/Equipment/GetPermissionGridJson",
-                    param: { FObjectType: 'Organize', itemId: FOrgId, keyword: '' },
-                    id: "FId",
-                    text: "FShortName",
-                    search: true
-                });
-
-            } else if (ItemId === 'EquipmentType') {
-                $("#FObjectId").bindSelect({
-                    url: "/SystemDocument/EquipmentType/GetTreeSelectJson",
-                    search: true
-                });
-            }
-        }
+        var FOrgId = $("#FUseDeptId").val();
+        getOperationItem(ItemId, FOrgId);
     });
 
     //通过对象类型绑定对象列表
@@ -194,9 +183,46 @@ function initControl() {
         var FOperationLevelId = $("#FOperationLevelId").val();
         var FObjectTypeId = $("#FObjectTypeId").val();    //需要修改为当前行
         var FObjectId = $(this).val();
-        var FOrgId = $("#FOrganizeId").val();
+
+        $("#FExpWareId").empty().prepend("<option value=''>==请选择==</option>");
         if (!!FObjectId) {
             bindOperationProjectId(FOperationTypeId, FOperationLevelId, FObjectTypeId, FObjectId);
+            getExpWare(FOperationTypeId, FOperationLevelId, FObjectTypeId, FObjectId, '');
+        }
+        if (FObjectTypeId == "Equipment") {
+            if (!!FObjectId) {
+                $.ajax({
+                    url: "/SystemDocument/Equipment/GetFormJson",
+                    data: { keyValue: FObjectId },
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        $("#FEquipManagerId").val(data.FPrincipalId).trigger("change");
+                        $("#FPositionId").val(data.FPositionID).trigger("change");
+                    }
+                });
+            }
+        }
+    });
+
+    $("#FUseDeptId").on("change", function () {
+        var UseOrgID = $(this).val();
+        if (!!UseOrgID) {
+            $("#FPositionId").empty().prepend("<option value=''>==请选择==</option>");
+            $("#FPositionId").bindSelect({
+                url: "/SystemDocument/Position/GetTreeSelectJson",
+                param: { FOrganize: UseOrgID }
+            });
+            var ItemId = $("#FObjectTypeId").val();
+
+            getOperationItem(ItemId, UseOrgID);
+        }
+    });
+
+    $("#FPositionId").on("change", function () {
+        var positionId = $(this).val();
+        if (!!positionId) {
+            $("#FOnlineMonitorId").val(top.clients.position[positionId].FPrincipalId).trigger("change");
         }
     });
 
@@ -211,37 +237,11 @@ function initControl() {
         language: "zh-CN",//汉化
     });
 
-    $("#partselectlist").draggable({
-        handle: ".modal-header"
-    });
-    //$('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
-
-    //// Workaround to fix datetimepicker position on window scroll
-    //$(document).scroll(function () {
-    //    $('#form_modal1 .form_datetime').datetimepicker('place'); //#modal is the id of the modal
-    //});
-    //var FParentNo = "OperationType";
-    //$("#FOrganizeId").bindSelect({
-    //    url: "/SystemDocument/Organize/GetTreeSelectJson"
-    //});
-    //$("#FOperationTypeId").bindSelect({
-    //    url: "/SystemDocument/ItemsType/GetGridSelectJson",
-    //    id: "FId",
-    //    text: "FFullName",
-    //    param: { itemId: FParentNo, keyword: "" }
-    //});
-
     $("select", oTable).select2({
         placeholder: '请选择',
         minimumResultsForSearch: 20,
         language: "zh-CN",//汉化
     });
-
-    //$("#FInterval").inputmask({
-    //    "mask": "9",
-    //    "repeat": 10,
-    //    "greedy": false
-    //}); // ~ mask "9" or mask "99" or ... mask "9999999999"
 }
 
 function bindOperationProjectId(FOperationTypeId, FOperationLevelId, FObjectTypeId, FObjectId) {
@@ -385,11 +385,7 @@ var PartSelectTable = function () {
                 "sClass": "text-center",
                 "data": "FId",
                 "render": function (data, type, full, meta) {
-                    //if (CheckBoxContent.indexOf(data) >= 0) {
-                    //    return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkboxes" checked="checked"/><span></span></label>';
-                    //} else {
                     return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkboxes"/><span></span></label>';
-                    //}
                 },
                 "bSortable": false,
                 "sWidth": "20px;"
@@ -573,13 +569,13 @@ function editRow(oTable, nRow) {
     jqTds[0].innerHTML = '<input type="text" class="form-control input-sm" name="FId" value="' + aData[0] + '">';
     jqTds[1].innerHTML = '<input type="text" class="form-control input-sm" name="FItemId" value="' + aData[1] + '">';
     jqTds[2].innerHTML = '<span name="FEntryId">' + aData[2] + '</span>';
-    jqTds[3].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FObjectTypeId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
-    jqTds[4].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FObjectId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
-    jqTds[5].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FProjectId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
-    jqTds[6].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FOperationProjectId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
-    jqTds[7].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FOperationClassId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
-    jqTds[8].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FOperatorId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
-    jqTds[9].innerHTML = '<input type="text" class="form-control input-sm dt-center table-td-vertical-align" name="FDescription" />';
+    //jqTds[3].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FObjectTypeId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
+    //jqTds[4].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FObjectId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
+    jqTds[3].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FProjectId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
+    jqTds[4].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FEquipmentPartsId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
+    jqTds[5].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FOperationClassId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
+    jqTds[6].innerHTML = '<div class="control-group  form-group-sm">' + $("select[name='FOperatorId']", oTable[0].rows[1]).prop('outerHTML') + '</div>';
+    jqTds[7].innerHTML = '<input type="text" class="form-control input-sm dt-center table-td-vertical-align" name="FDescription" />';
 
     $("select", nRow).select2({
         placeholder: '请选择',
@@ -600,46 +596,8 @@ function editRow(oTable, nRow) {
         }
     });
 
-    //通过对象类型绑定对象列表
-    $("select[name='FObjectTypeId']", nRow).on("change", function () {
-        var ItemId = $(this).val();
-        var FOrgId = $("#FOrganizeId").val();
-        if (!!ItemId) {
-            $("select[name='FObjectId']", nRow).empty().prepend("<option value=''>==请选择==</option>");
-            $("select[name='FOperationProjectId']", nRow).empty().prepend("<option value=''>==请选择==</option>");
-            if (ItemId === 'Equipment') {
-                $("select[name='FObjectId']", nRow).bindSelect({
-                    url: "/SystemDocument/Equipment/GetPermissionGridJson",
-                    param: { FObjectType: 'Organize', itemId: FOrgId, keyword: '' },
-                    id: "FId",
-                    text: "FShortName",
-                    search: true
-                });
-
-            } else if (ItemId === 'EquipmentType') {
-                $("select[name='FObjectId']", nRow).bindSelect({
-                    url: "/SystemDocument/EquipmentType/GetTreeSelectJson",
-                    search: true
-                });
-            }
-        }
-    });
-    //通过对象类型绑定对象列表
-    $("select[name='FObjectId']", nRow).on("change", function () {
-        var FOperationTypeId = $("#FOperationTypeId").val();
-        var FOperationLevelId = $("#FOperationLevelId").val();
-        var FObjectTypeId = $("select[name='FObjectTypeId']", nRow).val();    //需要修改为当前行
-        var FObjectId = $(this).val();
-        var FOrgId = $("#FOrganizeId").val();
-        if (!!FObjectId) {
-            bindOperationProjectId(nRow, FOperationTypeId, FOperationLevelId, FObjectTypeId, FObjectId);
-        }
-    });
-
-    $("select[name='FObjectTypeId']", nRow).val(aData[3]).trigger("change");
-    $("select[name='FObjectId']", nRow).val(aData[4]).trigger("change");
     $("select[name='FProjectId']", nRow).val(aData[5]).trigger("change");
-    $("select[name='FOperationProjectId']", nRow).val(aData[6]).trigger("change");
+    $("select[name='FEquipmentPartsId']", nRow).val(aData[6]).trigger("change");
     $("select[name='FOperationClassId']", nRow).val(aData[7]).trigger("change");
     $("select[name='FOperatorId']", nRow).val(aData[8]).trigger("change");
     $("input[name='FDescription']", nRow).val(aData[9]);
@@ -661,7 +619,7 @@ function editPartRow(pTable, nRow) {
     jqTds[8].innerHTML = '<div class="control-group  form-group-sm"><input type="text" class="form-control input-small" value="' + aData[8] + '" style="width: 100%!important" name="FQty"></div>';
     jqTds[9].innerHTML = '<span name="FStock">' + aData[9] + '<\span>';
     jqTds[10].innerHTML = '<a href="javascript:;" class="btn btn-sm blue" name="delPartRow"><i class="fa fa-times"></i> 删除</a>';
-    //}
+
     $("input[name='FQty']", nRow).inputmask('decimal', {
         //rightAlignNumerics: false,
         rightAlign: false,
@@ -965,4 +923,46 @@ function getUserItems() {
     }
     return dataItems;
     
+}
+
+//根据作业类型、作业级别、对象类型、对象获取经验库数据
+function getExpWare(foperationTypeId, foperationLevelId, fequipTypeId, fitem, fkeyword) {
+    if ((!!foperationTypeId) && (!!foperationLevelId) && (!!fequipTypeId) && (!!fitem)) {
+        if (fequipTypeId == "Equipment") {
+            fequipTypeId = "";
+        }
+        if (fequipTypeId == "EquipmentType") {
+            fequipTypeId = fitem;
+            fitem = "";
+        }
+
+        $("#FExpWareId").bindSelect({
+            url: "/SystemDocument/ExpWare/GetSelectJson",
+            id: "FId",
+            text: "FShortName",
+            param: { FOperationTypeId: foperationTypeId, FOperationLevelId: foperationLevelId, FEquipTypeId: fequipTypeId, itemId: fitem, keyword: fkeyword }
+        });
+    }
+}
+
+function getOperationItem(ItemId, FOrgId) {
+    if (!!ItemId) {
+        $("#FObjectId").empty().prepend("<option value=''>==请选择==</option>");
+        $("#FOperationProjectId").empty().prepend("<option value=''>==请选择==</option>");
+        if (ItemId === 'Equipment') {
+            $("#FObjectId").bindSelect({
+                url: "/SystemDocument/Equipment/GetPermissionGridJson",
+                param: { FObjectType: 'Organize', itemId: FOrgId, keyword: '' },
+                id: "FId",
+                text: "FShortName",
+                search: true
+            });
+
+        } else if (ItemId === 'EquipmentType') {
+            $("#FObjectId").bindSelect({
+                url: "/SystemDocument/EquipmentType/GetTreeSelectJson",
+                search: true
+            });
+        }
+    }
 }

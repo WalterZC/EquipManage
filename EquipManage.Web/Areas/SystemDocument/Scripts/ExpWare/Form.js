@@ -41,12 +41,12 @@ function initControl() {
     });
     $("#FMalfunctionType").bindSelect({
         url: "/SystemDocument/ItemsData/GetSelectJson",
-        param: { enCode: "FMalfunctionType" }
+        param: { enCode: "MalfunctionType" }
     });
 
     $("#FMalfunctionReasonId").bindSelect({
         url: "/SystemDocument/ItemsData/GetSelectJson",
-        param: { enCode: "FMalfunctionReasonId" }
+        param: { enCode: "MalfunctionReasonId" }
     });
     $("#FOperationTypeId").on("change", function () {
         var ItemId = $(this).val();

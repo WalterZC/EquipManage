@@ -34,6 +34,7 @@ namespace EquipManage.Web.Controllers
                 authorizeButton = this.GetMenuButtonList(),
                 equipment = this.GetEquipmentList(),
                 parts = this.GetPartsList(),
+                position = this.GetPositionList()
             };
             return Content(data.ToJson());
         }
@@ -94,6 +95,23 @@ namespace EquipManage.Web.Controllers
                 {
                     encode = item.FEnCode,
                     fullname = item.FFullName
+                };
+                dictionary.Add(item.FId, fieldItem);
+            }
+            return dictionary;
+        }
+        private object GetPositionList()
+        {
+            PositionApp positionApp = new PositionApp();
+            var data = positionApp.GetList();
+            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+            foreach (PositionEntity item in data)
+            {
+                var fieldItem = new
+                {
+                    encode = item.FId,
+                    fullname = item.FShortName,
+                    FPrincipalId = item.FPrincipalID
                 };
                 dictionary.Add(item.FId, fieldItem);
             }

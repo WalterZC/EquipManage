@@ -15,23 +15,14 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         private EquipmentTypeApp equipmentTypeApp = new EquipmentTypeApp();
         private EquipmentApp equipmentApp = new EquipmentApp();
 
-        //[HttpGet]
-        //[HandlerAjaxOnly]
-        //public ActionResult GetTreeSelectJson()
-        //{
-        //    var data = expWareApp.GetList();
-        //    var treeList = new List<TreeSelectModel>();
-        //    foreach (ExpWareEntity item in data)
-        //    {
-        //        TreeSelectModel treeModel = new TreeSelectModel();
-        //        treeModel.id = item.FId;
-        //        treeModel.text = item.FFullName;
-        //        //treeModel.parentId = item.FParentId;
-        //        treeModel.data = item;
-        //        treeList.Add(treeModel);
-        //    }
-        //    return Content(treeList.TreeSelectJson());
-        //}
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetSelectJson(string FOperationTypeId, string FOperationLevelId, string FEquipTypeId, string itemId, string keyword)
+        {
+            var data = expWareApp.GetList(FOperationTypeId, FOperationLevelId, FEquipTypeId, itemId, keyword);
+
+            return Content(data.ToJson());
+        }
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetTreeJson()
@@ -72,9 +63,9 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         }
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetGridJson(string FEquipTypeId, string itemId, string keyword)
+        public ActionResult GetGridJson(string FOperationTypeId,string FOperationLevelId, string FEquipTypeId, string itemId, string keyword)
         {
-            var data = expWareApp.GetList(FEquipTypeId,itemId, keyword);
+            var data = expWareApp.GetList(FOperationTypeId, FOperationLevelId, FEquipTypeId, itemId, keyword);
             //var data = equipmentApp.GetList(itemId, keyword);
             return Content(data.ToJson());
         }

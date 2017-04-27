@@ -12,15 +12,28 @@ namespace EquipManage.Application.SystemDocument
         private IExpWareRepository service = new ExpWareRepository();
         private OrganizeApp organizeApp = new OrganizeApp();
 
-        public List<ExpWareEntity> GetList(string FEquipTypeId,string itemId="", string keyword="")
+        public List<ExpWareEntity> GetList(string FOperationTypeId, string FOperationLevelId,string FEquipTypeId,string itemId="", string keyword="")
         {
             var expression = ExtLinq.True<ExpWareEntity>();
 
-            expression = expression.And(t => t.FEquipTypeId == FEquipTypeId);
+            if (!string.IsNullOrEmpty(FEquipTypeId))
+            {
+                expression = expression.And(t => t.FEquipTypeId == FEquipTypeId);
+            }
 
             if (!string.IsNullOrEmpty(itemId))
             {
-                expression = expression.Or(t => t.FItemId == itemId);
+                expression = expression.And(t => t.FItemId == itemId);
+            }
+
+            if (!string.IsNullOrEmpty(FOperationTypeId))
+            {
+                expression = expression.And(t => t.FOperationTypeId == FOperationTypeId);
+            }
+
+            if (!string.IsNullOrEmpty(FOperationLevelId))
+            {
+                expression = expression.And(t => t.FOperationLevelId == FOperationLevelId);
             }
 
             if (!string.IsNullOrEmpty(keyword))

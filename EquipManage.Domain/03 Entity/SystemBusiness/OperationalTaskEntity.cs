@@ -91,9 +91,9 @@ namespace EquipManage.Domain.Entity.SystemBusiness
 
         public string FPositionId { get; set; }
 
-        public string FBelongDeptId { get; set; }
+        public string FUseDeptId { get; set; }
 
-        public string FBelongDeptManagerId { get; set; }
+        public string FUseDeptManagerId { get; set; }
 
         public string FOperationProjectId { get; set; }
 

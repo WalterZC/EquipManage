@@ -12,7 +12,8 @@ $.clientsInit = function () {
         user: [],
         authorizeMenu: [],
         authorizeButton: [],
-        equipment:[]
+        equipment: [],
+        position:[]
     };
     var init = function () {
         $.ajax({
@@ -31,6 +32,7 @@ $.clientsInit = function () {
                 dataJson.authorizeButton = data.authorizeButton;
                 dataJson.equipment = data.equipment;
                 dataJson.parts = data.parts;
+                dataJson.position = data.position;
             }
         });
     }

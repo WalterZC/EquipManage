@@ -27,7 +27,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
                 TreeViewModel tree = new TreeViewModel();
                 bool hasChildren = itemList.Count(t => t.FParentId == item.FId) == 0 ? false : true;
                 tree.id = item.FId;
-                tree.text = item.FFullName;
+                tree.text = item.FShortName;
                 tree.value = item.FEnCode;
                 tree.parentId = item.FParentId;
                 tree.isexpand = true;
@@ -61,7 +61,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
                         TreeViewModel tree = new TreeViewModel();
                         bool hasChildren = itemList.Count(t => t.FParentId == item.FId) == 0 ? false : true;
                         tree.id = item.FId;
-                        tree.text = item.FFullName;
+                        tree.text = item.FShortName;
                         tree.value = item.FEnCode;
                         tree.parentId = item.FParentId;
                         tree.isexpand = true;
@@ -78,7 +78,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
                         TreeViewModel tree = new TreeViewModel();
                         bool hasChildren = equipmentTypeList.Count(t => t.FParentId == item.FId) == 0 ? false : true;
                         tree.id = item.FId;
-                        tree.text = item.FFullName;
+                        tree.text = item.FShortName;
                         tree.value = item.FNumber;
                         tree.parentId = item.FParentId;
                         tree.isexpand = true;

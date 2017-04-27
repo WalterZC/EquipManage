@@ -17,7 +17,7 @@
     });
     function treeView() {
         $("#itemTree").treeview({
-            url: "/SystemDocument/Organize/GetTreeJson",
+            url: "/SystemDocument/Organize/GetOperationTreeViewJson",
             onnodeclick: function (item) {
                 $("#txt_keyword").val('');
                 $('#btn_search').trigger("click");
@@ -32,7 +32,7 @@
             colModel: [
                 { label: '主键', name: 'FId', hidden: true },
                 {
-                    label: '部门', name: 'FBelongOrgID', width: 80, align: 'left',
+                    label: '部门', name: 'FBelongOrgID', width: 280, align: 'left',
                     formatter: function (cellvalue, options, rowObject) {
                         return top.clients.organize[cellvalue] == null ? "" : top.clients.organize[cellvalue].fullname;
                     }
@@ -44,7 +44,7 @@
                     label: '创建时间', name: 'FCreatorTime', width: 80, align: 'left',
                     formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
                 },
-                { label: '工作内容', name: 'FOperationContent', width: 200, align: 'left' }
+                { label: '工作内容', name: 'FOperationContent', width: 80, align: 'left' }
             ],
             pager: "#gridPager",
             sortname: 'FBelongOrgID asc,FCreatorTime desc',

@@ -50,7 +50,7 @@ function gridList() {
 
         $gridList.jqGrid('setGridParam', {
             url: "/SystemDocument/ExpWare/GetGridJson",
-            postData: { FEquipTypeId: FEquipTypeId, itemId: itemId, keyword: $("#txt_keyword").val() },
+            postData: { FOperationTypeId: '', FOperationLevelId:'', FEquipTypeId: FEquipTypeId, itemId: itemId, keyword: $("#txt_keyword").val() },
         }).trigger('reloadGrid');
     });
 }

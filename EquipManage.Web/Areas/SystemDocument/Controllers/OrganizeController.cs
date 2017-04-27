@@ -27,12 +27,57 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
             {
                 TreeSelectModel treeModel = new TreeSelectModel();
                 treeModel.id = item.FId;
-                treeModel.text = item.FFullName;
+                treeModel.text = item.FShortName;
                 treeModel.parentId = item.FParentId;
                 treeModel.data = item;
                 treeList.Add(treeModel);
             }
             return Content(treeList.TreeSelectJson());
+        }
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetOperationTreeSelectJson()
+        {
+            var data = organizeApp.GetOperationList();
+            var treeList = new List<TreeSelectModel>();
+            foreach (OrganizeEntity item in data)
+            {
+                TreeSelectModel treeModel = new TreeSelectModel();
+                treeModel.id = item.FId;
+                treeModel.text = item.FShortName;
+                treeModel.parentId = data.Count(t => t.FId == item.FParentId) == 0 ? "0" : item.FParentId;
+                treeModel.data = item;
+                treeList.Add(treeModel);
+            }
+            return Content(treeList.TreeSelectJson());
+        }
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetOperationTreeViewJson()
+        {
+            var data = organizeApp.GetOperationList();
+            var treeList = new List<TreeViewModel>();
+            foreach (OrganizeEntity item in data)
+            {
+                //TreeSelectModel treeModel = new TreeSelectModel();
+                //treeModel.id = item.FId;
+                //treeModel.text = item.FShortName;
+                //treeModel.parentId = data.Count(t => t.FId == item.FParentId) == 0 ? "0" : item.FParentId;
+                //treeModel.data = item;
+                //treeList.Add(treeModel);
+
+                TreeViewModel tree = new TreeViewModel();
+                bool hasChildren = data.Count(t => t.FParentId == item.FId) == 0 ? false : true;
+                tree.id = item.FId;
+                tree.text = item.FShortName;
+                tree.value = item.FEnCode;
+                tree.parentId = data.Count(t => t.FId == item.FParentId) == 0 ? "0" : item.FParentId;
+                tree.isexpand = true;
+                tree.complete = true;
+                tree.hasChildren = hasChildren;
+                treeList.Add(tree);
+            }
+            return Content(treeList.TreeViewJson());
         }
         [HttpGet]
         [HandlerAjaxOnly]
@@ -45,7 +90,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
                 TreeViewModel tree = new TreeViewModel();
                 bool hasChildren = data.Count(t => t.FParentId == item.FId) == 0 ? false : true;
                 tree.id = item.FId;
-                tree.text = item.FFullName;
+                tree.text = item.FShortName;
                 tree.value = item.FEnCode;
                 tree.parentId = item.FParentId;
                 tree.isexpand = true;
@@ -92,6 +137,7 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         {
             OrganizeEntity ParentEntity = organizeApp.GetForm(organizeEntity.FParentId);
             organizeEntity.FLayers = Ext.ToInt(ParentEntity == null ? 0 : ParentEntity.FLayers) + 1;
+            organizeEntity.FFullName = string.Format("{0}_{1}", ParentEntity.FFullName, organizeEntity.FShortName);
             organizeApp.SubmitForm(organizeEntity, keyValue);
             return Success("操作成功。");
         }

@@ -35,13 +35,13 @@ namespace EquipManage.Application.SystemDocument
         /// <returns></returns>
         public List<OrganizeEntity> GetSelectEntitys(string itemId, string keyword)
         {
-            return service.GetItemList(itemId).Where(t=>t.FEnCode.Contains(keyword)||t.FShortName.Contains(keyword)).ToList();
+            return service.GetItemList(itemId).Where(t => t.FEnCode.Contains(keyword) || t.FShortName.Contains(keyword)).ToList();
         }
         /// <summary>
         /// 获取当前用户拥有权限的所有部门
         /// </summary>
         /// <returns></returns>
-        public List<OrganizeEntity> GetPermissionGridList(string ItemId="")
+        public List<OrganizeEntity> GetPermissionGridList(string ItemId = "")
         {
             List<OrganizeEntity> organizeList = new List<OrganizeEntity>();
 
@@ -49,13 +49,13 @@ namespace EquipManage.Application.SystemDocument
 
             if (!string.IsNullOrEmpty(ItemId))
             {
-                itemList = this.GetSelectEntitys(ItemId,"");
+                itemList = this.GetSelectEntitys(ItemId, "");
             }
             else
             {
                 itemList = this.GetList();
             }
-            
+
             var Rightdata = itemRightApp.GetList(OperatorProvider.Provider.GetCurrent().UserId, "Organize");
 
             if (OperatorProvider.Provider.GetCurrent().IsSystem)
@@ -71,7 +71,24 @@ namespace EquipManage.Application.SystemDocument
             return organizeList;
         }
 
-        
+        /// <summary>
+        /// 获取有作业权限的部门列表
+        /// </summary>
+        /// <returns></returns>
+        public List<OrganizeEntity> GetOperationList()
+        {
+            List<OrganizeEntity> organizeList = new List<OrganizeEntity>();
+            if (OperatorProvider.Provider.GetCurrent().IsSystem)
+            {
+                organizeList = this.GetList().Where(t => (t.FIsOperation.Equals(true))).ToList();
+            }
+            else
+            {
+                organizeList = this.GetSelectEntitys(OperatorProvider.Provider.GetCurrent().CompanyId, "").Where(t => (t.FIsOperation.Equals(true))).ToList();
+            }
+            return organizeList;
+        }
+
         public OrganizeEntity GetForm(string keyValue)
         {
             return service.FindEntity(keyValue);
@@ -91,8 +108,31 @@ namespace EquipManage.Application.SystemDocument
         {
             if (!string.IsNullOrEmpty(keyValue))
             {
+                List<OrganizeEntity> SelectEntitys = this.GetSelectEntitys(keyValue, "");
+                organizeEntity.FIsLeaf = SelectEntitys.Count > 1 ? false : true;
+
                 organizeEntity.Modify(keyValue);
                 service.Update(organizeEntity);
+
+                if (organizeEntity.FIsOperation)
+                {
+                    if (SelectEntitys.Count > 0)
+                    {
+                        for (int i = 0; i < SelectEntitys.Count; i++)
+                        {
+                            if (SelectEntitys[i].FId != keyValue)
+                            {
+                                OrganizeEntity Entity = new OrganizeEntity();
+                                Entity = GetForm(SelectEntitys[i].FId);
+
+                                Entity.FIsOperation = organizeEntity.FIsOperation;
+
+                                Entity.Modify(Entity.FId);
+                                service.Update(Entity);
+                            }
+                        }
+                    }
+                }
             }
             else
             {

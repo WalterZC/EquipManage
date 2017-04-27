@@ -18,14 +18,14 @@ namespace EquipManage.Web.Areas.SystemDocument.Controllers
         [HandlerAjaxOnly]
         public ActionResult GetTreeSelectJson(string FOrganize)
         {
-            var data = positionApp.GetEntitys(FOrganize);
+            var data = positionApp.GetItemList(FOrganize);
             var treeList = new List<TreeSelectModel>();
             foreach (PositionEntity item in data)
             {
                 TreeSelectModel treeModel = new TreeSelectModel();
                 treeModel.id = item.FId;
                 treeModel.text = item.FShortName;
-                treeModel.parentId = item.FParentID;
+                treeModel.parentId = data.Count(t => t.FId == item.FParentID) == 0 ? "0" : item.FParentID;
                 treeList.Add(treeModel);
             }
             return Content(treeList.TreeSelectJson());
