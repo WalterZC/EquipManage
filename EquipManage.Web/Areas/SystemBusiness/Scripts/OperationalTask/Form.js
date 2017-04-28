@@ -140,10 +140,39 @@ function initControl() {
     $("#FUseDeptManagerId").select2({
         data: UserListData
     });
+    $("#FMaintainerId").select2({
+        data: getMaintainItems()
+    });
     
+    //故障申报人
+    $("#FProposerId").select2({
+        data: UserListData
+    });
+    //运行状态
     $("#FRunningStatus").select2({
         data: getdataItems("RunningStatus")
     });
+    //故障原因
+    $("#FMalfunctionReasonId").select2({
+        data: getdataItems("MalfunctionReasonId")
+    });
+    //缺陷等级
+    $("#FDefectLevelId").select2({
+        data: getdataItems("DefectLevel")
+    });
+    //故障类型
+    $("#FMalfunctionTypeId").select2({
+        data: getdataItems("MalfunctionType")
+    });
+    //设定委外或内修
+    $('input[name="FMaintainType"]').on("change", function () {
+        if ($("#FOutMaintain").prop("checked")) {
+            $("#OutRow").css('display', 'block'); 
+        } else {
+            $("#OutRow").css("display", "none");
+        }
+    });
+
     $("#FOperationTypeId").on("change", function () {
         var FOperationTypeId = $(this).val();
         var FOperationLevelId = $("#FOperationLevelId").val();
@@ -924,7 +953,14 @@ function getUserItems() {
     return dataItems;
     
 }
+function getMaintainItems() {
+    var dataItems = new Array();
+    for (var i in top.clients.maintain) {
+        dataItems.push({ "id": i, "text": top.clients.maintain[i].FFullName });
+    }
+    return dataItems;
 
+}
 //根据作业类型、作业级别、对象类型、对象获取经验库数据
 function getExpWare(foperationTypeId, foperationLevelId, fequipTypeId, fitem, fkeyword) {
     if ((!!foperationTypeId) && (!!foperationLevelId) && (!!fequipTypeId) && (!!fitem)) {

@@ -34,7 +34,8 @@ namespace EquipManage.Web.Controllers
                 authorizeButton = this.GetMenuButtonList(),
                 equipment = this.GetEquipmentList(),
                 parts = this.GetPartsList(),
-                position = this.GetPositionList()
+                position = this.GetPositionList(),
+                maintain = this.GetMaintainList()
             };
             return Content(data.ToJson());
         }
@@ -81,7 +82,7 @@ namespace EquipManage.Web.Controllers
             {
                 dictionaryItem.Add(itemList.FId, itemList.FItemName);
             }
-            
+
             return dictionaryItem;
         }
         private object GetOrganizeList()
@@ -152,6 +153,43 @@ namespace EquipManage.Web.Controllers
             }
             return dictionary;
         }
+        //获取维修商
+        private object GetMaintainList()
+        {
+            List<MaintainEntity> datalist = new List<MaintainEntity>();
+            MaintainApp maintainApp = new MaintainApp();
+            OrganizeApp organizeApp = new OrganizeApp();
+            var maintainlist = maintainApp.GetList();
+            List<OrganizeEntity> orgList = new List<OrganizeEntity>();
+
+            if (OperatorProvider.Provider.GetCurrent().IsSystem)
+            {
+                orgList = organizeApp.GetList();
+            }
+            else
+            {
+                orgList = organizeApp.GetSelectEntitys(OperatorProvider.Provider.GetCurrent().CompanyId, "");
+            }
+            datalist = (from c in maintainlist
+                        join o in orgList on c.FOrganizeId equals o.FId
+                        select c).ToList();
+
+            Dictionary<string, object> dictionary = new Dictionary<string, object>();
+            foreach (MaintainEntity item in datalist)
+            {
+                var fieldItem = new
+                {
+                    FId = item.FId,
+                    FShortName = item.FShortName,
+                    FNumber = item.FNumber,
+                    FFullName = item.FFullName,
+                    FLinkMan = item.FLinkMan
+                };
+                dictionary.Add(item.FId, fieldItem);
+            }
+            return dictionary;
+        }
+        //获取零件列表
         private object GetPartsList()
         {
             PartsApp partsApp = new PartsApp();

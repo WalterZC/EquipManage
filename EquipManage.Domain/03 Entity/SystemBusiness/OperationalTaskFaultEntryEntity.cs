@@ -33,6 +33,22 @@ namespace EquipManage.Domain.Entity.SystemBusiness
 
         public string FFaultVideo { get; set; }
 
+        public bool FMaintainType { get; set; }
+
+        public string FProposerId { get; set; }
+
+        public string FMaintainerId { get; set; }
+
+        public decimal? FAmount { get; set; }
+
+        public string FOuter { get; set; }
+
+        public string FPhone { get; set; }
+
+        public string FMalfunctionSummary { get; set; }
+
+        public string FMalfunctionReason { get; set; }
+
     }
 
 }
